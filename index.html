@@ -1,738 +1,1927 @@
-<!doctype html>
-<html lang="id">
+<!DOCTYPE html>
+<html lang="en-US">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>The Wedding of Nasrul & Naya</title>
-  <meta name="description" content="Undangan Pernikahan Nasrul & Naya - 7 Februari 2026" />
-  <style>
-    :root{
-      --bg:#f7f1e6;
-      --paper:#fffaf0;
-      --ink:#2b2b2b;
-      --muted:#6b6b6b;
-      --gold:#b79a6a;
-      --gold2:#8a6e45;
-      --shadow: 0 14px 34px rgba(0,0,0,.12);
-      --radius: 22px;
-      --ring: rgba(183,154,106,.28);
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      color:var(--ink);
-      background:
-        radial-gradient(1200px 600px at 50% -50%, rgba(183,154,106,.25), transparent 60%),
-        linear-gradient(#fff, var(--bg));
-      font-family: ui-serif, Georgia, "Times New Roman", serif;
-    }
-    a{color:inherit}
-    .wrap{max-width:560px;margin:0 auto;padding:16px 14px 110px}
-    .card{
-      background:rgba(255,250,240,.92);
-      border:1px solid var(--ring);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-      position:relative;
-    }
-    .hero{
-      padding:28px 18px 20px;
-      text-align:center;
-      position:relative;
-      background:
-        radial-gradient(650px 340px at 50% 0%, rgba(183,154,106,.22), transparent 60%),
-        linear-gradient(180deg, rgba(183,154,106,.08), transparent 45%);
-    }
-    .leaf{
-      position:absolute;inset:-12px -12px auto auto;
-      width:180px;height:180px;opacity:.22;transform:rotate(12deg);
-      background: radial-gradient(circle at 30% 30%, var(--gold), transparent 60%),
-                  radial-gradient(circle at 60% 70%, var(--gold2), transparent 55%);
-      border-radius: 40% 60% 70% 30% / 50% 40% 60% 50%;
-      pointer-events:none;
-    }
-    .leaf.left{
-      inset:auto auto -25px -25px;
-      transform:rotate(-18deg);
-      width:230px;height:230px;
-      opacity:.18;
-    }
-    .small{font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;}
-    .badge{
-      display:inline-block;
-      padding:7px 12px;
-      border:1px solid var(--ring);
-      border-radius:999px;
-      letter-spacing:.08em;
-      font-size:12px;
-      color:var(--gold2);
-      background: rgba(255,255,255,.55);
-      backdrop-filter: blur(6px);
-      text-transform:uppercase;
-    }
-    .title{
-      margin:14px 0 6px;
-      font-size:38px;
-      line-height:1.05;
-      color:var(--gold2);
-      font-style: italic;
-      letter-spacing:.02em;
-    }
-    .subtitle{margin:0 0 10px;font-size:15px;color:var(--muted)}
-    .date{margin:10px 0 0;font-weight:800;letter-spacing:.03em;font-size:18px}
-    .btn{
-      display:inline-flex;align-items:center;justify-content:center;gap:10px;
-      padding:12px 16px;border-radius:14px;
-      border:1px solid rgba(183,154,106,.45);
-      background: linear-gradient(180deg, rgba(183,154,106,.22), rgba(183,154,106,.08));
-      color: #3b2f1f;text-decoration:none;font-weight:800;
-      box-shadow: 0 8px 18px rgba(183,154,106,.20);
-      cursor:pointer;user-select:none;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-    }
-    .btn:active{transform: translateY(1px)}
-    .btn svg{width:18px;height:18px}
-    .btn.ghost{
-      background: rgba(255,255,255,.55);
-      box-shadow:none;
-    }
-    .section{padding:18px 18px 2px}
-    .section h3{
-      margin:0 0 10px;
-      font-size:18px;
-      color:var(--gold2);
-      letter-spacing:.02em;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-    }
-    .p{margin:0 0 12px;line-height:1.75;color:#3a3a3a;font-size:15px}
-    .divider{height:1px;background:rgba(183,154,106,.18);margin:6px 18px}
-    .names{display:grid;gap:12px;margin:10px 0 6px}
-    .box{
-      border:1px solid rgba(183,154,106,.25);
-      border-radius:18px;
-      padding:14px 14px;
-      background:rgba(255,255,255,.56);
-    }
-    .name{font-size:22px;color:var(--gold2);margin:0 0 4px;font-style: italic}
-    .meta{margin:0;color:var(--muted);font-size:13px;line-height:1.65;font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;}
-    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-    .count{
-      text-align:center;padding:10px 10px;
-      border-radius:16px;border:1px solid rgba(183,154,106,.22);
-      background:rgba(255,255,255,.55);
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-    }
-    .count b{display:block;font-size:22px;color:#2a2a2a}
-    .count span{font-size:12px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
-    .eventgrid{display:grid;gap:12px;margin:6px 0 14px}
-    .tt{font-weight:900;color:var(--gold2);margin:0 0 8px;letter-spacing:.02em}
-    .row{display:flex;gap:10px;align-items:flex-start;margin:6px 0}
-    .ic{
-      width:26px;height:26px;border-radius:10px;display:grid;place-items:center;
-      border:1px solid rgba(183,154,106,.28);
-      background: rgba(183,154,106,.10);
-      flex:0 0 auto;
-    }
-    .ic svg{width:16px;height:16px}
-    .quote{
-      margin:0 0 14px;padding:14px;
-      border-left:4px solid rgba(183,154,106,.55);
-      background: rgba(183,154,106,.08);
-      border-radius:14px;line-height:1.75;
-      color:#3b2f1f;font-size:14px;
-    }
-    .actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;padding:6px 18px 18px}
-    .gallery{
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:10px;
-      margin:10px 0 14px;
-    }
-    .ph{
-      aspect-ratio: 1 / 1;
-      border-radius:18px;
-      border:1px solid rgba(183,154,106,.25);
-      overflow:hidden;
-      background:
-        radial-gradient(120px 120px at 30% 30%, rgba(183,154,106,.25), transparent 60%),
-        radial-gradient(120px 120px at 70% 70%, rgba(138,110,69,.18), transparent 55%),
-        linear-gradient(180deg, rgba(255,255,255,.8), rgba(255,255,255,.45));
-      position:relative;
-    }
-    .ph::after{
-      content:"";
-      position:absolute;inset:auto 10px 10px 10px;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      font-size:12px;color:var(--muted);
-      background:rgba(255,255,255,.6);
-      border:1px solid rgba(183,154,106,.22);
-      border-radius:12px;
-      padding:6px 10px;
-      text-align:center;
-      backdrop-filter: blur(6px);
-    }
-    .field{display:grid;gap:8px;margin:10px 0}
-    label{font-size:12px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;}
-    input, select, textarea{
-      width:100%;
-      padding:12px 12px;
-      border-radius:14px;
-      border:1px solid rgba(183,154,106,.30);
-      background: rgba(255,255,255,.75);
-      font-size:15px;
-      outline:none;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-    }
-    textarea{min-height:92px;resize:vertical}
-    .list{
-      margin:10px 0 18px;
-      display:grid;gap:10px;
-    }
-    .msg{
-      border-radius:18px;
-      border:1px solid rgba(183,154,106,.22);
-      background:rgba(255,255,255,.55);
-      padding:12px 12px;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-    }
-    .msg b{display:block;margin-bottom:4px}
-    .msg small{color:var(--muted)}
-    .footer{
-      padding:0 18px 22px;text-align:center;
-      color:var(--muted);font-size:12px;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-    }
+	<meta charset="UTF-8">
+			<title>Premium 021 DigitalVite</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+        <style type="text/css">
+            .cui-comment-text img {
+                max-width: 100% !important;
+            }
+        </style>
+        <meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
 
-    /* Modal: nama tamu + tombol musik */
-    .modal{
-      position:fixed;inset:0;background: rgba(0,0,0,.55);
-      display:none;align-items:flex-end;justify-content:center;
-      padding:14px;z-index:60;
+	<!-- This site is optimized with the Yoast SEO plugin v26.8 - https://yoast.com/product/yoast-seo-wordpress/ -->
+	<link rel="canonical" href="https://digitalvite.id/premium-021/" />
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Premium 021 DigitalVite" />
+	<meta property="og:description" content="Save the Date You&#8217;re invited to the wedding of Hanum &amp; Xavi Kamis, 26 Mei 2022 00Hari 00Jam 00Menit 00Detik &#8220;Dan Diantara Tanda-tanda (Kebesaran) -Nya Ialah Dia Menciptakan Pasangan-pasangan Untukmu Dari Jenismu Sendiri, Agar Kamu Cenderung Dan Merasa Teteram Kepadanya, Dan Dia Menjadikan Diantaramu Rasa Kasih Dan Sayang. Sungguh, Pada Yang Demuikian Itu Benar-benar Terdapat [&hellip;]" />
+	<meta property="og:url" content="https://digitalvite.id/premium-021/" />
+	<meta property="og:site_name" content="DigitalVite" />
+	<meta property="article:modified_time" content="2025-12-14T09:59:04+00:00" />
+	<meta property="og:image" content="https://digitalvite.id/wp-content/uploads/2024/09/Desain-tanpa-judul-1-2.png" />
+	<meta property="og:image:width" content="1080" />
+	<meta property="og:image:height" content="1080" />
+	<meta property="og:image:type" content="image/png" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:label1" content="Est. reading time" />
+	<meta name="twitter:data1" content="5 minutes" />
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://digitalvite.id/premium-021/","url":"https://digitalvite.id/premium-021/","name":"Premium 021 DigitalVite","isPartOf":{"@id":"https://digitalvite.id/#website"},"primaryImageOfPage":{"@id":"https://digitalvite.id/premium-021/#primaryimage"},"image":{"@id":"https://digitalvite.id/premium-021/#primaryimage"},"thumbnailUrl":"https://digitalvite.id/wp-content/uploads/2024/09/Desain-tanpa-judul-1-2.png","datePublished":"2025-04-28T02:22:23+00:00","dateModified":"2025-12-14T09:59:04+00:00","breadcrumb":{"@id":"https://digitalvite.id/premium-021/#breadcrumb"},"inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://digitalvite.id/premium-021/"]}]},{"@type":"ImageObject","inLanguage":"en-US","@id":"https://digitalvite.id/premium-021/#primaryimage","url":"https://digitalvite.id/wp-content/uploads/2024/09/Desain-tanpa-judul-1-2.png","contentUrl":"https://digitalvite.id/wp-content/uploads/2024/09/Desain-tanpa-judul-1-2.png","width":1080,"height":1080},{"@type":"BreadcrumbList","@id":"https://digitalvite.id/premium-021/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://digitalvite.id/"},{"@type":"ListItem","position":2,"name":"Premium 021"}]},{"@type":"WebSite","@id":"https://digitalvite.id/#website","url":"https://digitalvite.id/","name":"DigitalVite","description":"","publisher":{"@id":"https://digitalvite.id/#organization"},"potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://digitalvite.id/?s={search_term_string}"},"query-input":{"@type":"PropertyValueSpecification","valueRequired":true,"valueName":"search_term_string"}}],"inLanguage":"en-US"},{"@type":"Organization","@id":"https://digitalvite.id/#organization","name":"DigitalVite","url":"https://digitalvite.id/","logo":{"@type":"ImageObject","inLanguage":"en-US","@id":"https://digitalvite.id/#/schema/logo/image/","url":"https://digitalvite.id/wp-content/uploads/2024/09/Logo-DigitaVite-5.png","contentUrl":"https://digitalvite.id/wp-content/uploads/2024/09/Logo-DigitaVite-5.png","width":1032,"height":1032,"caption":"DigitalVite"},"image":{"@id":"https://digitalvite.id/#/schema/logo/image/"}}]}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<title>Premium 021 DigitalVite</title>
+<link rel="alternate" type="application/rss+xml" title="DigitalVite &raquo; Feed" href="https://digitalvite.id/feed/" />
+<link rel="alternate" type="application/rss+xml" title="DigitalVite &raquo; Comments Feed" href="https://digitalvite.id/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="DigitalVite &raquo; Premium 021 Comments Feed" href="https://digitalvite.id/premium-021/feed/" />
+<link rel="alternate" title="oEmbed (JSON)" type="application/json+oembed" href="https://digitalvite.id/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdigitalvite.id%2Fpremium-021%2F" />
+<link rel="alternate" title="oEmbed (XML)" type="text/xml+oembed" href="https://digitalvite.id/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdigitalvite.id%2Fpremium-021%2F&#038;format=xml" />
+<style id='wp-img-auto-sizes-contain-inline-css'>
+img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
+/*# sourceURL=wp-img-auto-sizes-contain-inline-css */
+</style>
+<link rel='stylesheet' id='bdt-uikit-css' href='https://digitalvite.id/wp-content/plugins/weddingpress/assets/css/modules/bdt-uikit.css?ver=3.15.1' media='all' />
+<link rel='stylesheet' id='ep-helper-css' href='https://digitalvite.id/wp-content/plugins/weddingpress/assets/css/modules/ep-helper.css?ver=3.1.9' media='all' />
+<style id='wp-emoji-styles-inline-css'>
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+/*# sourceURL=wp-emoji-styles-inline-css */
+</style>
+<style id='wp-block-library-inline-css'>
+:root{
+  --wp-block-synced-color:#7a00df;
+  --wp-block-synced-color--rgb:122, 0, 223;
+  --wp-bound-block-color:var(--wp-block-synced-color);
+  --wp-editor-canvas-background:#ddd;
+  --wp-admin-theme-color:#007cba;
+  --wp-admin-theme-color--rgb:0, 124, 186;
+  --wp-admin-theme-color-darker-10:#006ba1;
+  --wp-admin-theme-color-darker-10--rgb:0, 107, 160.5;
+  --wp-admin-theme-color-darker-20:#005a87;
+  --wp-admin-theme-color-darker-20--rgb:0, 90, 135;
+  --wp-admin-border-width-focus:2px;
+}
+@media (min-resolution:192dpi){
+  :root{
+    --wp-admin-border-width-focus:1.5px;
+  }
+}
+.wp-element-button{
+  cursor:pointer;
+}
+
+:root .has-very-light-gray-background-color{
+  background-color:#eee;
+}
+:root .has-very-dark-gray-background-color{
+  background-color:#313131;
+}
+:root .has-very-light-gray-color{
+  color:#eee;
+}
+:root .has-very-dark-gray-color{
+  color:#313131;
+}
+:root .has-vivid-green-cyan-to-vivid-cyan-blue-gradient-background{
+  background:linear-gradient(135deg, #00d084, #0693e3);
+}
+:root .has-purple-crush-gradient-background{
+  background:linear-gradient(135deg, #34e2e4, #4721fb 50%, #ab1dfe);
+}
+:root .has-hazy-dawn-gradient-background{
+  background:linear-gradient(135deg, #faaca8, #dad0ec);
+}
+:root .has-subdued-olive-gradient-background{
+  background:linear-gradient(135deg, #fafae1, #67a671);
+}
+:root .has-atomic-cream-gradient-background{
+  background:linear-gradient(135deg, #fdd79a, #004a59);
+}
+:root .has-nightshade-gradient-background{
+  background:linear-gradient(135deg, #330968, #31cdcf);
+}
+:root .has-midnight-gradient-background{
+  background:linear-gradient(135deg, #020381, #2874fc);
+}
+:root{
+  --wp--preset--font-size--normal:16px;
+  --wp--preset--font-size--huge:42px;
+}
+
+.has-regular-font-size{
+  font-size:1em;
+}
+
+.has-larger-font-size{
+  font-size:2.625em;
+}
+
+.has-normal-font-size{
+  font-size:var(--wp--preset--font-size--normal);
+}
+
+.has-huge-font-size{
+  font-size:var(--wp--preset--font-size--huge);
+}
+
+.has-text-align-center{
+  text-align:center;
+}
+
+.has-text-align-left{
+  text-align:left;
+}
+
+.has-text-align-right{
+  text-align:right;
+}
+
+.has-fit-text{
+  white-space:nowrap !important;
+}
+
+#end-resizable-editor-section{
+  display:none;
+}
+
+.aligncenter{
+  clear:both;
+}
+
+.items-justified-left{
+  justify-content:flex-start;
+}
+
+.items-justified-center{
+  justify-content:center;
+}
+
+.items-justified-right{
+  justify-content:flex-end;
+}
+
+.items-justified-space-between{
+  justify-content:space-between;
+}
+
+.screen-reader-text{
+  border:0;
+  clip-path:inset(50%);
+  height:1px;
+  margin:-1px;
+  overflow:hidden;
+  padding:0;
+  position:absolute;
+  width:1px;
+  word-wrap:normal !important;
+}
+
+.screen-reader-text:focus{
+  background-color:#ddd;
+  clip-path:none;
+  color:#444;
+  display:block;
+  font-size:1em;
+  height:auto;
+  left:5px;
+  line-height:normal;
+  padding:15px 23px 14px;
+  text-decoration:none;
+  top:5px;
+  width:auto;
+  z-index:100000;
+}
+html :where(.has-border-color){
+  border-style:solid;
+}
+
+html :where([style*=border-top-color]){
+  border-top-style:solid;
+}
+
+html :where([style*=border-right-color]){
+  border-right-style:solid;
+}
+
+html :where([style*=border-bottom-color]){
+  border-bottom-style:solid;
+}
+
+html :where([style*=border-left-color]){
+  border-left-style:solid;
+}
+
+html :where([style*=border-width]){
+  border-style:solid;
+}
+
+html :where([style*=border-top-width]){
+  border-top-style:solid;
+}
+
+html :where([style*=border-right-width]){
+  border-right-style:solid;
+}
+
+html :where([style*=border-bottom-width]){
+  border-bottom-style:solid;
+}
+
+html :where([style*=border-left-width]){
+  border-left-style:solid;
+}
+html :where(img[class*=wp-image-]){
+  height:auto;
+  max-width:100%;
+}
+:where(figure){
+  margin:0 0 1em;
+}
+
+html :where(.is-position-sticky){
+  --wp-admin--admin-bar--position-offset:var(--wp-admin--admin-bar--height, 0px);
+}
+
+@media screen and (max-width:600px){
+  html :where(.is-position-sticky){
+    --wp-admin--admin-bar--position-offset:0px;
+  }
+}
+/*# sourceURL=/wp-includes/css/dist/block-library/common.css */
+</style>
+<style id='global-styles-inline-css'>
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--color--base: #f9f9f9;--wp--preset--color--base-2: #ffffff;--wp--preset--color--contrast: #111111;--wp--preset--color--contrast-2: #636363;--wp--preset--color--contrast-3: #A4A4A4;--wp--preset--color--accent: #cfcabe;--wp--preset--color--accent-2: #c2a990;--wp--preset--color--accent-3: #d8613c;--wp--preset--color--accent-4: #b1c5a4;--wp--preset--color--accent-5: #b5bdbc;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgb(6,147,227) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgb(252,185,0) 0%,rgb(255,105,0) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgb(255,105,0) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--gradient--gradient-1: linear-gradient(to bottom, #cfcabe 0%, #F9F9F9 100%);--wp--preset--gradient--gradient-2: linear-gradient(to bottom, #C2A990 0%, #F9F9F9 100%);--wp--preset--gradient--gradient-3: linear-gradient(to bottom, #D8613C 0%, #F9F9F9 100%);--wp--preset--gradient--gradient-4: linear-gradient(to bottom, #B1C5A4 0%, #F9F9F9 100%);--wp--preset--gradient--gradient-5: linear-gradient(to bottom, #B5BDBC 0%, #F9F9F9 100%);--wp--preset--gradient--gradient-6: linear-gradient(to bottom, #A4A4A4 0%, #F9F9F9 100%);--wp--preset--gradient--gradient-7: linear-gradient(to bottom, #cfcabe 50%, #F9F9F9 50%);--wp--preset--gradient--gradient-8: linear-gradient(to bottom, #C2A990 50%, #F9F9F9 50%);--wp--preset--gradient--gradient-9: linear-gradient(to bottom, #D8613C 50%, #F9F9F9 50%);--wp--preset--gradient--gradient-10: linear-gradient(to bottom, #B1C5A4 50%, #F9F9F9 50%);--wp--preset--gradient--gradient-11: linear-gradient(to bottom, #B5BDBC 50%, #F9F9F9 50%);--wp--preset--gradient--gradient-12: linear-gradient(to bottom, #A4A4A4 50%, #F9F9F9 50%);--wp--preset--font-size--small: 0.9rem;--wp--preset--font-size--medium: 1.05rem;--wp--preset--font-size--large: clamp(1.39rem, 1.39rem + ((1vw - 0.2rem) * 0.767), 1.85rem);--wp--preset--font-size--x-large: clamp(1.85rem, 1.85rem + ((1vw - 0.2rem) * 1.083), 2.5rem);--wp--preset--font-size--xx-large: clamp(2.5rem, 2.5rem + ((1vw - 0.2rem) * 1.283), 3.27rem);--wp--preset--font-family--body: "Inter", sans-serif;--wp--preset--font-family--heading: Cardo;--wp--preset--font-family--system-sans-serif: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Cantarell, Ubuntu, roboto, noto, arial, sans-serif;--wp--preset--font-family--system-serif: Iowan Old Style, Apple Garamond, Baskerville, Times New Roman, Droid Serif, Times, Source Serif Pro, serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;--wp--preset--spacing--20: min(1.5rem, 2vw);--wp--preset--spacing--30: min(2.5rem, 3vw);--wp--preset--spacing--40: min(4rem, 5vw);--wp--preset--spacing--50: min(6.5rem, 8vw);--wp--preset--spacing--60: min(10.5rem, 13vw);--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--spacing--10: 1rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgb(255, 255, 255), 6px 6px rgb(0, 0, 0);--wp--preset--shadow--crisp: 6px 6px 0px rgb(0, 0, 0);}:root { --wp--style--global--content-size: 620px;--wp--style--global--wide-size: 1280px; }:where(body) { margin: 0; }.wp-site-blocks { padding-top: var(--wp--style--root--padding-top); padding-bottom: var(--wp--style--root--padding-bottom); }.has-global-padding { padding-right: var(--wp--style--root--padding-right); padding-left: var(--wp--style--root--padding-left); }.has-global-padding > .alignfull { margin-right: calc(var(--wp--style--root--padding-right) * -1); margin-left: calc(var(--wp--style--root--padding-left) * -1); }.has-global-padding :where(:not(.alignfull.is-layout-flow) > .has-global-padding:not(.wp-block-block, .alignfull)) { padding-right: 0; padding-left: 0; }.has-global-padding :where(:not(.alignfull.is-layout-flow) > .has-global-padding:not(.wp-block-block, .alignfull)) > .alignfull { margin-left: 0; margin-right: 0; }.wp-site-blocks > .alignleft { float: left; margin-right: 2em; }.wp-site-blocks > .alignright { float: right; margin-left: 2em; }.wp-site-blocks > .aligncenter { justify-content: center; margin-left: auto; margin-right: auto; }:where(.wp-site-blocks) > * { margin-block-start: 1.2rem; margin-block-end: 0; }:where(.wp-site-blocks) > :first-child { margin-block-start: 0; }:where(.wp-site-blocks) > :last-child { margin-block-end: 0; }:root { --wp--style--block-gap: 1.2rem; }:root :where(.is-layout-flow) > :first-child{margin-block-start: 0;}:root :where(.is-layout-flow) > :last-child{margin-block-end: 0;}:root :where(.is-layout-flow) > *{margin-block-start: 1.2rem;margin-block-end: 0;}:root :where(.is-layout-constrained) > :first-child{margin-block-start: 0;}:root :where(.is-layout-constrained) > :last-child{margin-block-end: 0;}:root :where(.is-layout-constrained) > *{margin-block-start: 1.2rem;margin-block-end: 0;}:root :where(.is-layout-flex){gap: 1.2rem;}:root :where(.is-layout-grid){gap: 1.2rem;}.is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}.is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}.is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}.is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}.is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}.is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}.is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}.is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}body{background-color: var(--wp--preset--color--base);color: var(--wp--preset--color--contrast);font-family: var(--wp--preset--font-family--body);font-size: var(--wp--preset--font-size--medium);font-style: normal;font-weight: 400;line-height: 1.55;--wp--style--root--padding-top: 0px;--wp--style--root--padding-right: var(--wp--preset--spacing--50);--wp--style--root--padding-bottom: 0px;--wp--style--root--padding-left: var(--wp--preset--spacing--50);}a:where(:not(.wp-element-button)){color: var(--wp--preset--color--contrast);text-decoration: underline;}:root :where(a:where(:not(.wp-element-button)):hover){text-decoration: none;}h1, h2, h3, h4, h5, h6{color: var(--wp--preset--color--contrast);font-family: var(--wp--preset--font-family--heading);font-weight: 400;line-height: 1.2;}h1{font-size: var(--wp--preset--font-size--xx-large);line-height: 1.15;}h2{font-size: var(--wp--preset--font-size--x-large);}h3{font-size: var(--wp--preset--font-size--large);}h4{font-size: clamp(1.1rem, 1.1rem + ((1vw - 0.2rem) * 0.767), 1.5rem);}h5{font-size: var(--wp--preset--font-size--medium);}h6{font-size: var(--wp--preset--font-size--small);}:root :where(.wp-element-button, .wp-block-button__link){background-color: var(--wp--preset--color--contrast);border-radius: .33rem;border-color: var(--wp--preset--color--contrast);border-width: 0;color: var(--wp--preset--color--base);font-family: inherit;font-size: var(--wp--preset--font-size--small);font-style: normal;font-weight: 500;letter-spacing: inherit;line-height: inherit;padding-top: 0.6rem;padding-right: 1rem;padding-bottom: 0.6rem;padding-left: 1rem;text-decoration: none;text-transform: inherit;}:root :where(.wp-element-button:hover, .wp-block-button__link:hover){background-color: var(--wp--preset--color--contrast-2);border-color: var(--wp--preset--color--contrast-2);color: var(--wp--preset--color--base);}:root :where(.wp-element-button:focus, .wp-block-button__link:focus){background-color: var(--wp--preset--color--contrast-2);border-color: var(--wp--preset--color--contrast-2);color: var(--wp--preset--color--base);outline-color: var(--wp--preset--color--contrast);outline-offset: 2px;}:root :where(.wp-element-button:active, .wp-block-button__link:active){background-color: var(--wp--preset--color--contrast);color: var(--wp--preset--color--base);}:root :where(.wp-element-caption, .wp-block-audio figcaption, .wp-block-embed figcaption, .wp-block-gallery figcaption, .wp-block-image figcaption, .wp-block-table figcaption, .wp-block-video figcaption){color: var(--wp--preset--color--contrast-2);font-family: var(--wp--preset--font-family--body);font-size: 0.8rem;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-base-color{color: var(--wp--preset--color--base) !important;}.has-base-2-color{color: var(--wp--preset--color--base-2) !important;}.has-contrast-color{color: var(--wp--preset--color--contrast) !important;}.has-contrast-2-color{color: var(--wp--preset--color--contrast-2) !important;}.has-contrast-3-color{color: var(--wp--preset--color--contrast-3) !important;}.has-accent-color{color: var(--wp--preset--color--accent) !important;}.has-accent-2-color{color: var(--wp--preset--color--accent-2) !important;}.has-accent-3-color{color: var(--wp--preset--color--accent-3) !important;}.has-accent-4-color{color: var(--wp--preset--color--accent-4) !important;}.has-accent-5-color{color: var(--wp--preset--color--accent-5) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-base-background-color{background-color: var(--wp--preset--color--base) !important;}.has-base-2-background-color{background-color: var(--wp--preset--color--base-2) !important;}.has-contrast-background-color{background-color: var(--wp--preset--color--contrast) !important;}.has-contrast-2-background-color{background-color: var(--wp--preset--color--contrast-2) !important;}.has-contrast-3-background-color{background-color: var(--wp--preset--color--contrast-3) !important;}.has-accent-background-color{background-color: var(--wp--preset--color--accent) !important;}.has-accent-2-background-color{background-color: var(--wp--preset--color--accent-2) !important;}.has-accent-3-background-color{background-color: var(--wp--preset--color--accent-3) !important;}.has-accent-4-background-color{background-color: var(--wp--preset--color--accent-4) !important;}.has-accent-5-background-color{background-color: var(--wp--preset--color--accent-5) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-base-border-color{border-color: var(--wp--preset--color--base) !important;}.has-base-2-border-color{border-color: var(--wp--preset--color--base-2) !important;}.has-contrast-border-color{border-color: var(--wp--preset--color--contrast) !important;}.has-contrast-2-border-color{border-color: var(--wp--preset--color--contrast-2) !important;}.has-contrast-3-border-color{border-color: var(--wp--preset--color--contrast-3) !important;}.has-accent-border-color{border-color: var(--wp--preset--color--accent) !important;}.has-accent-2-border-color{border-color: var(--wp--preset--color--accent-2) !important;}.has-accent-3-border-color{border-color: var(--wp--preset--color--accent-3) !important;}.has-accent-4-border-color{border-color: var(--wp--preset--color--accent-4) !important;}.has-accent-5-border-color{border-color: var(--wp--preset--color--accent-5) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-gradient-1-gradient-background{background: var(--wp--preset--gradient--gradient-1) !important;}.has-gradient-2-gradient-background{background: var(--wp--preset--gradient--gradient-2) !important;}.has-gradient-3-gradient-background{background: var(--wp--preset--gradient--gradient-3) !important;}.has-gradient-4-gradient-background{background: var(--wp--preset--gradient--gradient-4) !important;}.has-gradient-5-gradient-background{background: var(--wp--preset--gradient--gradient-5) !important;}.has-gradient-6-gradient-background{background: var(--wp--preset--gradient--gradient-6) !important;}.has-gradient-7-gradient-background{background: var(--wp--preset--gradient--gradient-7) !important;}.has-gradient-8-gradient-background{background: var(--wp--preset--gradient--gradient-8) !important;}.has-gradient-9-gradient-background{background: var(--wp--preset--gradient--gradient-9) !important;}.has-gradient-10-gradient-background{background: var(--wp--preset--gradient--gradient-10) !important;}.has-gradient-11-gradient-background{background: var(--wp--preset--gradient--gradient-11) !important;}.has-gradient-12-gradient-background{background: var(--wp--preset--gradient--gradient-12) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}.has-xx-large-font-size{font-size: var(--wp--preset--font-size--xx-large) !important;}.has-body-font-family{font-family: var(--wp--preset--font-family--body) !important;}.has-heading-font-family{font-family: var(--wp--preset--font-family--heading) !important;}.has-system-sans-serif-font-family{font-family: var(--wp--preset--font-family--system-sans-serif) !important;}.has-system-serif-font-family{font-family: var(--wp--preset--font-family--system-serif) !important;}:where(.wp-site-blocks *:focus){outline-width:2px;outline-style:solid}
+/*# sourceURL=global-styles-inline-css */
+</style>
+<style id='core-block-supports-inline-css'>
+/**
+ * Core styles: block-supports
+ */
+
+/*# sourceURL=core-block-supports-inline-css */
+</style>
+<style id='wp-block-template-skip-link-inline-css'>
+
+		.skip-link.screen-reader-text {
+			border: 0;
+			clip-path: inset(50%);
+			height: 1px;
+			margin: -1px;
+			overflow: hidden;
+			padding: 0;
+			position: absolute !important;
+			width: 1px;
+			word-wrap: normal !important;
+		}
+
+		.skip-link.screen-reader-text:focus {
+			background-color: #eee;
+			clip-path: none;
+			color: #444;
+			display: block;
+			font-size: 1em;
+			height: auto;
+			left: 5px;
+			line-height: normal;
+			padding: 15px 23px 14px;
+			text-decoration: none;
+			top: 5px;
+			width: auto;
+			z-index: 100000;
+		}
+/*# sourceURL=wp-block-template-skip-link-inline-css */
+</style>
+<link rel='stylesheet' id='eae-css-css' href='https://digitalvite.id/wp-content/plugins/addon-elements-for-elementor-page-builder/assets/css/eae.css?ver=1.14.4' media='all' />
+<link rel='stylesheet' id='eae-peel-css-css' href='https://digitalvite.id/wp-content/plugins/addon-elements-for-elementor-page-builder/assets/lib/peel/peel.css?ver=1.14.4' media='all' />
+<link rel='stylesheet' id='font-awesome-4-shim-css' href='https://digitalvite.id/wp-content/plugins/elementor/assets/lib/font-awesome/css/v4-shims.min.css?ver=1.0' media='all' />
+<link rel='stylesheet' id='font-awesome-5-all-css' href='https://digitalvite.id/wp-content/plugins/elementor/assets/lib/font-awesome/css/all.min.css?ver=1.0' media='all' />
+<link rel='stylesheet' id='vegas-css-css' href='https://digitalvite.id/wp-content/plugins/addon-elements-for-elementor-page-builder/assets/lib/vegas/vegas.css?ver=2.4.0' media='all' />
+<link rel='stylesheet' id='exad-main-style-css' href='https://digitalvite.id/wp-content/plugins/weddingpress/assets/css/exad-styles.min.css?ver=6.9' media='all' />
+<link rel='stylesheet' id='cui_style-css' href='https://digitalvite.id/wp-content/plugins/weddingpress/addons/comment-kit2//css/cui_style.css?ver=1.0.0' media='screen' />
+<style id='cui_style-inline-css'>
+
+		.cui-wrapper {
+		  font-size: 14px
+		}
+	.cui-post-author {
+	color: white !important;
+	background: #777 !important;
+}
+	.cui-wrapper ul.cui-container-comments li.cui-item-comment .cui-comment-avatar img {
+		max-width: 28px;
+		max-height: 28px;
+	}
+	.cui-wrapper ul.cui-container-comments li.cui-item-comment .cui-comment-content {
+		margin-left: 38px;
+	}
+	.cui-wrapper ul.cui-container-comments li.cui-item-comment ul .cui-comment-avatar img {
+		max-width: 24px;
+		max-height: 24px;
+	}
+	.cui-wrapper ul.cui-container-comments li.cui-item-comment ul ul .cui-comment-avatar img {
+		max-width: 21px;
+		max-height: 21px;
+	}
+    .cui_comment_count_card.cui_card-tidak_hadir {
+    background-color: #d90a11;
     }
-    .modal.open{display:flex}
-    .sheet{
-      width:min(560px, 100%);
-      background: var(--paper);
-      border:1px solid rgba(183,154,106,.25);
-      border-radius: 22px;
-      box-shadow: var(--shadow);
-      overflow:hidden;
-      animation: pop .2s ease-out;
+    .cui_comment_count_card.cui_card-hadir {
+    background-color: #3D9A62;
     }
-    @keyframes pop{from{transform:translateY(10px);opacity:.8}to{transform:translateY(0);opacity:1}}
-    .sheethead{
-      padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px;
-      border-bottom:1px solid rgba(183,154,106,.2);
-      background: rgba(183,154,106,.08);
+    .cui_comment_count_card.cui_card-masih_ragu {
+    background-color: #d7a916;
     }
-    .sheethead b{color:var(--gold2);font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;}
-    .x{
-      width:36px;height:36px;border-radius:12px;border:1px solid rgba(183,154,106,.3);
-      background: rgba(255,255,255,.6);cursor:pointer;display:grid;place-items:center;
-    }
-    .sheetbody{padding:14px 16px 18px}
-    .help{margin:10px 0 0;color:var(--muted);font-size:12px;line-height:1.5;font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;}
-    .sticky{
-      position:fixed;left:0;right:0;bottom:0;
-      display:flex;justify-content:center;gap:10px;
-      padding:10px 14px;
-      background: linear-gradient(180deg, transparent, rgba(0,0,0,.08));
-      backdrop-filter: blur(6px);
-      z-index:50;
-    }
-    .sticky .btn{width:min(560px, 100%)}
-    .mini{
-      position:fixed;right:14px;bottom:78px;z-index:55;
-      display:flex;flex-direction:column;gap:10px;
-    }
-    .fab{
-      width:48px;height:48px;border-radius:16px;
-      border:1px solid rgba(183,154,106,.35);
-      background: rgba(255,255,255,.65);
-      box-shadow: 0 10px 24px rgba(0,0,0,.12);
-      display:grid;place-items:center;
-      cursor:pointer;
-    }
-    .fab svg{width:20px;height:20px}
-  </style>
-</head>
-<body>
-  <div class="wrap">
-    <div class="card" id="top">
-      <div class="hero">
-        <div class="leaf"></div>
-        <span class="badge small" id="badge">THE WEDDING OF</span>
-        <div class="title">Nasrul &amp; Naya</div>
-        <div class="subtitle small">Dengan memohon rahmat dan ridho Allah SWT</div>
-        <div class="date small">Ahad, 7 Februari 2026</div>
+	
+/*# sourceURL=cui_style-inline-css */
+</style>
+<link rel='stylesheet' id='elementor-frontend-css' href='https://digitalvite.id/wp-content/plugins/elementor/assets/css/frontend.css?ver=3.25.0' media='all' />
+<link rel='stylesheet' id='swiper-css' href='https://digitalvite.id/wp-content/plugins/elementor/assets/lib/swiper/v8/css/swiper.css?ver=8.4.5' media='all' />
+<link rel='stylesheet' id='e-swiper-css' href='https://digitalvite.id/wp-content/plugins/elementor/assets/css/conditionals/e-swiper.css?ver=3.25.0' media='all' />
+<link rel='stylesheet' id='elementor-post-6-css' href='https://digitalvite.id/wp-content/uploads/elementor/css/post-6.css?ver=1765684750' media='all' />
+<link rel='stylesheet' id='weddingpress-wdp-css' href='https://digitalvite.id/wp-content/plugins/weddingpress/assets/css/wdp.css?ver=3.1.9' media='all' />
+<link rel='stylesheet' id='kirim-kit-css' href='https://digitalvite.id/wp-content/plugins/weddingpress/assets/css/guest-book.css?ver=3.1.9' media='all' />
+<link rel='stylesheet' id='jet-tricks-frontend-css' href='https://digitalvite.id/wp-content/plugins/jet-tricks/assets/css/jet-tricks-frontend.css?ver=1.4.9' media='all' />
+<link rel='stylesheet' id='e-animation-zoomInLeft-css' href='https://digitalvite.id/wp-content/plugins/elementor/assets/lib/animations/styles/zoomInLeft.css?ver=3.25.0' media='all' />
+<link rel='stylesheet' id='widget-heading-css' href='https://digitalvite.id/wp-content/plugins/elementor/assets/css/widget-heading.min.css?ver=3.25.0' media='all' />
+<link rel='stylesheet' id='widget-menu-anchor-css' href='https://digitalvite.id/wp-content/plugins/elementor/assets/css/widget-menu-anchor.min.css?ver=3.25.0' media='all' />
+<link rel='stylesheet' id='e-animation-fadeInUp-css' href='https://digitalvite.id/wp-content/plugins/elementor/assets/lib/animations/styles/fadeInUp.css?ver=3.25.0' media='all' />
+<link rel='stylesheet' id='widget-image-css' href='https://digitalvite.id/wp-content/plugins/elementor/assets/css/widget-image.min.css?ver=3.25.0' media='all' />
+<link rel='stylesheet' id='e-animation-slideInLeft-css' href='https://digitalvite.id/wp-content/plugins/elementor/assets/lib/animations/styles/slideInLeft.css?ver=3.25.0' media='all' />
+<link rel='stylesheet' id='widget-text-editor-css' href='https://digitalvite.id/wp-content/plugins/elementor/assets/css/widget-text-editor.min.css?ver=3.25.0' media='all' />
+<link rel='stylesheet' id='e-animation-zoomIn-css' href='https://digitalvite.id/wp-content/plugins/elementor/assets/lib/animations/styles/zoomIn.css?ver=3.25.0' media='all' />
+<link rel='stylesheet' id='e-animation-fadeInLeft-css' href='https://digitalvite.id/wp-content/plugins/elementor/assets/lib/animations/styles/fadeInLeft.css?ver=3.25.0' media='all' />
+<link rel='stylesheet' id='widget-social-icons-css' href='https://digitalvite.id/wp-content/plugins/elementor/assets/css/widget-social-icons.min.css?ver=3.25.0' media='all' />
+<link rel='stylesheet' id='e-apple-webkit-css' href='https://digitalvite.id/wp-content/plugins/elementor/assets/css/conditionals/apple-webkit.min.css?ver=3.25.0' media='all' />
+<link rel='stylesheet' id='e-animation-fadeInRight-css' href='https://digitalvite.id/wp-content/plugins/elementor/assets/lib/animations/styles/fadeInRight.css?ver=3.25.0' media='all' />
+<link rel='stylesheet' id='widget-icon-box-css' href='https://digitalvite.id/wp-content/plugins/elementor/assets/css/widget-icon-box.min.css?ver=3.25.0' media='all' />
+<link rel='stylesheet' id='ep-timeline-css' href='https://digitalvite.id/wp-content/plugins/weddingpress/assets/css/modules/ep-timeline.css?ver=3.1.9' media='all' />
+<link rel='stylesheet' id='ep-font-css' href='https://digitalvite.id/wp-content/plugins/weddingpress/assets/css/modules/ep-font.css?ver=3.1.9' media='all' />
+<link rel='stylesheet' id='widget-gallery-css' href='https://digitalvite.id/wp-content/plugins/elementor-pro/assets/css/widget-gallery.min.css?ver=3.25.0' media='all' />
+<link rel='stylesheet' id='elementor-gallery-css' href='https://digitalvite.id/wp-content/plugins/elementor/assets/lib/e-gallery/css/e-gallery.css?ver=1.2.0' media='all' />
+<link rel='stylesheet' id='e-transitions-css' href='https://digitalvite.id/wp-content/plugins/elementor-pro/assets/css/conditionals/transitions.min.css?ver=3.25.0' media='all' />
+<link rel='stylesheet' id='elementor-post-42179-css' href='https://digitalvite.id/wp-content/uploads/elementor/css/post-42179.css?ver=1766576900' media='all' />
+<link rel='stylesheet' id='google-fonts-1-css' href='https://fonts.googleapis.com/css?family=Roboto%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CRoboto+Slab%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CAlata%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CWork+Sans%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CGreat+Vibes%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CDancing+Script%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic&#038;display=swap&#038;ver=6.9' media='all' />
+<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin><script src="https://digitalvite.id/wp-content/plugins/addon-elements-for-elementor-page-builder/assets/js/iconHelper.js?ver=1.0" id="eae-iconHelper-js"></script>
+<script src="https://digitalvite.id/wp-includes/js/jquery/jquery.js?ver=3.7.1" id="jquery-core-js"></script>
+<script src="https://digitalvite.id/wp-includes/js/jquery/jquery-migrate.js?ver=3.4.1" id="jquery-migrate-js"></script>
+<link rel="https://api.w.org/" href="https://digitalvite.id/wp-json/" /><link rel="alternate" title="JSON" type="application/json" href="https://digitalvite.id/wp-json/wp/v2/pages/42179" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://digitalvite.id/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.9" />
+<link rel='shortlink' href='https://digitalvite.id/?p=42179' />
+<meta name="generator" content="Elementor 3.25.0; features: e_font_icon_svg, e_optimized_control_loading; settings: css_print_method-external, google_font-enabled, font_display-swap">
+<!-- HEAD: anti-zoom mobile & image protection (aman) -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-        <div style="height:14px"></div>
-        <button class="btn" id="openBtn" type="button">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M4 4h16v16H4z"/><path d="M4 8h16"/><path d="M8 12h8"/><path d="M8 16h6"/>
-          </svg>
-          Buka Undangan
-        </button>
+<style>
+/* jangan pakai pointer-events:none di seluruh img — gunakan ini lebih aman */
+img, picture, video, canvas {
+    -webkit-user-drag: none; /* mencegah drag gambar */
+    user-select: none;       /* mencegah seleksi teks pada elemen media */
+    -webkit-touch-callout: none;
+}
 
-        <div class="leaf left"></div>
-      </div>
+/* jika ada gambar yang perlu diklik, beri class .allow-click untuk override */
+img.allow-click, picture.allow-click, .allow-click * {
+    -webkit-user-drag: auto;
+    user-select: auto;
+    pointer-events: auto;
+}
+</style>
 
-      <div class="section">
-        <h3>Save the Date</h3>
-        <p class="p">
-          Kami mengundang Bapak/Ibu/Saudara/i untuk hadir dan memberikan doa restu pada acara pernikahan kami.
-        </p>
-        <div class="grid2">
-          <div class="count"><b id="d">0</b><span>Hari</span></div>
-          <div class="count"><b id="h">0</b><span>Jam</span></div>
-          <div class="count"><b id="m">0</b><span>Menit</span></div>
-          <div class="count"><b id="s">0</b><span>Detik</span></div>
-        </div>
-      </div>
+			<style>
+				.e-con.e-parent:nth-of-type(n+4):not(.e-lazyloaded):not(.e-no-lazyload),
+				.e-con.e-parent:nth-of-type(n+4):not(.e-lazyloaded):not(.e-no-lazyload) * {
+					background-image: none !important;
+				}
+				@media screen and (max-height: 1024px) {
+					.e-con.e-parent:nth-of-type(n+3):not(.e-lazyloaded):not(.e-no-lazyload),
+					.e-con.e-parent:nth-of-type(n+3):not(.e-lazyloaded):not(.e-no-lazyload) * {
+						background-image: none !important;
+					}
+				}
+				@media screen and (max-height: 640px) {
+					.e-con.e-parent:nth-of-type(n+2):not(.e-lazyloaded):not(.e-no-lazyload),
+					.e-con.e-parent:nth-of-type(n+2):not(.e-lazyloaded):not(.e-no-lazyload) * {
+						background-image: none !important;
+					}
+				}
+			</style>
+			<style class='wp-fonts-local'>
+@font-face{font-family:Inter;font-style:normal;font-weight:300 900;font-display:fallback;src:url('https://digitalvite.id/wp-content/themes/twentytwentyfour/assets/fonts/inter/Inter-VariableFont_slnt,wght.woff2') format('woff2');font-stretch:normal;}
+@font-face{font-family:Cardo;font-style:normal;font-weight:400;font-display:fallback;src:url('https://digitalvite.id/wp-content/themes/twentytwentyfour/assets/fonts/cardo/cardo_normal_400.woff2') format('woff2');}
+@font-face{font-family:Cardo;font-style:italic;font-weight:400;font-display:fallback;src:url('https://digitalvite.id/wp-content/themes/twentytwentyfour/assets/fonts/cardo/cardo_italic_400.woff2') format('woff2');}
+@font-face{font-family:Cardo;font-style:normal;font-weight:700;font-display:fallback;src:url('https://digitalvite.id/wp-content/themes/twentytwentyfour/assets/fonts/cardo/cardo_normal_700.woff2') format('woff2');}
+</style>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" /></head>
+<body class="wp-singular page-template page-template-elementor_canvas page page-id-42179 wp-embed-responsive wp-theme-twentytwentyfour elementor-default elementor-template-canvas elementor-kit-6 elementor-page elementor-page-42179">
+			<div data-elementor-type="wp-page" data-elementor-id="42179" class="elementor elementor-42179" data-elementor-post-type="page">
+						<section class="has_eae_slider elementor-section elementor-top-section elementor-element elementor-element-4cb7821 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-eae-slider="37174" data-id="4cb7821" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="has_eae_slider elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-8b3dda4" data-eae-slider="12322" data-id="8b3dda4" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-b3d350e elementor-invisible elementor-widget elementor-widget-heading" data-id="b3d350e" data-element_type="widget" data-settings="{&quot;_animation&quot;:&quot;zoomInLeft&quot;}" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">Save the Date</h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-d743a7d elementor-widget elementor-widget-menu-anchor" data-id="d743a7d" data-element_type="widget" data-widget_type="menu-anchor.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-menu-anchor" id="undangan"></div>
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-ceb3f95 elementor-invisible elementor-widget elementor-widget-heading" data-id="ceb3f95" data-element_type="widget" data-settings="{&quot;_animation&quot;:&quot;zoomInLeft&quot;}" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">You're invited to the wedding of</h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-261cf07 elementor-widget elementor-widget-image" data-id="261cf07" data-element_type="widget" data-settings="{&quot;_animation_mobile&quot;:&quot;fadeInUp&quot;}" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+													<img fetchpriority="high" decoding="async" width="333" height="328" src="https://digitalvite.id/wp-content/uploads/2025/02/680db9b0c83d88d2e3c94e1372691aab-e1703131320438.jpg" class="attachment-full size-full wp-image-37291" alt="" srcset="https://digitalvite.id/wp-content/uploads/2025/02/680db9b0c83d88d2e3c94e1372691aab-e1703131320438.jpg 333w, https://digitalvite.id/wp-content/uploads/2025/02/680db9b0c83d88d2e3c94e1372691aab-e1703131320438-300x295.jpg 300w" sizes="(max-width: 333px) 100vw, 333px" />													</div>
+				</div>
+				<div class="elementor-element elementor-element-be1373c elementor-widget elementor-widget-heading" data-id="be1373c" data-element_type="widget" data-settings="{&quot;_animation_mobile&quot;:&quot;fadeInUp&quot;}" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">Hanum &amp; Xavi</h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-cfc0383 elementor-invisible elementor-widget elementor-widget-heading" data-id="cfc0383" data-element_type="widget" data-settings="{&quot;_animation&quot;:&quot;zoomInLeft&quot;}" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">Kamis, 26 Mei<br> 2022</h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-ff38958 animated-slow elementor-invisible elementor-widget elementor-widget-weddingpress-countdown" data-id="ff38958" data-element_type="widget" data-settings="{&quot;_animation_mobile&quot;:&quot;fadeInUp&quot;,&quot;_animation&quot;:&quot;fadeInUp&quot;,&quot;_animation_delay&quot;:600}" data-widget_type="weddingpress-countdown.default">
+				<div class="elementor-widget-container">
+			
+	<div class="wpkoi-elements-countdown-wrapper">
+		<div class="wpkoi-elements-countdown-container wpkoi-elements-countdown-label-block ">		
+			<ul id="wpkoi-elements-countdown-ff38958" class="wpkoi-elements-countdown-items" data-date="Oct 16 2026 7:00:00">
+			    <li class="wpkoi-elements-countdown-item"><div class="wpkoi-elements-countdown-days"><span data-days class="wpkoi-elements-countdown-digits">00</span><span class="wpkoi-elements-countdown-label">Hari</span></div></li>			    <li class="wpkoi-elements-countdown-item"><div class="wpkoi-elements-countdown-hours"><span data-hours class="wpkoi-elements-countdown-digits">00</span><span class="wpkoi-elements-countdown-label">Jam</span></div></li>			   <li class="wpkoi-elements-countdown-item"><div class="wpkoi-elements-countdown-minutes"><span data-minutes class="wpkoi-elements-countdown-digits">00</span><span class="wpkoi-elements-countdown-label">Menit</span></div></li>			   <li class="wpkoi-elements-countdown-item"><div class="wpkoi-elements-countdown-seconds"><span data-seconds class="wpkoi-elements-countdown-digits">00</span><span class="wpkoi-elements-countdown-label">Detik</span></div></li>			</ul>
+			<div class="clearfix"></div>
+		</div>
+	</div>
 
-      <div class="divider"></div>
 
-      <div class="section">
-        <h3>Assalamu’alaikum Warahmatullahi Wabarakatuh</h3>
-        <p class="p">
-          Dengan memohon rahmat dan ridho Allah SWT, kami bermaksud menyelenggarakan
-          acara akad nikah dan resepsi pernikahan:
-        </p>
+	<script type="text/javascript">
+	jQuery(document).ready(function ($) {
+		'use strict';
+		$("#wpkoi-elements-countdown-ff38958").countdown();
+	});
+	</script>
+	
+			</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				<section class="has_eae_slider elementor-section elementor-top-section elementor-element elementor-element-cd9da8e elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-eae-slider="23863" data-id="cd9da8e" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="has_eae_slider elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-07263e8" data-eae-slider="45279" data-id="07263e8" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-b722a4f elementor-invisible elementor-widget elementor-widget-text-editor" data-id="b722a4f" data-element_type="widget" data-settings="{&quot;_animation&quot;:&quot;slideInLeft&quot;,&quot;_animation_mobile&quot;:&quot;fadeInUp&quot;}" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p>&#8220;Dan Diantara Tanda-tanda (Kebesaran) -Nya Ialah Dia Menciptakan Pasangan-pasangan Untukmu Dari Jenismu Sendiri, Agar Kamu Cenderung Dan Merasa Teteram Kepadanya, Dan Dia Menjadikan Diantaramu Rasa Kasih Dan Sayang. Sungguh, Pada Yang Demuikian Itu Benar-benar Terdapat Tanda-tanda (Kebesaran Allah) Bagi Kaum Yang Berfikir&#8221;<br />{ Q.S : Ar-Rum (30) : 20 } </p>						</div>
+				</div>
+				<div class="elementor-element elementor-element-0f45037 animated-slow elementor-align-center elementor-invisible elementor-widget elementor-widget-weddingpress-datekit2" data-id="0f45037" data-element_type="widget" data-settings="{&quot;_animation_mobile&quot;:&quot;zoomIn&quot;,&quot;_animation&quot;:&quot;zoomIn&quot;,&quot;_animation_delay&quot;:600}" data-widget_type="weddingpress-datekit2.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-button-wrapper">
+			<a href="https://www.google.com/calendar/render?action=TEMPLATE&amp;text=Pernikahan+Nanda+%26+Maulidin&amp;dates=20241021T070000Z%2F20241021T170000Z" class="elementor-button-link elementor-button elementor-size-sm" target="_blank" rel="nofollow" role="button">
+				<span class="elementor-button-content-wrapper wdp-flexbox">
+								<span class="elementor-button-icon elementor-align-icon-left">
+					<svg aria-hidden="true" class="e-font-icon-svg e-far-calendar-alt" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"></path></svg>				</span>
+					<span class="elementor-button-text">Simpan di Kalender</span>
+		</span>
+					</a>
+		</div>
+				</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				<section class="has_eae_slider elementor-section elementor-top-section elementor-element elementor-element-744dde6 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-eae-slider="10792" data-id="744dde6" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="has_eae_slider elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-23be1b0" data-eae-slider="96562" data-id="23be1b0" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-536f660 elementor-widget elementor-widget-menu-anchor" data-id="536f660" data-element_type="widget" data-widget_type="menu-anchor.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-menu-anchor" id="mempelai"></div>
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-32154a8 elementor-widget elementor-widget-image" data-id="32154a8" data-element_type="widget" data-settings="{&quot;_animation_mobile&quot;:&quot;zoomIn&quot;}" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+													<img decoding="async" width="73" height="11" src="https://digitalvite.id/wp-content/uploads/2025/02/bismillah-1.svg" class="attachment-thumbnail size-thumbnail wp-image-37307" alt="" />													</div>
+				</div>
+				<div class="elementor-element elementor-element-c1723d4 elementor-invisible elementor-widget elementor-widget-text-editor" data-id="c1723d4" data-element_type="widget" data-settings="{&quot;_animation&quot;:&quot;zoomIn&quot;,&quot;_animation_mobile&quot;:&quot;fadeInUp&quot;}" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p>Dengan Memohon Rahmat Dan Ridho Dari Allah SWT. Kami Bermaksud Menyelenggarakan Syukuran Pernikahan Putra Putri Kami</p>						</div>
+				</div>
+				<div class="elementor-element elementor-element-89db76f elementor-widget elementor-widget-image" data-id="89db76f" data-element_type="widget" data-settings="{&quot;_animation_mobile&quot;:&quot;fadeInLeft&quot;}" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+													<img decoding="async" width="138" height="138" src="https://digitalvite.id/wp-content/uploads/2025/02/image1601.png" class="attachment-full size-full wp-image-37308" alt="" />													</div>
+				</div>
+				<div class="elementor-element elementor-element-5413683 elementor-invisible elementor-widget elementor-widget-heading" data-id="5413683" data-element_type="widget" data-settings="{&quot;_animation&quot;:&quot;zoomIn&quot;}" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">Hanum Ananta</h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-42332d3 elementor-widget elementor-widget-text-editor" data-id="42332d3" data-element_type="widget" data-settings="{&quot;_animation_mobile&quot;:&quot;fadeInUp&quot;}" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p>Anak Pertama Dari :<br />Bapak Sahidi &amp; Ibu Kustira</p>						</div>
+				</div>
+				<div class="elementor-element elementor-element-7fe9b0d elementor-shape-circle e-grid-align-mobile-center elementor-grid-0 e-grid-align-center elementor-widget elementor-widget-social-icons" data-id="7fe9b0d" data-element_type="widget" data-widget_type="social-icons.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-social-icons-wrapper elementor-grid">
+							<span class="elementor-grid-item">
+					<a class="elementor-icon elementor-social-icon elementor-social-icon-instagram elementor-repeater-item-53376f4" href="https://www.instagram.com/sherylanst?igsh=YzhrN294Z29jMG5p" target="_blank">
+						<span class="elementor-screen-only">Instagram</span>
+						<svg class="e-font-icon-svg e-fab-instagram" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"></path></svg>					</a>
+				</span>
+					</div>
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-8fe6516 elementor-invisible elementor-widget elementor-widget-heading" data-id="8fe6516" data-element_type="widget" data-settings="{&quot;_animation&quot;:&quot;zoomIn&quot;}" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">&amp;</h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-03c9dbe elementor-widget elementor-widget-image" data-id="03c9dbe" data-element_type="widget" data-settings="{&quot;_animation_mobile&quot;:&quot;fadeInLeft&quot;}" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+													<img loading="lazy" decoding="async" width="395" height="395" src="https://digitalvite.id/wp-content/uploads/2025/02/g3623.png" class="attachment-full size-full wp-image-37309" alt="" srcset="https://digitalvite.id/wp-content/uploads/2025/02/g3623.png 395w, https://digitalvite.id/wp-content/uploads/2025/02/g3623-300x300.png 300w, https://digitalvite.id/wp-content/uploads/2025/02/g3623-150x150.png 150w" sizes="(max-width: 395px) 100vw, 395px" />													</div>
+				</div>
+				<div class="elementor-element elementor-element-e37e42d elementor-invisible elementor-widget elementor-widget-heading" data-id="e37e42d" data-element_type="widget" data-settings="{&quot;_animation&quot;:&quot;zoomIn&quot;}" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">Xavi Syauqi</h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-3fc3fbb elementor-widget elementor-widget-text-editor" data-id="3fc3fbb" data-element_type="widget" data-settings="{&quot;_animation_mobile&quot;:&quot;fadeInUp&quot;}" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p>Anak Pertama Dari :<br />Bapak Arif Rafi Udin, S.Pd  &amp; Ibu Elis Mukhtosiroh</p>						</div>
+				</div>
+				<div class="elementor-element elementor-element-82a7f8b elementor-shape-circle e-grid-align-mobile-center elementor-grid-0 e-grid-align-center elementor-widget elementor-widget-social-icons" data-id="82a7f8b" data-element_type="widget" data-widget_type="social-icons.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-social-icons-wrapper elementor-grid">
+							<span class="elementor-grid-item">
+					<a class="elementor-icon elementor-social-icon elementor-social-icon-instagram elementor-repeater-item-53376f4" href="https://www.instagram.com/digitalvite.id" target="_blank">
+						<span class="elementor-screen-only">Instagram</span>
+						<svg class="e-font-icon-svg e-fab-instagram" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"></path></svg>					</a>
+				</span>
+							<span class="elementor-grid-item">
+					<a class="elementor-icon elementor-social-icon elementor-social-icon-tiktok elementor-repeater-item-4ca6d00" href="https://www.instagram.com/digitalvite.id" target="_blank">
+						<span class="elementor-screen-only">Tiktok</span>
+						<svg class="e-font-icon-svg e-fab-tiktok" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39a121.43,121.43,0,0,0,67,20.14Z"></path></svg>					</a>
+				</span>
+					</div>
+				</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				<section class="has_eae_slider elementor-section elementor-top-section elementor-element elementor-element-db89531 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-eae-slider="93531" data-id="db89531" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="has_eae_slider elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-eb3e1fc" data-eae-slider="19147" data-id="eb3e1fc" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-d536a5c elementor-widget elementor-widget-menu-anchor" data-id="d536a5c" data-element_type="widget" data-widget_type="menu-anchor.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-menu-anchor" id="acara"></div>
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-e8e469a elementor-invisible elementor-widget elementor-widget-text-editor" data-id="e8e469a" data-element_type="widget" data-settings="{&quot;_animation&quot;:&quot;zoomIn&quot;}" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p>Insya Allah Acara Akan Dilaksanakan Pada :</p>						</div>
+				</div>
+		<div class="has_eae_slider elementor-element elementor-element-be9b4f0 e-con-full e-flex elementor-invisible e-con e-child" data-eae-slider="75004" data-id="be9b4f0" data-element_type="container" data-settings="{&quot;animation&quot;:&quot;fadeInRight&quot;,&quot;animation_mobile&quot;:&quot;fadeInRight&quot;}">
+		<div class="has_eae_slider elementor-element elementor-element-85dc5ba e-con-full e-flex e-con e-child" data-eae-slider="43658" data-id="85dc5ba" data-element_type="container" data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;animation_mobile&quot;:&quot;zoomIn&quot;}">
+				<div class="elementor-element elementor-element-a3f8c13 elementor-widget elementor-widget-image" data-id="a3f8c13" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+													<img loading="lazy" decoding="async" width="240" height="300" src="https://digitalvite.id/wp-content/uploads/2025/02/416bd45b618959d4d3291075cbc03188-240x300.jpg" class="attachment-medium size-medium wp-image-37311" alt="" srcset="https://digitalvite.id/wp-content/uploads/2025/02/416bd45b618959d4d3291075cbc03188-240x300.jpg 240w, https://digitalvite.id/wp-content/uploads/2025/02/416bd45b618959d4d3291075cbc03188.jpg 564w" sizes="(max-width: 240px) 100vw, 240px" />													</div>
+				</div>
+				<div class="elementor-element elementor-element-743324a elementor-widget elementor-widget-icon-box" data-id="743324a" data-element_type="widget" data-settings="{&quot;_animation_mobile&quot;:&quot;fadeInRight&quot;}" data-widget_type="icon-box.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-icon-box-wrapper">
 
-        <div class="names">
-          <div class="box">
-            <p class="name">Nasrul</p>
-            <p class="meta">Putra dari Ibu <b>Nur Halimah</b></p>
-          </div>
-          <div class="box">
-            <p class="name">Naya</p>
-            <p class="meta">Putri dari Ibu <b>Nur Halimah</b></p>
-          </div>
-        </div>
-      </div>
+			
+						<div class="elementor-icon-box-content">
 
-      <div class="divider"></div>
+									<h3 class="elementor-icon-box-title">
+						<span  >
+							Akad Nikah						</span>
+					</h3>
+				
+									<p class="elementor-icon-box-description">
+						<b>Kamis, 26 Mei 2022</b>
+<br/>
+Pukul 09.00 WIB s/d Selesai<br/>
+Alamat : Kediaman mempelai wanita					</p>
+				
+			</div>
+			
+		</div>
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-9558d48 elementor-mobile-align-center elementor-align-center elementor-invisible elementor-widget elementor-widget-button" data-id="9558d48" data-element_type="widget" data-settings="{&quot;_animation_mobile&quot;:&quot;zoomIn&quot;,&quot;_animation&quot;:&quot;zoomIn&quot;}" data-widget_type="button.default">
+				<div class="elementor-widget-container">
+							<div class="elementor-button-wrapper">
+					<a class="elementor-button elementor-button-link elementor-size-xs" href="#">
+						<span class="elementor-button-content-wrapper">
+						<span class="elementor-button-icon">
+				<svg aria-hidden="true" class="e-font-icon-svg e-fas-location-arrow" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M444.52 3.52L28.74 195.42c-47.97 22.39-31.98 92.75 19.19 92.75h175.91v175.91c0 51.17 70.36 67.17 92.75 19.19l191.9-415.78c15.99-38.39-25.59-79.97-63.97-63.97z"></path></svg>			</span>
+									<span class="elementor-button-text">Lihat Lokasi</span>
+					</span>
+					</a>
+				</div>
+						</div>
+				</div>
+				</div>
+				</div>
+		<div class="has_eae_slider elementor-element elementor-element-320ec1a e-con-full e-flex elementor-invisible e-con e-child" data-eae-slider="79336" data-id="320ec1a" data-element_type="container" data-settings="{&quot;animation&quot;:&quot;fadeInRight&quot;,&quot;animation_mobile&quot;:&quot;fadeInRight&quot;}">
+		<div class="has_eae_slider elementor-element elementor-element-8970645 e-con-full e-flex e-con e-child" data-eae-slider="2968" data-id="8970645" data-element_type="container" data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;animation_mobile&quot;:&quot;zoomIn&quot;}">
+				<div class="elementor-element elementor-element-de1e0ec elementor-widget elementor-widget-image" data-id="de1e0ec" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+													<img loading="lazy" decoding="async" width="269" height="300" src="https://digitalvite.id/wp-content/uploads/2025/02/f875ef8451a074458e9bb0b8186e2ea8-e1724226147746-269x300.jpg" class="attachment-medium size-medium wp-image-37312" alt="" srcset="https://digitalvite.id/wp-content/uploads/2025/02/f875ef8451a074458e9bb0b8186e2ea8-e1724226147746-269x300.jpg 269w, https://digitalvite.id/wp-content/uploads/2025/02/f875ef8451a074458e9bb0b8186e2ea8-e1724226147746.jpg 423w" sizes="(max-width: 269px) 100vw, 269px" />													</div>
+				</div>
+				<div class="elementor-element elementor-element-cf30d13 elementor-widget elementor-widget-icon-box" data-id="cf30d13" data-element_type="widget" data-settings="{&quot;_animation_mobile&quot;:&quot;fadeInRight&quot;}" data-widget_type="icon-box.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-icon-box-wrapper">
 
-      <div class="section" id="acara">
-        <h3>Detail Acara</h3>
-        <div class="eventgrid">
-          <div class="box">
-            <p class="tt small">Akad Nikah</p>
-            <div class="row">
-              <div class="ic">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <circle cx="12" cy="12" r="9"/><path d="M12 7v6l4 2"/>
-                </svg>
-              </div>
-              <div class="meta">
-                <b>Ahad, 7 Februari 2026</b><br/>
-                Pukul <b>09.00 WIB</b>
-              </div>
+			
+						<div class="elementor-icon-box-content">
+
+									<h3 class="elementor-icon-box-title">
+						<span  >
+							Resepsi						</span>
+					</h3>
+				
+									<p class="elementor-icon-box-description">
+						<b>Kamis, 26 Mei 2022</b>
+<br/>
+Pukul 11.00 WIB s/d Selesai<br/>
+Alamat : Kediaman mempelai wanita					</p>
+				
+			</div>
+			
+		</div>
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-33da3c4 elementor-mobile-align-center elementor-align-center elementor-invisible elementor-widget elementor-widget-button" data-id="33da3c4" data-element_type="widget" data-settings="{&quot;_animation_mobile&quot;:&quot;zoomIn&quot;,&quot;_animation&quot;:&quot;zoomIn&quot;}" data-widget_type="button.default">
+				<div class="elementor-widget-container">
+							<div class="elementor-button-wrapper">
+					<a class="elementor-button elementor-button-link elementor-size-xs" href="#">
+						<span class="elementor-button-content-wrapper">
+						<span class="elementor-button-icon">
+				<svg aria-hidden="true" class="e-font-icon-svg e-fas-location-arrow" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M444.52 3.52L28.74 195.42c-47.97 22.39-31.98 92.75 19.19 92.75h175.91v175.91c0 51.17 70.36 67.17 92.75 19.19l191.9-415.78c15.99-38.39-25.59-79.97-63.97-63.97z"></path></svg>			</span>
+									<span class="elementor-button-text">Lihat Lokasi</span>
+					</span>
+					</a>
+				</div>
+						</div>
+				</div>
+				</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				<section class="has_eae_slider elementor-section elementor-top-section elementor-element elementor-element-ad0b91b elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-eae-slider="13213" data-id="ad0b91b" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="has_eae_slider elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-c13afd2" data-eae-slider="85998" data-id="c13afd2" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-0b8218c elementor-invisible elementor-widget elementor-widget-text-editor" data-id="0b8218c" data-element_type="widget" data-settings="{&quot;_animation&quot;:&quot;zoomIn&quot;,&quot;_animation_mobile&quot;:&quot;fadeInUp&quot;}" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p>Love Story</p>						</div>
+				</div>
+				<div class="elementor-element elementor-element-b208c2f elementor-widget elementor-widget-weddingpress-timeline" data-id="b208c2f" data-element_type="widget" data-settings="{&quot;_animation_mobile&quot;:&quot;fadeInUp&quot;}" data-widget_type="weddingpress-timeline.bdt-olivier">
+				<div class="elementor-widget-container">
+					<div class="weddingpress-timeline weddingpress-timeline-skin-olivier" data-visible_items="4">
+			<div class="weddingpress-timeline-wrapper">
+				<div class="weddingpress-timeline-items">					
+					
+												
+						
+						<div class="weddingpress-timeline-item">
+							<div class="weddingpress-timeline-content">
+								        <div class="weddingpress-timeline-item-main" >
+            <span class="weddingpress-timeline-arrow"></span>
+
+            
+            <div class="weddingpress-timeline-desc bdt-padding">
+                    <div class="weddingpress-timeline-title">
+                    <a href="" title="Perkenalan">
+                Perkenalan            </a>
             </div>
-            <div class="row">
-              <div class="ic">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M12 21s7-4.5 7-11a7 7 0 0 0-14 0c0 6.5 7 11 7 11z"/>
-                  <circle cx="12" cy="10" r="2"/>
-                </svg>
-              </div>
-              <div class="meta">
-                Lokasi: <b>Rusun</b>
-              </div>
+                            <ul class="weddingpress-timeline-meta bdt-subnav bdt-flex-middle">
+
+            <li>Dari teman SD OTW Jadi teman Hidup</li>
+
+        </ul>
+                                <div class="weddingpress-timeline-excerpt">
+        	<p>Meskipun satu desa, satu RT Setelah lulus dari Bangku SD sudah jarang ketemu karena beda Sekolah.</p><p>Setelah lulus dari bangku SMA. Saya memutuskan untuk melanjutkan studi ke Kota tembakau,Jember. Setelah sekian lama tidak bertemu, akhirnya pada satu hari dia mendekati aku ketika aku semester 6 menuju Skripsi. Dia benar-benar serius meski beberapa kali aku tidak yakin kepadanya.</p>            </div>
+                                    </div>
+        </div>
+    							</div>
+						</div>
+
+												
+						
+						<div class="weddingpress-timeline-item">
+							<div class="weddingpress-timeline-content">
+								        <div class="weddingpress-timeline-item-main" >
+            <span class="weddingpress-timeline-arrow"></span>
+
+            
+            <div class="weddingpress-timeline-desc bdt-padding">
+                    <div class="weddingpress-timeline-title">
+                    <a href="" title="Lamaran">
+                Lamaran            </a>
             </div>
-          </div>
+                            <ul class="weddingpress-timeline-meta bdt-subnav bdt-flex-middle">
 
-          <div class="box">
-            <p class="tt small">Resepsi</p>
-            <div class="row">
-              <div class="ic">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <circle cx="12" cy="12" r="9"/><path d="M12 7v6l4 2"/>
-                </svg>
-              </div>
-              <div class="meta">
-                <b>Ahad, 7 Februari 2026</b><br/>
-                Pukul <b>11.00 WIB</b> – selesai
-              </div>
+            <li></li>
+
+        </ul>
+                                <div class="weddingpress-timeline-excerpt">
+        	<p>Akhirnya atas Restu Ayah dan semua keluarga Dia memutuskan untuk melanjutkan hubungan ke jenjang yang lebih serius.</p><p>Setiap ujian yang datang setelah tunangan mampu kita lewati dan kita selesaikan dengan sangat Baik.</p>            </div>
+                                    </div>
+        </div>
+    							</div>
+						</div>
+
+												
+						
+						<div class="weddingpress-timeline-item">
+							<div class="weddingpress-timeline-content">
+								        <div class="weddingpress-timeline-item-main" >
+            <span class="weddingpress-timeline-arrow"></span>
+
+            
+            <div class="weddingpress-timeline-desc bdt-padding">
+                    <div class="weddingpress-timeline-title">
+                    <a href="" title="Pernikahan">
+                Pernikahan            </a>
             </div>
-            <div class="row">
-              <div class="ic">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M12 21s7-4.5 7-11a7 7 0 0 0-14 0c0 6.5 7 11 7 11z"/>
-                  <circle cx="12" cy="10" r="2"/>
-                </svg>
-              </div>
-              <div class="meta">
-                Lokasi: <b>Rusun</b>
-              </div>
-            </div>
-          </div>
+                            <ul class="weddingpress-timeline-meta bdt-subnav bdt-flex-middle">
+
+            <li></li>
+
+        </ul>
+                                <div class="weddingpress-timeline-excerpt">
+        	<p>Bismillahirrahmanirrahim<br />Kami akan memutuskan untuk menjalani kehidupan, menjalankan ibadah terpanjang seumur hidup semati..<br />Kami akan memutuskan untuk saling menerima,mengakui setiap kelemahan dan kelebihan diantara kita.<br />Untuk itu, Kami mohon doa &amp; restu terbaiknya</p>            </div>
+                                    </div>
         </div>
+    							</div>
+						</div>
 
-        <div class="actions">
-          <a class="btn" id="mapsBtn" href="https://maps.app.goo.gl/ffLGd3GRFQGsXqba8" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M12 21s7-4.5 7-11a7 7 0 0 0-14 0c0 6.5 7 11 7 11z"/>
-              <circle cx="12" cy="10" r="2"/>
-            </svg>
-            Buka Maps
-          </a>
-          <a class="btn" id="waBtn" href="#" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M21 12a8.5 8.5 0 0 1-12.7 7.3L3 21l1.8-5.2A8.5 8.5 0 1 1 21 12z"/>
-              <path d="M8.5 10.5c1.6 3.2 3.8 5.4 7 7"/>
-            </svg>
-            Bagikan WhatsApp
-          </a>
-          <a class="btn ghost" id="copyBtn" href="#" role="button">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M9 9h10v10H9z"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
-            </svg>
-            Copy Link
-          </a>
-        </div>
-      </div>
+					
+				</div>
+			</div>
+		</div>
+ 				</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				<section class="has_eae_slider elementor-section elementor-top-section elementor-element elementor-element-8c6b54d elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-eae-slider="14955" data-id="8c6b54d" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="has_eae_slider elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-8d18998" data-eae-slider="64814" data-id="8d18998" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-2efb0e5 elementor-widget elementor-widget-menu-anchor" data-id="2efb0e5" data-element_type="widget" data-widget_type="menu-anchor.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-menu-anchor" id="galery"></div>
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-a054000 elementor-invisible elementor-widget elementor-widget-text-editor" data-id="a054000" data-element_type="widget" data-settings="{&quot;_animation&quot;:&quot;zoomIn&quot;,&quot;_animation_mobile&quot;:&quot;fadeInUp&quot;}" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p>Wedding Gallery</p>						</div>
+				</div>
+				<div class="elementor-element elementor-element-3f0ec56 elementor-widget elementor-widget-gallery" data-id="3f0ec56" data-element_type="widget" data-settings="{&quot;gallery_layout&quot;:&quot;justified&quot;,&quot;ideal_row_height_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:190,&quot;sizes&quot;:[]},&quot;gap_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:18,&quot;sizes&quot;:[]},&quot;lazyload&quot;:&quot;yes&quot;,&quot;ideal_row_height&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:200,&quot;sizes&quot;:[]},&quot;ideal_row_height_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:150,&quot;sizes&quot;:[]},&quot;gap&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:10,&quot;sizes&quot;:[]},&quot;gap_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:10,&quot;sizes&quot;:[]},&quot;link_to&quot;:&quot;file&quot;,&quot;overlay_background&quot;:&quot;yes&quot;,&quot;content_hover_animation&quot;:&quot;fade-in&quot;}" data-widget_type="gallery.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-gallery__container">
+							<a class="e-gallery-item elementor-gallery-item elementor-animated-content" href="https://digitalvite.id/wp-content/uploads/2025/02/f875ef8451a074458e9bb0b8186e2ea8-1.jpg" data-elementor-open-lightbox="yes" data-elementor-lightbox-slideshow="3f0ec56" data-elementor-lightbox-title="f875ef8451a074458e9bb0b8186e2ea8-1.jpg" data-e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MzczOTcsInVybCI6Imh0dHBzOlwvXC9kaWdpdGFsdml0ZS5pZFwvd3AtY29udGVudFwvdXBsb2Fkc1wvMjAyNVwvMDJcL2Y4NzVlZjg0NTFhMDc0NDU4ZTliYjBiODE4NmUyZWE4LTEuanBnIiwic2xpZGVzaG93IjoiM2YwZWM1NiJ9">
+					<div class="e-gallery-image elementor-gallery-item__image" data-thumbnail="https://digitalvite.id/wp-content/uploads/2025/02/f875ef8451a074458e9bb0b8186e2ea8-1.jpg" data-width="564" data-height="705" aria-label="" role="img" ></div>
+											<div class="elementor-gallery-item__overlay"></div>
+														</a>
+							<a class="e-gallery-item elementor-gallery-item elementor-animated-content" href="https://digitalvite.id/wp-content/uploads/2025/02/45976615556438918da6f078a3380023.jpg" data-elementor-open-lightbox="yes" data-elementor-lightbox-slideshow="3f0ec56" data-elementor-lightbox-title="45976615556438918da6f078a3380023.jpg" data-e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MzczOTgsInVybCI6Imh0dHBzOlwvXC9kaWdpdGFsdml0ZS5pZFwvd3AtY29udGVudFwvdXBsb2Fkc1wvMjAyNVwvMDJcLzQ1OTc2NjE1NTU2NDM4OTE4ZGE2ZjA3OGEzMzgwMDIzLmpwZyIsInNsaWRlc2hvdyI6IjNmMGVjNTYifQ%3D%3D">
+					<div class="e-gallery-image elementor-gallery-item__image" data-thumbnail="https://digitalvite.id/wp-content/uploads/2025/02/45976615556438918da6f078a3380023.jpg" data-width="564" data-height="705" aria-label="" role="img" ></div>
+											<div class="elementor-gallery-item__overlay"></div>
+														</a>
+							<a class="e-gallery-item elementor-gallery-item elementor-animated-content" href="https://digitalvite.id/wp-content/uploads/2025/02/680db9b0c83d88d2e3c94e1372691aab.jpg" data-elementor-open-lightbox="yes" data-elementor-lightbox-slideshow="3f0ec56" data-elementor-lightbox-title="680db9b0c83d88d2e3c94e1372691aab.jpg" data-e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MzczOTksInVybCI6Imh0dHBzOlwvXC9kaWdpdGFsdml0ZS5pZFwvd3AtY29udGVudFwvdXBsb2Fkc1wvMjAyNVwvMDJcLzY4MGRiOWIwYzgzZDg4ZDJlM2M5NGUxMzcyNjkxYWFiLmpwZyIsInNsaWRlc2hvdyI6IjNmMGVjNTYifQ%3D%3D">
+					<div class="e-gallery-image elementor-gallery-item__image" data-thumbnail="https://digitalvite.id/wp-content/uploads/2025/02/680db9b0c83d88d2e3c94e1372691aab.jpg" data-width="564" data-height="705" aria-label="" role="img" ></div>
+											<div class="elementor-gallery-item__overlay"></div>
+														</a>
+							<a class="e-gallery-item elementor-gallery-item elementor-animated-content" href="https://digitalvite.id/wp-content/uploads/2025/02/74e1226ba1b48e8ab5277efa52279089.jpg" data-elementor-open-lightbox="yes" data-elementor-lightbox-slideshow="3f0ec56" data-elementor-lightbox-title="74e1226ba1b48e8ab5277efa52279089.jpg" data-e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6Mzc0MDAsInVybCI6Imh0dHBzOlwvXC9kaWdpdGFsdml0ZS5pZFwvd3AtY29udGVudFwvdXBsb2Fkc1wvMjAyNVwvMDJcLzc0ZTEyMjZiYTFiNDhlOGFiNTI3N2VmYTUyMjc5MDg5LmpwZyIsInNsaWRlc2hvdyI6IjNmMGVjNTYifQ%3D%3D">
+					<div class="e-gallery-image elementor-gallery-item__image" data-thumbnail="https://digitalvite.id/wp-content/uploads/2025/02/74e1226ba1b48e8ab5277efa52279089.jpg" data-width="564" data-height="705" aria-label="" role="img" ></div>
+											<div class="elementor-gallery-item__overlay"></div>
+														</a>
+							<a class="e-gallery-item elementor-gallery-item elementor-animated-content" href="https://digitalvite.id/wp-content/uploads/2025/02/15e779de6e3334113f2eb9750f2cde1b.jpg" data-elementor-open-lightbox="yes" data-elementor-lightbox-slideshow="3f0ec56" data-elementor-lightbox-title="15e779de6e3334113f2eb9750f2cde1b.jpg" data-e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6Mzc0MDEsInVybCI6Imh0dHBzOlwvXC9kaWdpdGFsdml0ZS5pZFwvd3AtY29udGVudFwvdXBsb2Fkc1wvMjAyNVwvMDJcLzE1ZTc3OWRlNmUzMzM0MTEzZjJlYjk3NTBmMmNkZTFiLmpwZyIsInNsaWRlc2hvdyI6IjNmMGVjNTYifQ%3D%3D">
+					<div class="e-gallery-image elementor-gallery-item__image" data-thumbnail="https://digitalvite.id/wp-content/uploads/2025/02/15e779de6e3334113f2eb9750f2cde1b.jpg" data-width="564" data-height="705" aria-label="" role="img" ></div>
+											<div class="elementor-gallery-item__overlay"></div>
+														</a>
+							<a class="e-gallery-item elementor-gallery-item elementor-animated-content" href="https://digitalvite.id/wp-content/uploads/2025/02/73de1c574a583c339cc5295239cc9bf8.jpg" data-elementor-open-lightbox="yes" data-elementor-lightbox-slideshow="3f0ec56" data-elementor-lightbox-title="73de1c574a583c339cc5295239cc9bf8.jpg" data-e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6Mzc0MDIsInVybCI6Imh0dHBzOlwvXC9kaWdpdGFsdml0ZS5pZFwvd3AtY29udGVudFwvdXBsb2Fkc1wvMjAyNVwvMDJcLzczZGUxYzU3NGE1ODNjMzM5Y2M1Mjk1MjM5Y2M5YmY4LmpwZyIsInNsaWRlc2hvdyI6IjNmMGVjNTYifQ%3D%3D">
+					<div class="e-gallery-image elementor-gallery-item__image" data-thumbnail="https://digitalvite.id/wp-content/uploads/2025/02/73de1c574a583c339cc5295239cc9bf8.jpg" data-width="1080" data-height="1350" aria-label="" role="img" ></div>
+											<div class="elementor-gallery-item__overlay"></div>
+														</a>
+					</div>
+			</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				<section class="has_eae_slider elementor-section elementor-top-section elementor-element elementor-element-3c7cefd elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-eae-slider="53512" data-id="3c7cefd" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="has_eae_slider elementor-column elementor-col-20 elementor-top-column elementor-element elementor-element-c7fb3fd" data-eae-slider="49657" data-id="c7fb3fd" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+			<div class="elementor-widget-wrap elementor-element-populated">
+					<div class="elementor-background-overlay"></div>
+						<div class="elementor-element elementor-element-5534735 elementor-widget elementor-widget-image" data-id="5534735" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+													<img loading="lazy" decoding="async" width="973" height="857" src="https://digitalvite.id/wp-content/uploads/2024/08/Adab-walimah-1.png" class="attachment-large size-large wp-image-6515" alt="" srcset="https://digitalvite.id/wp-content/uploads/2024/08/Adab-walimah-1.png 973w, https://digitalvite.id/wp-content/uploads/2024/08/Adab-walimah-1-300x264.png 300w, https://digitalvite.id/wp-content/uploads/2024/08/Adab-walimah-1-768x676.png 768w" sizes="(max-width: 973px) 100vw, 973px" />													</div>
+				</div>
+					</div>
+		</div>
+				<div class="has_eae_slider elementor-column elementor-col-20 elementor-top-column elementor-element elementor-element-4d8631b" data-eae-slider="19548" data-id="4d8631b" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-10af481 elementor-widget elementor-widget-heading" data-id="10af481" data-element_type="widget" data-settings="{&quot;_animation_mobile&quot;:&quot;fadeInUp&quot;}" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h1 class="elementor-heading-title elementor-size-default">Wedding Gift</h1>		</div>
+				</div>
+				<div class="elementor-element elementor-element-feef834 elementor-widget elementor-widget-heading" data-id="feef834" data-element_type="widget" data-settings="{&quot;_animation_mobile&quot;:&quot;fadeInUp&quot;}" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<p class="elementor-heading-title elementor-size-default">Doa Restu Anda merupakan karunia yang sangat berarti bagi kami. Dan jika memberi adalah ungkapan tanda kasih Anda, Anda dapat memberi kado secara cashless.</p>		</div>
+				</div>
+					</div>
+		</div>
+				<div class="has_eae_slider elementor-column elementor-col-20 elementor-top-column elementor-element elementor-element-3fd20ea bank" data-eae-slider="83975" data-id="3fd20ea" data-element_type="column" id="bank" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-527335f elementor-widget elementor-widget-image" data-id="527335f" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+													<img loading="lazy" decoding="async" width="1024" height="303" src="https://digitalvite.id/wp-content/uploads/2024/07/mandiri.svg" class="attachment-large size-large wp-image-3367" alt="" />													</div>
+				</div>
+				<div class="elementor-element elementor-element-585c9a6 elementor-widget elementor-widget-image" data-id="585c9a6" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+													<img loading="lazy" decoding="async" width="150" height="150" src="https://digitalvite.id/wp-content/uploads/2024/08/chip-atm-1-2-4.png" class="attachment-large size-large wp-image-6173" alt="" />													</div>
+				</div>
+				<div class="elementor-element elementor-element-11826a3 elementor-widget__width-initial elementor-widget elementor-widget-text-editor" data-id="11826a3" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p><strong>Hayati Az-zahra</strong></p><p>1830002110145</p>						</div>
+				</div>
+				<div class="elementor-element elementor-element-e804e34 elementor-mobile-align-right elementor-widget elementor-widget-weddingpress-copy-text" data-id="e804e34" data-element_type="widget" data-widget_type="weddingpress-copy-text.default">
+				<div class="elementor-widget-container">
+					
+		<div class="elementor-image img"></div>
 
-      <div class="divider"></div>
+		<div class="head-title"></div>
+		<div class="elementor-button-wrapper">
+						<div class="copy-content spancontent" style="display: none;">1830002110145</div>
+				
+			<a style="cursor:pointer;" onclick="copyText(this)" data-message="berhasil disalin" class="elementor-button" role="button">
+				
+		<div class="elementor-button-content-wrapper">
+						<span class="elementor-button-icon elementor-align-icon-left">
+				<svg aria-hidden="true" class="e-font-icon-svg e-far-copy" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M433.941 65.941l-51.882-51.882A48 48 0 0 0 348.118 0H176c-26.51 0-48 21.49-48 48v48H48c-26.51 0-48 21.49-48 48v320c0 26.51 21.49 48 48 48h224c26.51 0 48-21.49 48-48v-48h80c26.51 0 48-21.49 48-48V99.882a48 48 0 0 0-14.059-33.941zM266 464H54a6 6 0 0 1-6-6V150a6 6 0 0 1 6-6h74v224c0 26.51 21.49 48 48 48h96v42a6 6 0 0 1-6 6zm128-96H182a6 6 0 0 1-6-6V54a6 6 0 0 1 6-6h106v88c0 13.255 10.745 24 24 24h88v202a6 6 0 0 1-6 6zm6-256h-64V48h9.632c1.591 0 3.117.632 4.243 1.757l48.368 48.368a6 6 0 0 1 1.757 4.243V112z"></path></svg>			</span>
+						<span class="elementor-button-text">Salin</span>
+		</div>
+					</a>
+			
+		</div>
 
-      <div class="section" id="galeri">
-        <h3>Wedding Gallery</h3>
-        <p class="p">Ganti foto-foto di bagian galeri dengan foto kalian (lihat catatan di bawah).</p>
-        <div class="gallery" id="gallery">
-          <div class="ph"></div>
-          <div class="ph"></div>
-          <div class="ph"></div>
-          <div class="ph"></div>
-          <div class="ph"></div>
-          <div class="ph"></div>
-        </div>
-        <p class="p small" style="color:var(--muted);font-size:13px">
-          Catatan: kalau mau fotonya beneran tampil, ganti array <b>GALLERY_URLS</b> di script (paling bawah).
-        </p>
-      </div>
+		<style type="text/css">
+			.spancontent {
+				padding-bottom: 20px;
+			}
+			.copy-content {
+				color: #6EC1E4;
+				text-align: center;
+			}
+			.head-title {
+				color: #6EC1E4;
+				text-align: center;
+			}
+		</style>
 
-      <div class="divider"></div>
+		<script>
+		function copyText(el) {
+		    var content = jQuery(el).siblings('div.copy-content').html()
+		    var temp = jQuery("<textarea>");
+		    jQuery("body").append(temp);
+		    temp.val(content.replace(/<br ?\/?>/g, "\n")).select();
+		    document.execCommand("copy");
+		    temp.remove();
+		    var text = jQuery(el).html()
+		    jQuery(el).html(jQuery(el).data('message'))
+		    var counter = 0;
+		    var interval = setInterval(function() {
+		        counter++;
+		        if (counter == 1) {
+		            jQuery(el).html(text)
+		        }
+		    }, 500);
+		}
 
-      <div class="section">
-        <h3>Doa Pernikahan</h3>
-        <div class="quote">
-          “Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri,
-          agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang.”
-          <br><b>(QS. Ar-Rum : 21)</b>
-        </div>
-        <p class="p">
-          Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir serta memberikan doa restu.
-        </p>
-        <p class="p"><b>Wassalamu’alaikum Warahmatullahi Wabarakatuh</b></p>
-      </div>
+		</script>
 
-      <div class="divider"></div>
+				</div>
+				</div>
+					</div>
+		</div>
+				<div class="has_eae_slider elementor-column elementor-col-20 elementor-top-column elementor-element elementor-element-14a1bdd" data-eae-slider="71200" data-id="14a1bdd" data-element_type="column" id="bank-2" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-5f9c1b4 elementor-widget elementor-widget-image" data-id="5f9c1b4" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+													<img loading="lazy" decoding="async" width="1024" height="420" src="https://digitalvite.id/wp-content/uploads/2024/07/Icon-BCA-1.svg" class="attachment-large size-large wp-image-3154" alt="" />													</div>
+				</div>
+				<div class="elementor-element elementor-element-396ff6e elementor-widget elementor-widget-image" data-id="396ff6e" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+													<img loading="lazy" decoding="async" width="150" height="150" src="https://digitalvite.id/wp-content/uploads/2024/08/chip-atm-1-2-4.png" class="attachment-large size-large wp-image-6173" alt="" />													</div>
+				</div>
+				<div class="elementor-element elementor-element-f28edb2 elementor-widget__width-initial elementor-widget elementor-widget-text-editor" data-id="f28edb2" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p><strong>Hayati Az-zahra</strong></p><p>123 456 789</p>						</div>
+				</div>
+				<div class="elementor-element elementor-element-747be37 elementor-mobile-align-right elementor-widget elementor-widget-weddingpress-copy-text" data-id="747be37" data-element_type="widget" data-widget_type="weddingpress-copy-text.default">
+				<div class="elementor-widget-container">
+					
+		<div class="elementor-image img"></div>
 
-      <div class="section" id="rsvp">
-        <h3>RSVP & Ucapan</h3>
-        <p class="p">Isi konfirmasi kehadiran dan tulis ucapan ya 🤍 (tersimpan di perangkat pengunjung).</p>
+		<div class="head-title"></div>
+		<div class="elementor-button-wrapper">
+						<div class="copy-content spancontent" style="display: none;">123 456 789</div>
+				
+			<a style="cursor:pointer;" onclick="copyText(this)" data-message="berhasil disalin" class="elementor-button" role="button">
+				
+		<div class="elementor-button-content-wrapper">
+						<span class="elementor-button-icon elementor-align-icon-left">
+				<svg aria-hidden="true" class="e-font-icon-svg e-far-copy" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M433.941 65.941l-51.882-51.882A48 48 0 0 0 348.118 0H176c-26.51 0-48 21.49-48 48v48H48c-26.51 0-48 21.49-48 48v320c0 26.51 21.49 48 48 48h224c26.51 0 48-21.49 48-48v-48h80c26.51 0 48-21.49 48-48V99.882a48 48 0 0 0-14.059-33.941zM266 464H54a6 6 0 0 1-6-6V150a6 6 0 0 1 6-6h74v224c0 26.51 21.49 48 48 48h96v42a6 6 0 0 1-6 6zm128-96H182a6 6 0 0 1-6-6V54a6 6 0 0 1 6-6h106v88c0 13.255 10.745 24 24 24h88v202a6 6 0 0 1-6 6zm6-256h-64V48h9.632c1.591 0 3.117.632 4.243 1.757l48.368 48.368a6 6 0 0 1 1.757 4.243V112z"></path></svg>			</span>
+						<span class="elementor-button-text">Salin</span>
+		</div>
+					</a>
+			
+		</div>
 
-        <form id="rsvpForm" class="box">
-          <div class="field">
-            <label>Nama</label>
-            <input id="fNama" placeholder="Nama kamu" required />
-          </div>
+		<style type="text/css">
+			.spancontent {
+				padding-bottom: 20px;
+			}
+			.copy-content {
+				color: #6EC1E4;
+				text-align: center;
+			}
+			.head-title {
+				color: #6EC1E4;
+				text-align: center;
+			}
+		</style>
 
-          <div class="field">
-            <label>Kehadiran</label>
-            <select id="fHadir" required>
-              <option value="">Pilih</option>
-              <option value="Hadir">Hadir</option>
-              <option value="Tidak hadir">Tidak hadir</option>
-              <option value="Masih ragu">Masih ragu</option>
-            </select>
-          </div>
+		<script>
+		function copyText(el) {
+		    var content = jQuery(el).siblings('div.copy-content').html()
+		    var temp = jQuery("<textarea>");
+		    jQuery("body").append(temp);
+		    temp.val(content.replace(/<br ?\/?>/g, "\n")).select();
+		    document.execCommand("copy");
+		    temp.remove();
+		    var text = jQuery(el).html()
+		    jQuery(el).html(jQuery(el).data('message'))
+		    var counter = 0;
+		    var interval = setInterval(function() {
+		        counter++;
+		        if (counter == 1) {
+		            jQuery(el).html(text)
+		        }
+		    }, 500);
+		}
 
-          <div class="field">
-            <label>Ucapan</label>
-            <textarea id="fUcapan" placeholder="Tulis ucapan untuk Nasrul & Naya..." required></textarea>
-          </div>
+		</script>
 
-          <button class="btn" type="submit" style="width:100%">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/>
-            </svg>
-            Kirim
-          </button>
+				</div>
+				</div>
+					</div>
+		</div>
+				<div class="has_eae_slider elementor-column elementor-col-20 elementor-top-column elementor-element elementor-element-65cda5c alamat" data-eae-slider="17362" data-id="65cda5c" data-element_type="column" id="alamat" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-d6f6118 elementor-view-default elementor-widget elementor-widget-icon" data-id="d6f6118" data-element_type="widget" data-widget_type="icon.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-icon-wrapper">
+			<div class="elementor-icon">
+			<svg aria-hidden="true" class="e-font-icon-svg e-fas-gift" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M32 448c0 17.7 14.3 32 32 32h160V320H32v128zm256 32h160c17.7 0 32-14.3 32-32V320H288v160zm192-320h-42.1c6.2-12.1 10.1-25.5 10.1-40 0-48.5-39.5-88-88-88-41.6 0-68.5 21.3-103 68.3-34.5-47-61.4-68.3-103-68.3-48.5 0-88 39.5-88 88 0 14.5 3.8 27.9 10.1 40H32c-17.7 0-32 14.3-32 32v80c0 8.8 7.2 16 16 16h480c8.8 0 16-7.2 16-16v-80c0-17.7-14.3-32-32-32zm-326.1 0c-22.1 0-40-17.9-40-40s17.9-40 40-40c19.9 0 34.6 3.3 86.1 80h-86.1zm206.1 0h-86.1c51.4-76.5 65.7-80 86.1-80 22.1 0 40 17.9 40 40s-17.9 40-40 40z"></path></svg>			</div>
+		</div>
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-cd06d6f elementor-widget elementor-widget-heading" data-id="cd06d6f" data-element_type="widget" data-settings="{&quot;_animation_mobile&quot;:&quot;fadeInUp&quot;}" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<p class="elementor-heading-title elementor-size-default">Anda Juga Bisa Mengirim Kado Fisik Ke Alamat Berikut: <br>
+ <br>
 
-          <p class="help">Kalau mau versi yang beneran nyimpen ke server (bisa dilihat semua orang), bilang—aku bikinin versi Firebase/Sheet.</p>
-        </form>
-
-        <div class="list" id="msgList"></div>
-
-        <button class="btn ghost" id="clearLocal" type="button" style="width:100%">
-          Hapus data RSVP (di perangkat ini)
-        </button>
-      </div>
-
-      <div class="footer">
-        © 2026 • Nasrul & Naya
-      </div>
+Jln. Mesjid Tuha No. 22 Ds. Ie Masen Ulee Kareng Kecamatan Ulee Kareng Kota Banda Aceh</p>		</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				<section class="has_eae_slider elementor-section elementor-top-section elementor-element elementor-element-5c60b253 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-eae-slider="9904" data-id="5c60b253" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="has_eae_slider elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-46ba0c8e" data-eae-slider="27737" data-id="46ba0c8e" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-7dd27f5c elementor-widget elementor-widget-menu-anchor" data-id="7dd27f5c" data-element_type="widget" data-widget_type="menu-anchor.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-menu-anchor" id="ucapan"></div>
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-33b1e4b9 elementor-invisible elementor-widget elementor-widget-text-editor" data-id="33b1e4b9" data-element_type="widget" data-settings="{&quot;_animation&quot;:&quot;zoomIn&quot;}" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p>Tiada Yang Dapat Kami Ungkapkan Selain Rasa Terimakasih Dari Hati Yang Tulus Apabila Bapak/ Ibu/ Saudara/i Berkenan Hadir Untuk Memberikan Do&#8217;a Restu Kepada Kami</p>						</div>
+				</div>
+				<div class="elementor-element elementor-element-6e14f4a elementor-widget elementor-widget-image" data-id="6e14f4a" data-element_type="widget" data-settings="{&quot;_animation_mobile&quot;:&quot;fadeInUp&quot;}" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+													<img fetchpriority="high" decoding="async" width="333" height="328" src="https://digitalvite.id/wp-content/uploads/2025/02/680db9b0c83d88d2e3c94e1372691aab-e1703131320438.jpg" class="attachment-full size-full wp-image-37291" alt="" srcset="https://digitalvite.id/wp-content/uploads/2025/02/680db9b0c83d88d2e3c94e1372691aab-e1703131320438.jpg 333w, https://digitalvite.id/wp-content/uploads/2025/02/680db9b0c83d88d2e3c94e1372691aab-e1703131320438-300x295.jpg 300w" sizes="(max-width: 333px) 100vw, 333px" />													</div>
+				</div>
+				<div class="elementor-element elementor-element-74d6e152 elementor-widget elementor-widget-heading" data-id="74d6e152" data-element_type="widget" data-settings="{&quot;_animation_mobile&quot;:&quot;fadeInUp&quot;}" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">Hanum &amp; Xavi</h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-71444e9 elementor-invisible elementor-widget elementor-widget-heading" data-id="71444e9" data-element_type="widget" data-settings="{&quot;_animation&quot;:&quot;zoomInLeft&quot;}" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">Ahad, 22 Februari 2022</h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-7c2b2955 elementor-widget elementor-widget-text-editor" data-id="7c2b2955" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p>Berikan Ucapan Spesial Anda Disini :</p>						</div>
+				</div>
+				<div class="elementor-element elementor-element-7bbe7e9 elementor-widget elementor-widget-weddingpress-kit2" data-id="7bbe7e9" data-element_type="widget" data-settings="{&quot;_animation_mobile&quot;:&quot;fadeInUp&quot;,&quot;show_avatar&quot;:&quot;yes&quot;,&quot;attendence&quot;:&quot;yes&quot;,&quot;show_date&quot;:&quot;yes&quot;}" data-widget_type="weddingpress-kit2.default">
+				<div class="elementor-widget-container">
+			<div class='cui-wrapper cui- cui-border' style='overflow: hidden;'><div class='cui-wrap-link'><div class='header-cui'><a id='cui-link-42179' class='cui-link cui-icon-link cui-icon-link-true auto-load-true' href='?post_id=42179&amp;comments=7&amp;get=100&amp;order=DESC' title='7 Comment'><span>7</span> Comments</a></div></div><!--.cui-wrap-link--><div id='cui-wrap-commnent-42179' class='cui-wrap-comments' style='display:none;'><div id='cui-wrap-form-42179' class='cui-clearfix'><div class="cui-comment-attendence"><div id="invitation-count-42179" class="cui_comment_count_card_wrap"><div class="cui_comment_count_card_row"><div class="cui_comment_count_card cui_card-hadir"><span>4</span><span>Hadir</span></div><div class="cui_comment_count_card cui_card-tidak_hadir"><span>3</span><span>Tidak hadir</span></div><div class="cui_comment_count_card cui_card-masih_ragu"><span>0</span><span>Masih Ragu</span></div></div></div></div><div class="cui-clearfix cui-wrap-form "><div id='cui-container-form-42179' class='cui-container-form cui-no-login'><div id='respond-42179' class='respond cui-clearfix'><form action='https://digitalvite.id/wp-comments-post.php' method='post' id='commentform-42179'><p class="comment-form-author cui-field-1"><input id="author" name="author" type="text" aria-required="true" class="cui-input" placeholder="Nama" /><span class="cui-required">*</span><span class="cui-error-info cui-error-info-name">Mohon maaf! Khusus untuk tamu undangan</span></p><div class="cui-wrap-textarea"><textarea id="cui-textarea-42179" class="waci_comment cui-textarea autosize-textarea" name="comment" aria-required="true" placeholder="Ucapan" rows="2"></textarea><span class="cui-required">*</span><span class="cui-error-info cui-error-info-text">2 characters minimum.</span></div>
+        <div class="nm-wrap-comments">     
+        <div class="row">        
+</div>
+</div>    <div class="cui-clearfix cui-wrap-select cui-field-wrap cui-select-attending">
+        
+    <select class="waci_comment cui-select" name="konfirmasi" id="konfirmasi">
+        <option value="" disabled selected>Konfirmasi Kehadiran</option>
+        <option value="Hadir">Datang</option>
+        <option value="Tidak hadir">Absen</option>
+                <option value="Masih Ragu">Mungkin</option>
+                </select><span class="cui-required"></span><span class="cui-error-info cui-error-info-confirm"></span>
     </div>
-  </div>
+        <div class='cui-wrap-submit cui-clearfix'><p class='form-submit'><span class="cui-hide">Do not change these fields following</span><input type="text" class="cui-hide" name="name" value="username"><input type="text" class="cui-hide" name="nombre" value=""><input type="text" class="cui-hide" name="form-cui" value=""><input type="button" class="cui-form-btn cui-cancel-btn" value="Cancel"><input name='submit' id='submit-42179' value='Kirim' type='submit' /><input type='hidden' name='commentpress' value='true' /><input type='hidden' name='comment_post_ID' value='42179' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+</p></div></form></div></div><!--.cui-container-form--></div><!--.cui-clearfix cui-relative--></div><!--.cui-wrap-form--><div id='cui-comment-status-42179'  class='cui-comment-status'></div><div id='cui-box' class='cui-box'><ul id='cui-container-comment-42179' class='cui-container-comments cui-order-DESC  cui-has-7-comments cui-multiple-comments' data-order='DESC'></ul></div><div id='cui-holder-id-42179' class='cui-holder-42179 cui-holder'></div></div><!--.cui-wrap-comments--></div><!--.cui-wrapper-->            <style>
+                .cui-wrapper .cui-holder {
+                    display: block !important;
+                }
+            </style>
 
-  <!-- tombol kecil kanan bawah: musik -->
-  <div class="mini">
-    <button class="fab" id="musicBtn" title="Musik">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M9 18V5l12-2v13"/><circle cx="7" cy="18" r="2"/><circle cx="19" cy="16" r="2"/>
-      </svg>
-    </button>
-    <a class="fab" href="#top" title="Ke atas">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M12 19V5"/><path d="m5 12 7-7 7 7"/>
-      </svg>
-    </a>
-  </div>
+            
+        
+        		<script>
 
-  <div class="sticky">
-    <button class="btn" id="openBtn2" type="button">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M4 4h16v16H4z"/><path d="M4 8h16"/><path d="M8 12h8"/><path d="M8 16h6"/>
-      </svg>
-      Buka Undangan
-    </button>
-  </div>
+			var txt=document.getElementById('cui-link-42179').innerHTML;
+			var pos = txt
+			.replace(/Comments/g, "Comments")
+			document.getElementById('cui-link-42179').innerHTML = pos;
+			
+			var txt1=document.getElementById('invitation-count-42179').innerHTML;
+			var pos1 = txt1
+			.replace(/Hadir/g, "Hadir")
+			.replace(/Tidak hadir/g, "Tidak Hadir")
+			.replace(/Masih Ragu/g, "");
+			document.getElementById('invitation-count-42179').innerHTML = pos1;
 
-  <!-- modal: isi nama tamu + start musik -->
-  <div class="modal" id="modal" aria-hidden="true">
-    <div class="sheet" role="dialog" aria-modal="true">
-      <div class="sheethead">
-        <b>Undangan untuk:</b>
-        <button class="x" id="closeBtn" aria-label="Tutup">✕</button>
-      </div>
-      <div class="sheetbody">
-        <p class="small" style="margin:0 0 10px;color:var(--muted)">
-          Isi nama tamu biar personal. Setelah masuk, musik bisa diputar.
-        </p>
+			var txt2=document.getElementById('commentform-42179').innerHTML;
+			var pos2 = txt2
+			.replace(/Nama/g, "Nama")
+			.replace(/Ucapan/g, "Ucapan")
+			.replace(/Konfirmasi Kehadiran/g, "Konfirmasi Kehadiran")
+			.replace(/Datang/g, "Hadir")
+			.replace(/Absen/g, "Tidak Hadir")
+			.replace(/Mungkin/g, "")
+			.replace(/Kirim/g, "Kirim");
+			document.getElementById('commentform-42179').innerHTML = pos2;
 
-        <input class="input" id="guestInput" placeholder="Contoh: Bapak/Ibu Rudi" />
+		</script>
+        
+        		</div>
+				</div>
+				<div class="elementor-element elementor-element-8e156bc elementor-widget elementor-widget-weddingpress-wellcome" data-id="8e156bc" data-element_type="widget" data-widget_type="weddingpress-wellcome.default">
+				<div class="elementor-widget-container">
+			        
+        <div class="modalx" data-sampul=''>
+        
+                        <div class="overlayy"></div>
+                            <div class="content-modalx">
+                                <div class="info_modalx">
+                                     
+                                           <div class="elementor-image img"><img decoding="async" src="https://digitalvite.id/wp-content/uploads/2025/02/416bd45b618959d4d3291075cbc03188-1.jpg" title="416bd45b618959d4d3291075cbc03188.jpg" alt="" loading="lazy" /></div>
 
-        <div style="height:12px"></div>
+                                                                        
+                                    
+                                    <div class="wdp-txt-the-wedding" style="width:auto !important" >The Wedding Of
+                                    </div>
 
-        <button class="btn" id="enterBtn" type="button" style="width:100%">
-          Masuk & Putar Musik
-        </button>
+                                    
 
-        <p class="help">
-          Tip link: tambah <b>?to=Nama%20Tamu</b> di URL. <br/>
-          Contoh: <b>.../index.html?to=Bapak%20Rudi</b>
-        </p>
-      </div>
-    </div>
-  </div>
+                                    
+                                            <div class="wdp-mempelai" style="width: auto !important;" >Hanum &amp; Xavi
+                                            </div>
 
-  <!-- Musik (ganti URL musiknya) -->
-  <audio id="bgm" preload="auto" loop>
-    <!-- GANTI ke link mp3 kamu -->
-    <source src="YOUR_MUSIC_URL.mp3" type="audio/mpeg">
-  </audio>
+                                    
 
-  <script>
-    // ===== CONFIG =====
-    const CONFIG = {
-      couple: "Nasrul & Naya",
-      dateLabel: "Ahad, 7 Februari 2026",
-      // Countdown target: Akad 09:00 WIB
-      targetISO: "2026-02-07T09:00:00+07:00",
-      locationText: "Rusun",
-      mapsLink: "https://maps.app.goo.gl/ffLGd3GRFQGsXqba8",
-      waText:
-`Assalamu’alaikum Warahmatullahi Wabarakatuh
+                                    
+                                    <div class="wdp-tgl" style="width: auto !important;" >Ahad, 22 Februari 2022
+                                    </div>
 
-Dengan memohon rahmat dan ridho Allah SWT, kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri pernikahan:
+                                    
+                                                                                <div class="wdp-dear" style="width: auto !important;" >Kepada yth:</div>
+                                                                        <div class="wdp-name namatamu" style="width: auto !important;"></div>
+                                        
+                                                                        <div class="wdp-button-wrapper" id="wdp-button-wrapper">
+                                        <button class="elementor-button">
+                                                                                        <span >
+                                                <svg aria-hidden="true" class="e-font-icon-svg e-far-envelope-open" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M494.586 164.516c-4.697-3.883-111.723-89.95-135.251-108.657C337.231 38.191 299.437 0 256 0c-43.205 0-80.636 37.717-103.335 55.859-24.463 19.45-131.07 105.195-135.15 108.549A48.004 48.004 0 0 0 0 201.485V464c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V201.509a48 48 0 0 0-17.414-36.993zM464 458a6 6 0 0 1-6 6H54a6 6 0 0 1-6-6V204.347c0-1.813.816-3.526 2.226-4.665 15.87-12.814 108.793-87.554 132.364-106.293C200.755 78.88 232.398 48 256 48c23.693 0 55.857 31.369 73.41 45.389 23.573 18.741 116.503 93.493 132.366 106.316a5.99 5.99 0 0 1 2.224 4.663V458zm-31.991-187.704c4.249 5.159 3.465 12.795-1.745 16.981-28.975 23.283-59.274 47.597-70.929 56.863C336.636 362.283 299.205 400 256 400c-43.452 0-81.287-38.237-103.335-55.86-11.279-8.967-41.744-33.413-70.927-56.865-5.21-4.187-5.993-11.822-1.745-16.981l15.258-18.528c4.178-5.073 11.657-5.843 16.779-1.726 28.618 23.001 58.566 47.035 70.56 56.571C200.143 320.631 232.307 352 256 352c23.602 0 55.246-30.88 73.41-45.389 11.994-9.535 41.944-33.57 70.563-56.568 5.122-4.116 12.601-3.346 16.778 1.727l15.258 18.526z"></path></svg>                                            </span>
+                                                                                        Buka Undangan                                        </button>
+                                    </div>
+                                                                    
+                                                                        
+                                    
 
-Nasrul & Naya
-Ahad, 7 Februari 2026
-Akad: 09.00 WIB
-Resepsi: 11.00 WIB – selesai
-Lokasi: Rusun
 
-Mohon doa restunya. Terima kasih.`
-    };
+                                </div>
+                            </div>
+                   </div>
+        
+     
 
-    // GANTI foto-foto kalian di sini (pakai URL foto)
-    const GALLERY_URLS = [
-      "https://files.catbox.moe/f9pbqf.jpg",
-      "https://files.catbox.moe/f9pbqf.jpg",
-      "https://files.catbox.moe/f9pbqf.jpg",
-      "https://files.catbox.moe/f9pbqf.jpg",
-      "https://files.catbox.moe/f9pbqf.jpg",
-      "https://files.catbox.moe/f9pbqf.jpg",
-    ];
+        <script>
+            const sampul = jQuery('.modalx').data('sampul');
+            jQuery('.modalx').css('background-image','url('+sampul+')');
+            jQuery('body').css('overflow','hidden');
+            jQuery('.wdp-button-wrapper button').on('click',function(){
+                jQuery('.modalx').addClass('removeModals');
+                jQuery('body').css('overflow','auto');
 
-    // ===== Helpers =====
-    const qs = (k) => new URLSearchParams(location.search).get(k);
-    const enc = encodeURIComponent;
+            });
+        </script>
 
-    function setGuestName(name){
-      const badge = document.getElementById("badge");
-      if(name && name.trim()){
-        badge.textContent = `KEPADA YTH: ${name.trim().toUpperCase()}`;
-      }else{
-        badge.textContent = "THE WEDDING OF";
-      }
-    }
+         
+           
+        <script>
+            //var z = document.querySelector('#wdp-button-wrapper');
+            //z.addEventListener("click", function(event) {
 
-    function updateCountdown(){
-      const target = new Date(CONFIG.targetISO).getTime();
-      const now = Date.now();
-      let diff = Math.max(0, target - now);
+            //Neo - Added New Conditional Statement for select Audio or Youtube
+            var isYT = false;
+			jQuery( "#wdp-button-wrapper" ).on( "click", "button", function() {
+                // var isYT = false;
+                playAudio();
+				if(document.body.contains(document.getElementById("song"))) {
+					document.getElementById("song").play();
+					isYT = false;
+				} else {
+					isYT = true;
+					player.playVideo();
+				}
+                function playAudio(){
+                    var isYT = false;
+                    if(document.body.contains(document.getElementById("song"))) {
+                        document.getElementById("song").play();
+                        isYT = false;
+                    } else {
+                        isYT = true;
+                        player.playVideo();
+                    }
+                }
+            });
+        </script>
+        <script>
+			// decode &amp; and \'
+			if(jQuery('.namatamu').length  >= 1){
+				let tmpHtmlNamatamu = document.querySelectorAll('.namatamu')
+				tmpHtmlNamatamu.forEach((tamuTexts) => {
+					tamuTexts.innerHTML = cleanIts(tamuTexts.innerHTML); 
+				});
+			}
+			function cleanIts(str){
 
-      const d = Math.floor(diff / (1000*60*60*24)); diff -= d*(1000*60*60*24);
-      const h = Math.floor(diff / (1000*60*60)); diff -= h*(1000*60*60);
-      const m = Math.floor(diff / (1000*60)); diff -= m*(1000*60);
-      const s = Math.floor(diff / 1000);
+				return jQuery("<textarea></textarea>").html(str.replace(/\\/g,"")).text();
+			}
+		</script>
 
-      document.getElementById("d").textContent = d;
-      document.getElementById("h").textContent = h;
-      document.getElementById("m").textContent = m;
-      document.getElementById("s").textContent = s;
-    }
+        <style type="text/css">
+            .elementor-button-qr {
+                display: inline-block;
+                line-height: 1;
+                background-color: #818a91;
+                font-size: 15px;
+                padding: 12px 24px;
+                border-radius: 3px;
+                color: #fff;
+                fill: #fff;
+                text-align: center;
+                -webkit-transition: all .3s;
+                -o-transition: all .3s;
+                transition: all .3s;
+            }
+        </style>
 
-    function renderGallery(){
-      if(!GALLERY_URLS.length) return;
-      const g = document.getElementById("gallery");
-      g.innerHTML = "";
-      GALLERY_URLS.slice(0, 12).forEach((url) => {
-        const el = document.createElement("div");
-        el.className = "ph";
-        el.style.backgroundImage = `url('${url}')`;
-        el.style.backgroundSize = "cover";
-        el.style.backgroundPosition = "center";
-        el.style.backgroundRepeat = "no-repeat";
-        el.innerHTML = "";
-        g.appendChild(el);
-      });
-    }
+        		</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				<section class="has_eae_slider elementor-section elementor-top-section elementor-element elementor-element-5d8d108 wdp-sticky-section-positon--bottom menu-container elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-eae-slider="49034" data-id="5d8d108" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="has_eae_slider elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-d5310c0" data-eae-slider="67562" data-id="d5310c0" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<section class="has_eae_slider elementor-section elementor-inner-section elementor-element elementor-element-f70b34f elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-eae-slider="96236" data-id="f70b34f" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;sticky&quot;:&quot;bottom&quot;,&quot;sticky_on&quot;:[&quot;desktop&quot;,&quot;tablet&quot;,&quot;mobile&quot;],&quot;sticky_offset&quot;:0,&quot;sticky_effects_offset&quot;:0,&quot;sticky_anchor_link_offset&quot;:0}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="has_eae_slider elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-1bb0c07" data-eae-slider="53863" data-id="1bb0c07" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-b0092ab elementor-widget__width-initial elementor-widget-mobile__width-initial elementor-view-default elementor-widget elementor-widget-icon" data-id="b0092ab" data-element_type="widget" data-widget_type="icon.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-icon-wrapper">
+			<a class="elementor-icon" href="#undangan">
+			<svg aria-hidden="true" class="e-font-icon-svg e-fas-home" viewBox="0 0 576 512" xmlns="http://www.w3.org/2000/svg"><path d="M280.37 148.26L96 300.11V464a16 16 0 0 0 16 16l112.06-.29a16 16 0 0 0 15.92-16V368a16 16 0 0 1 16-16h64a16 16 0 0 1 16 16v95.64a16 16 0 0 0 16 16.05L464 480a16 16 0 0 0 16-16V300L295.67 148.26a12.19 12.19 0 0 0-15.3 0zM571.6 251.47L488 182.56V44.05a12 12 0 0 0-12-12h-56a12 12 0 0 0-12 12v72.61L318.47 43a48 48 0 0 0-61 0L4.34 251.47a12 12 0 0 0-1.6 16.9l25.5 31A12 12 0 0 0 45.15 301l235.22-193.74a12.19 12.19 0 0 1 15.3 0L530.9 301a12 12 0 0 0 16.9-1.6l25.5-31a12 12 0 0 0-1.7-16.93z"></path></svg>			</a>
+		</div>
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-2b14950 elementor-widget__width-initial elementor-widget-mobile__width-initial elementor-view-default elementor-widget elementor-widget-icon" data-id="2b14950" data-element_type="widget" data-widget_type="icon.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-icon-wrapper">
+			<a class="elementor-icon" href="#couple">
+			<svg aria-hidden="true" class="e-font-icon-svg e-far-heart" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M458.4 64.3C400.6 15.7 311.3 23 256 79.3 200.7 23 111.4 15.6 53.6 64.3-21.6 127.6-10.6 230.8 43 285.5l175.4 178.7c10 10.2 23.4 15.9 37.6 15.9 14.3 0 27.6-5.6 37.6-15.8L469 285.6c53.5-54.7 64.7-157.9-10.6-221.3zm-23.6 187.5L259.4 430.5c-2.4 2.4-4.4 2.4-6.8 0L77.2 251.8c-36.5-37.2-43.9-107.6 7.3-150.7 38.9-32.7 98.9-27.8 136.5 10.5l35 35.7 35-35.7c37.8-38.5 97.8-43.2 136.5-10.6 51.1 43.1 43.5 113.9 7.3 150.8z"></path></svg>			</a>
+		</div>
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-7f8c2dc elementor-widget__width-initial elementor-widget-mobile__width-initial elementor-view-default elementor-widget elementor-widget-icon" data-id="7f8c2dc" data-element_type="widget" data-widget_type="icon.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-icon-wrapper">
+			<a class="elementor-icon" href="#acara">
+			<svg aria-hidden="true" class="e-font-icon-svg e-far-calendar" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M400 64h-48V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H160V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48zm-6 400H54c-3.3 0-6-2.7-6-6V160h352v298c0 3.3-2.7 6-6 6z"></path></svg>			</a>
+		</div>
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-58fd041 elementor-widget__width-initial elementor-widget-mobile__width-initial elementor-view-default elementor-widget elementor-widget-icon" data-id="58fd041" data-element_type="widget" data-widget_type="icon.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-icon-wrapper">
+			<a class="elementor-icon" href="#maps">
+			<svg aria-hidden="true" class="e-font-icon-svg e-fas-map-marker-alt" viewBox="0 0 384 512" xmlns="http://www.w3.org/2000/svg"><path d="M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0zM192 272c44.183 0 80-35.817 80-80s-35.817-80-80-80-80 35.817-80 80 35.817 80 80 80z"></path></svg>			</a>
+		</div>
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-0b194c5 elementor-widget__width-initial elementor-widget-mobile__width-initial elementor-view-default elementor-widget elementor-widget-icon" data-id="0b194c5" data-element_type="widget" data-widget_type="icon.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-icon-wrapper">
+			<a class="elementor-icon" href="#ucapan">
+			<svg aria-hidden="true" class="e-font-icon-svg e-far-comment-alt" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M448 0H64C28.7 0 0 28.7 0 64v288c0 35.3 28.7 64 64 64h96v84c0 7.1 5.8 12 12 12 2.4 0 4.9-.7 7.1-2.4L304 416h144c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64zm16 352c0 8.8-7.2 16-16 16H288l-12.8 9.6L208 428v-60H64c-8.8 0-16-7.2-16-16V64c0-8.8 7.2-16 16-16h384c8.8 0 16 7.2 16 16v288z"></path></svg>			</a>
+		</div>
+				</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				<div class="elementor-element elementor-element-01f7c4a elementor-view-stacked elementor-shape-circle elementor-widget elementor-widget-weddingpress-audio" data-id="01f7c4a" data-element_type="widget" data-settings="{&quot;loop&quot;:&quot;yes&quot;}" data-widget_type="weddingpress-audio.default">
+				<div class="elementor-widget-container">
+						<script>
+				var settingAutoplay = 'yes';
+				window.settingAutoplay = settingAutoplay === 'disable' ? false : true;
+			</script>
 
-    // ===== Maps, WA, Copy Link =====
-    const waBtn = document.getElementById("waBtn");
-    waBtn.href = "https://wa.me/?text=" + enc(CONFIG.waText + "\n\nLink: " + location.href);
+			<div id="audio-container" class="audio-box">
 
-    document.getElementById("copyBtn").addEventListener("click", async (e)=>{
-      e.preventDefault();
-      try{
-        await navigator.clipboard.writeText(location.href);
-        alert("Link berhasil dicopy!");
-      }catch{
-        prompt("Copy manual:", location.href);
-      }
+				
+
+				<audio id="song" loop>
+			<source src="https://digitalvite.id/wp-content/uploads/2024/12/ANDMESH-ANUGERAH-TERINDAH-VIDEO-LIRIK-LIRIK-LAGU-TERBARU-ezmp3-mp3cut.net_.mp3"
+			type="audio/mp3">
+		</audio>  
+			
+
+					
+			<div class="elementor-icon-wrapper" id="unmute-sound" style="display: none;">
+				<div class="elementor-icon">
+				<svg aria-hidden="true" class="e-font-icon-svg e-fas-pause-circle" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm-16 328c0 8.8-7.2 16-16 16h-48c-8.8 0-16-7.2-16-16V176c0-8.8 7.2-16 16-16h48c8.8 0 16 7.2 16 16v160zm112 0c0 8.8-7.2 16-16 16h-48c-8.8 0-16-7.2-16-16V176c0-8.8 7.2-16 16-16h48c8.8 0 16 7.2 16 16v160z"></path></svg>				</div>
+			</div> 
+
+			<div class="elementor-icon-wrapper" id="mute-sound" style="display: none;">
+				<div class="elementor-icon">
+				<svg aria-hidden="true" class="e-font-icon-svg e-fas-compact-disc" viewBox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><path d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zM88 256H56c0-105.9 86.1-192 192-192v32c-88.2 0-160 71.8-160 160zm160 96c-53 0-96-43-96-96s43-96 96-96 96 43 96 96-43 96-96 96zm0-128c-17.7 0-32 14.3-32 32s14.3 32 32 32 32-14.3 32-32-14.3-32-32-32z"></path></svg>				</div>
+			</div>
+			
+		</div>
+		
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-6570c4d elementor-widget elementor-widget-html" data-id="6570c4d" data-element_type="widget" data-widget_type="html.default">
+				<div class="elementor-widget-container">
+			<script>
+const $ = jQuery;
+
+// Button Variables
+const greatBtn = $('.great-btn');
+
+// Container Variables
+const rateBox = $('.rate-container');
+const greatBox = $('.great-container');
+
+greatBtn.click(() => {
+    rateBox.fadeOut(1000, () => {
+        
+        MenuBox.show ();
+        // Callback yang dapat ditambahkan jika diperlukan setelah efek pudar selesai
+        // Misalnya, menjalankan kode setelah elemen disembunyikan
+        console.log('Elemen disembunyikan!');
+   
     });
+});
 
-    // ===== Modal / Personalization =====
-    const modal = document.getElementById("modal");
-    const open = () => { modal.classList.add("open"); modal.setAttribute("aria-hidden","false"); setTimeout(()=>document.getElementById("guestInput").focus(), 50); };
-    const close = () => { modal.classList.remove("open"); modal.setAttribute("aria-hidden","true"); };
+</script>		</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				</div>
+		<script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/wp-*.php","/wp-admin/*","/wp-content/uploads/*","/wp-content/*","/wp-content/plugins/*","/wp-content/themes/twentytwentyfour/*","/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+			<script type='text/javascript'>
+				const lazyloadRunObserver = () => {
+					const lazyloadBackgrounds = document.querySelectorAll( `.e-con.e-parent:not(.e-lazyloaded)` );
+					const lazyloadBackgroundObserver = new IntersectionObserver( ( entries ) => {
+						entries.forEach( ( entry ) => {
+							if ( entry.isIntersecting ) {
+								let lazyloadBackground = entry.target;
+								if( lazyloadBackground ) {
+									lazyloadBackground.classList.add( 'e-lazyloaded' );
+								}
+								lazyloadBackgroundObserver.unobserve( entry.target );
+							}
+						});
+					}, { rootMargin: '200px 0px 200px 0px' } );
+					lazyloadBackgrounds.forEach( ( lazyloadBackground ) => {
+						lazyloadBackgroundObserver.observe( lazyloadBackground );
+					} );
+				};
+				const events = [
+					'DOMContentLoaded',
+					'elementor/lazyload/observe',
+				];
+				events.forEach( ( event ) => {
+					document.addEventListener( event, lazyloadRunObserver );
+				} );
+			</script>
+			<link rel='stylesheet' id='e-sticky-css' href='https://digitalvite.id/wp-content/plugins/elementor-pro/assets/css/modules/sticky.css?ver=3.25.0' media='all' />
+<script id="wp-block-template-skip-link-js-after">
+	( function() {
+		var skipLinkTarget = document.querySelector( 'main' ),
+			sibling,
+			skipLinkTargetID,
+			skipLink;
 
-    document.getElementById("openBtn").addEventListener("click", open);
-    document.getElementById("openBtn2").addEventListener("click", open);
-    document.getElementById("closeBtn").addEventListener("click", close);
-    modal.addEventListener("click", (e)=>{ if(e.target === modal) close(); });
+		// Early exit if a skip-link target can't be located.
+		if ( ! skipLinkTarget ) {
+			return;
+		}
 
-    // ===== Music =====
-    const audio = document.getElementById("bgm");
-    let isPlaying = false;
+		/*
+		 * Get the site wrapper.
+		 * The skip-link will be injected in the beginning of it.
+		 */
+		sibling = document.querySelector( '.wp-site-blocks' );
 
-    async function toggleMusic(){
-      try{
-        if(!isPlaying){
-          await audio.play();
-          isPlaying = true;
-        }else{
-          audio.pause();
-          isPlaying = false;
-        }
-      }catch(err){
-        alert("Musik belum bisa diputar. Pastikan kamu sudah ganti YOUR_MUSIC_URL.mp3 dengan link mp3 yang valid.");
-      }
-    }
+		// Early exit if the root element was not found.
+		if ( ! sibling ) {
+			return;
+		}
 
-    document.getElementById("musicBtn").addEventListener("click", toggleMusic);
+		// Get the skip-link target's ID, and generate one if it doesn't exist.
+		skipLinkTargetID = skipLinkTarget.id;
+		if ( ! skipLinkTargetID ) {
+			skipLinkTargetID = 'wp--skip-link--target';
+			skipLinkTarget.id = skipLinkTargetID;
+		}
 
-    document.getElementById("enterBtn").addEventListener("click", async ()=>{
-      const val = document.getElementById("guestInput").value;
-      const url = new URL(location.href);
-      if(val && val.trim()) url.searchParams.set("to", val.trim());
-      history.replaceState({}, "", url.toString());
-      setGuestName(val);
-      close();
-      document.getElementById("top").scrollIntoView({behavior:"smooth"});
-      // try start music on user gesture
-      await toggleMusic();
-    });
+		// Create the skip link.
+		skipLink = document.createElement( 'a' );
+		skipLink.classList.add( 'skip-link', 'screen-reader-text' );
+		skipLink.id = 'wp-skip-link';
+		skipLink.href = '#' + skipLinkTargetID;
+		skipLink.innerText = 'Skip to content';
 
-    // ===== RSVP + Ucapan (LocalStorage) =====
-    const KEY = "rsvp_nasrul_naya_msgs_v1";
+		// Inject the skip link.
+		sibling.parentElement.insertBefore( skipLink, sibling );
+	}() );
+	
+//# sourceURL=wp-block-template-skip-link-js-after
+</script>
+<script id="eae-main-js-extra">
+var eae = {"ajaxurl":"https://digitalvite.id/wp-admin/admin-ajax.php","current_url":"aHR0cHM6Ly9kaWdpdGFsdml0ZS5pZC9wcmVtaXVtLTAyMS8=","nonce":"64da3bf9d9","plugin_url":"https://digitalvite.id/wp-content/plugins/addon-elements-for-elementor-page-builder/"};
+var eae_editor = {"plugin_url":"https://digitalvite.id/wp-content/plugins/addon-elements-for-elementor-page-builder/"};
+//# sourceURL=eae-main-js-extra
+</script>
+<script src="https://digitalvite.id/wp-content/plugins/addon-elements-for-elementor-page-builder/assets/js/eae.js?ver=1.14.4" id="eae-main-js"></script>
+<script src="https://digitalvite.id/wp-content/plugins/addon-elements-for-elementor-page-builder/build/index.js?ver=1.14.4" id="eae-index-js"></script>
+<script src="https://digitalvite.id/wp-content/plugins/elementor/assets/lib/font-awesome/js/v4-shims.min.js?ver=1.0" id="font-awesome-4-shim-js"></script>
+<script src="https://digitalvite.id/wp-content/plugins/addon-elements-for-elementor-page-builder/assets/js/animated-main.js?ver=1.0" id="animated-main-js"></script>
+<script src="https://digitalvite.id/wp-content/plugins/addon-elements-for-elementor-page-builder/assets/js/particles.js?ver=2.0.0" id="eae-particles-js"></script>
+<script src="https://digitalvite.id/wp-content/plugins/addon-elements-for-elementor-page-builder/assets/lib/magnific.js?ver=1.1.0" id="wts-magnific-js"></script>
+<script src="https://digitalvite.id/wp-content/plugins/addon-elements-for-elementor-page-builder/assets/lib/vegas/vegas.js?ver=2.4.0" id="vegas-js"></script>
+<script src="https://digitalvite.id/wp-content/plugins/weddingpress/assets/js/wdp-swiper.min.js" id="wdp-swiper-js-js"></script>
+<script src="https://digitalvite.id/wp-content/plugins/weddingpress/assets/js/qr-code.js" id="weddingpress-qr-js"></script>
+<script src="https://digitalvite.id/wp-content/plugins/weddingpress/assets/js/exad-scripts.min.js?ver=3.1.9" id="exad-main-script-js"></script>
+<script id="cui_js_script-js-extra">
+var CUI_WP = {"ajaxurl":"https://digitalvite.id/wp-admin/admin-ajax.php","cuiNonce":"4caf8583b4","jpages":"true","jPagesNum":"10","textCounter":"true","textCounterNum":"500","widthWrap":"","autoLoad":"true","thanksComment":"Thanks for your comment!","thanksReplyComment":"Thanks for answering the comment!","duplicateComment":"You might have left one of the fields blank, or duplicate comments","accept":"Accept","cancel":"Cancel","reply":"Reply","textWriteComment":"Ucapan","classPopularComment":"cui-popular-comment","textToDisplay":"Text to display","textCharacteresMin":"2 characters minimum","textNavNext":"Next","textNavPrev":"Previous","textMsgDeleteComment":"Do you want delete this comment?","textLoadMore":"Load more"};
+//# sourceURL=cui_js_script-js-extra
+</script>
+<script src="https://digitalvite.id/wp-content/plugins/weddingpress/addons/comment-kit2//js/cui_script.js?ver=1.0.0" id="cui_js_script-js"></script>
+<script src="https://digitalvite.id/wp-content/plugins/weddingpress/addons/comment-kit2//js/libs/jquery.jPages.min.js?ver=0.7" id="cui_jPages-js"></script>
+<script src="https://digitalvite.id/wp-content/plugins/weddingpress/addons/comment-kit2//js/libs/jquery.textareaCounter.js?ver=2.0" id="cui_textCounter-js"></script>
+<script src="https://digitalvite.id/wp-content/plugins/weddingpress/addons/comment-kit2//js/libs/jquery.placeholder.min.js?ver=2.0.7" id="cui_placeholder-js"></script>
+<script src="https://digitalvite.id/wp-content/plugins/weddingpress/addons/comment-kit2//js/libs/autosize.min.js?ver=1.14" id="cui_autosize-js"></script>
+<script src="https://digitalvite.id/wp-content/plugins/weddingpress/assets/js/modules/timeline.min.js" id="timeline-js"></script>
+<script src="https://digitalvite.id/wp-content/plugins/weddingpress/assets/js/modules/ep-timeline.js?ver=3.1.9" id="ep-timeline-js"></script>
+<script src="https://digitalvite.id/wp-content/plugins/elementor/assets/lib/e-gallery/js/e-gallery.js?ver=1.2.0" id="elementor-gallery-js"></script>
+<script src="https://digitalvite.id/wp-content/plugins/elementor-pro/assets/lib/sticky/jquery.sticky.js?ver=3.25.0" id="e-sticky-js"></script>
+<script src="https://digitalvite.id/wp-content/plugins/elementor-pro/assets/js/webpack-pro.runtime.js?ver=3.25.0" id="elementor-pro-webpack-runtime-js"></script>
+<script src="https://digitalvite.id/wp-content/plugins/elementor/assets/js/webpack.runtime.js?ver=3.25.0" id="elementor-webpack-runtime-js"></script>
+<script src="https://digitalvite.id/wp-content/plugins/elementor/assets/js/frontend-modules.js?ver=3.25.0" id="elementor-frontend-modules-js"></script>
+<script src="https://digitalvite.id/wp-includes/js/dist/hooks.js?ver=220ff17f5667d013d468" id="wp-hooks-js"></script>
+<script src="https://digitalvite.id/wp-includes/js/dist/i18n.js?ver=6b3ae5bd3b8d9598492d" id="wp-i18n-js"></script>
+<script id="wp-i18n-js-after">
+wp.i18n.setLocaleData( { 'text direction\u0004ltr': [ 'ltr' ] } );
+//# sourceURL=wp-i18n-js-after
+</script>
+<script id="elementor-pro-frontend-js-before">
+var ElementorProFrontendConfig = {"ajaxurl":"https:\/\/digitalvite.id\/wp-admin\/admin-ajax.php","nonce":"fbb3aaeb33","urls":{"assets":"https:\/\/digitalvite.id\/wp-content\/plugins\/elementor-pro\/assets\/","rest":"https:\/\/digitalvite.id\/wp-json\/"},"settings":{"lazy_load_background_images":true},"popup":{"hasPopUps":true},"shareButtonsNetworks":{"facebook":{"title":"Facebook","has_counter":true},"twitter":{"title":"Twitter"},"linkedin":{"title":"LinkedIn","has_counter":true},"pinterest":{"title":"Pinterest","has_counter":true},"reddit":{"title":"Reddit","has_counter":true},"vk":{"title":"VK","has_counter":true},"odnoklassniki":{"title":"OK","has_counter":true},"tumblr":{"title":"Tumblr"},"digg":{"title":"Digg"},"skype":{"title":"Skype"},"stumbleupon":{"title":"StumbleUpon","has_counter":true},"mix":{"title":"Mix"},"telegram":{"title":"Telegram"},"pocket":{"title":"Pocket","has_counter":true},"xing":{"title":"XING","has_counter":true},"whatsapp":{"title":"WhatsApp"},"email":{"title":"Email"},"print":{"title":"Print"},"x-twitter":{"title":"X"},"threads":{"title":"Threads"}},"facebook_sdk":{"lang":"en_US","app_id":""},"lottie":{"defaultAnimationUrl":"https:\/\/digitalvite.id\/wp-content\/plugins\/elementor-pro\/modules\/lottie\/assets\/animations\/default.json"}};
+//# sourceURL=elementor-pro-frontend-js-before
+</script>
+<script src="https://digitalvite.id/wp-content/plugins/elementor-pro/assets/js/frontend.js?ver=3.25.0" id="elementor-pro-frontend-js"></script>
+<script src="https://digitalvite.id/wp-includes/js/jquery/ui/core.js?ver=1.13.3" id="jquery-ui-core-js"></script>
+<script id="elementor-frontend-js-before">
+var elementorFrontendConfig = {"environmentMode":{"edit":false,"wpPreview":false,"isScriptDebug":true},"i18n":{"shareOnFacebook":"Share on Facebook","shareOnTwitter":"Share on Twitter","pinIt":"Pin it","download":"Download","downloadImage":"Download image","fullscreen":"Fullscreen","zoom":"Zoom","share":"Share","playVideo":"Play Video","previous":"Previous","next":"Next","close":"Close","a11yCarouselWrapperAriaLabel":"Carousel | Horizontal scrolling: Arrow Left & Right","a11yCarouselPrevSlideMessage":"Previous slide","a11yCarouselNextSlideMessage":"Next slide","a11yCarouselFirstSlideMessage":"This is the first slide","a11yCarouselLastSlideMessage":"This is the last slide","a11yCarouselPaginationBulletMessage":"Go to slide"},"is_rtl":false,"breakpoints":{"xs":0,"sm":480,"md":768,"lg":1025,"xl":1440,"xxl":1600},"responsive":{"breakpoints":{"mobile":{"label":"Mobile Portrait","value":767,"default_value":767,"direction":"max","is_enabled":true},"mobile_extra":{"label":"Mobile Landscape","value":880,"default_value":880,"direction":"max","is_enabled":false},"tablet":{"label":"Tablet Portrait","value":1024,"default_value":1024,"direction":"max","is_enabled":true},"tablet_extra":{"label":"Tablet Landscape","value":1200,"default_value":1200,"direction":"max","is_enabled":false},"laptop":{"label":"Laptop","value":1366,"default_value":1366,"direction":"max","is_enabled":false},"widescreen":{"label":"Widescreen","value":2400,"default_value":2400,"direction":"min","is_enabled":false}},"hasCustomBreakpoints":false},"version":"3.25.0","is_static":false,"experimentalFeatures":{"e_font_icon_svg":true,"container":true,"e_swiper_latest":true,"e_nested_atomic_repeaters":true,"e_optimized_control_loading":true,"e_onboarding":true,"e_css_smooth_scroll":true,"theme_builder_v2":true,"home_screen":true,"landing-pages":true,"nested-elements":true,"editor_v2":true,"link-in-bio":true,"floating-buttons":true},"urls":{"assets":"https:\/\/digitalvite.id\/wp-content\/plugins\/elementor\/assets\/","ajaxurl":"https:\/\/digitalvite.id\/wp-admin\/admin-ajax.php","uploadUrl":"https:\/\/digitalvite.id\/wp-content\/uploads"},"nonces":{"floatingButtonsClickTracking":"ed2c2e0064"},"swiperClass":"swiper","settings":{"page":[],"editorPreferences":[]},"kit":{"active_breakpoints":["viewport_mobile","viewport_tablet"],"global_image_lightbox":"yes","lightbox_enable_counter":"yes","lightbox_enable_fullscreen":"yes","lightbox_enable_zoom":"yes","lightbox_enable_share":"yes","lightbox_title_src":"title","lightbox_description_src":"description"},"post":{"id":42179,"title":"Premium%20021%20DigitalVite","excerpt":"","featuredImage":"https:\/\/digitalvite.id\/wp-content\/uploads\/2024\/09\/Desain-tanpa-judul-1-2-1024x1024.png"}};
+//# sourceURL=elementor-frontend-js-before
+</script>
+<script src="https://digitalvite.id/wp-content/plugins/elementor/assets/js/frontend.js?ver=3.25.0" id="elementor-frontend-js"></script>
+<script src="https://digitalvite.id/wp-content/plugins/elementor-pro/assets/js/elements-handlers.js?ver=3.25.0" id="pro-elements-handlers-js"></script>
+<script src="https://digitalvite.id/wp-content/plugins/weddingpress/assets/js/modules/bdt-uikit.js?ver=3.15.1" id="bdt-uikit-js"></script>
+<script src="https://digitalvite.id/wp-content/plugins/jet-tricks/assets/js/lib/tippy/popperjs.js?ver=2.5.2" id="jet-tricks-popperjs-js"></script>
+<script src="https://digitalvite.id/wp-content/plugins/jet-tricks/assets/js/lib/tippy/tippy-bundle.js?ver=6.3.1" id="jet-tricks-tippy-bundle-js"></script>
+<script id="jet-tricks-frontend-js-extra">
+var JetTricksSettings = {"elements_data":{"sections":{"4cb7821":{"view_more":false,"particles":"false","particles_json":""},"cd9da8e":{"view_more":false,"particles":"false","particles_json":""},"744dde6":{"view_more":false,"particles":"false","particles_json":""},"db89531":{"view_more":false,"particles":"false","particles_json":""},"be9b4f0":{"view_more":false,"particles":"false","particles_json":""},"85dc5ba":{"view_more":false,"particles":"false","particles_json":""},"320ec1a":{"view_more":false,"particles":"false","particles_json":""},"8970645":{"view_more":false,"particles":"false","particles_json":""},"ad0b91b":{"view_more":false,"particles":"false","particles_json":""},"8c6b54d":{"view_more":false,"particles":"false","particles_json":""},"3c7cefd":{"view_more":false,"particles":"false","particles_json":""},"5c60b253":{"view_more":false,"particles":"false","particles_json":""},"5d8d108":{"view_more":false,"particles":"false","particles_json":""},"f70b34f":{"view_more":false,"particles":"false","particles_json":""}},"columns":[],"widgets":{"b3d350e":[],"d743a7d":[],"ceb3f95":[],"261cf07":[],"be1373c":[],"cfc0383":[],"ff38958":[],"b722a4f":[],"0f45037":[],"536f660":[],"32154a8":[],"c1723d4":[],"89db76f":[],"5413683":[],"42332d3":[],"7fe9b0d":[],"8fe6516":[],"03c9dbe":[],"e37e42d":[],"3fc3fbb":[],"82a7f8b":[],"d536a5c":[],"e8e469a":[],"a3f8c13":[],"743324a":[],"9558d48":[],"de1e0ec":[],"cf30d13":[],"33da3c4":[],"0b8218c":[],"b208c2f":[],"2efb0e5":[],"a054000":[],"3f0ec56":[],"5534735":[],"10af481":[],"feef834":[],"527335f":[],"585c9a6":[],"11826a3":[],"e804e34":[],"5f9c1b4":[],"396ff6e":[],"f28edb2":[],"747be37":[],"d6f6118":[],"cd06d6f":[],"7dd27f5c":[],"33b1e4b9":[],"6e14f4a":[],"74d6e152":[],"71444e9":[],"7c2b2955":[],"7bbe7e9":[],"8e156bc":[],"b0092ab":[],"2b14950":[],"7f8c2dc":[],"58fd041":[],"0b194c5":[],"01f7c4a":[],"6570c4d":[]}}};
+//# sourceURL=jet-tricks-frontend-js-extra
+</script>
+<script src="https://digitalvite.id/wp-content/plugins/jet-tricks/assets/js/jet-tricks-frontend.js?ver=1.4.9" id="jet-tricks-frontend-js"></script>
+<script id="weddingpress-wdp-js-extra">
+var cevar = {"ajax_url":"https://digitalvite.id/wp-admin/admin-ajax.php","plugin_url":"https://digitalvite.id/wp-content/plugins/weddingpress/"};
+//# sourceURL=weddingpress-wdp-js-extra
+</script>
+<script src="https://digitalvite.id/wp-content/plugins/weddingpress/assets/js/wdp.min.js?ver=3.1.9" id="weddingpress-wdp-js"></script>
+<script src="https://digitalvite.id/wp-content/plugins/weddingpress/assets/js/guest-form.js?ver=3.1.9" id="kirim-kit-js"></script>
+<script id="wp-emoji-settings" type="application/json">
+{"baseUrl":"https://s.w.org/images/core/emoji/17.0.2/72x72/","ext":".png","svgUrl":"https://s.w.org/images/core/emoji/17.0.2/svg/","svgExt":".svg","source":{"wpemoji":"https://digitalvite.id/wp-includes/js/wp-emoji.js?ver=6.9","twemoji":"https://digitalvite.id/wp-includes/js/twemoji.js?ver=6.9"}}
+</script>
+<script type="module">
+/**
+ * @output wp-includes/js/wp-emoji-loader.js
+ */
 
-    function loadMsgs(){
-      try{ return JSON.parse(localStorage.getItem(KEY) || "[]"); }
-      catch{ return []; }
-    }
-    function saveMsgs(arr){
-      localStorage.setItem(KEY, JSON.stringify(arr));
-    }
-    function renderMsgs(){
-      const list = document.getElementById("msgList");
-      const msgs = loadMsgs().slice().reverse();
-      if(!msgs.length){
-        list.innerHTML = `<div class="msg"><b>Belum ada ucapan</b><small>Jadi yang pertama ya 😄</small></div>`;
-        return;
-      }
-      list.innerHTML = msgs.map(m => `
-        <div class="msg">
-          <b>${escapeHtml(m.nama)} • <small>${escapeHtml(m.hadir)}</small></b>
-          <div>${escapeHtml(m.ucapan)}</div>
-          <small>${new Date(m.ts).toLocaleString("id-ID")}</small>
-        </div>
-      `).join("");
-    }
+/* eslint-env es6 */
 
-    function escapeHtml(s){
-      return String(s)
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
-    }
+// Note: This is loaded as a script module, so there is no need for an IIFE to prevent pollution of the global scope.
 
-    document.getElementById("rsvpForm").addEventListener("submit", (e)=>{
-      e.preventDefault();
-      const nama = document.getElementById("fNama").value.trim();
-      const hadir = document.getElementById("fHadir").value;
-      const ucapan = document.getElementById("fUcapan").value.trim();
-      if(!nama || !hadir || !ucapan) return;
+/**
+ * Emoji Settings as exported in PHP via _print_emoji_detection_script().
+ * @typedef WPEmojiSettings
+ * @type {object}
+ * @property {?object} source
+ * @property {?string} source.concatemoji
+ * @property {?string} source.twemoji
+ * @property {?string} source.wpemoji
+ */
 
-      const msgs = loadMsgs();
-      msgs.push({nama, hadir, ucapan, ts: Date.now()});
-      saveMsgs(msgs);
+const settings = /** @type {WPEmojiSettings} */ (
+	JSON.parse( document.getElementById( 'wp-emoji-settings' ).textContent )
+);
 
-      e.target.reset();
-      renderMsgs();
-      alert("Terkirim! Makasih ya 🤍");
-    });
+// For compatibility with other scripts that read from this global, in particular wp-includes/js/wp-emoji.js (source file: js/_enqueues/wp/emoji.js).
+window._wpemojiSettings = settings;
 
-    document.getElementById("clearLocal").addEventListener("click", ()=>{
-      if(confirm("Hapus semua data RSVP/ucapan di perangkat ini?")){
-        localStorage.removeItem(KEY);
-        renderMsgs();
-      }
-    });
+/**
+ * Support tests.
+ * @typedef SupportTests
+ * @type {object}
+ * @property {?boolean} flag
+ * @property {?boolean} emoji
+ */
 
-    // ===== Init =====
-    setGuestName(qs("to"));
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
-    renderGallery();
-    renderMsgs();
-  </script>
-</body>
+const sessionStorageKey = 'wpEmojiSettingsSupports';
+const tests = [ 'flag', 'emoji' ];
+
+/**
+ * Checks whether the browser supports offloading to a Worker.
+ *
+ * @since 6.3.0
+ *
+ * @private
+ *
+ * @returns {boolean}
+ */
+function supportsWorkerOffloading() {
+	return (
+		typeof Worker !== 'undefined' &&
+		typeof OffscreenCanvas !== 'undefined' &&
+		typeof URL !== 'undefined' &&
+		URL.createObjectURL &&
+		typeof Blob !== 'undefined'
+	);
+}
+
+/**
+ * @typedef SessionSupportTests
+ * @type {object}
+ * @property {number} timestamp
+ * @property {SupportTests} supportTests
+ */
+
+/**
+ * Get support tests from session.
+ *
+ * @since 6.3.0
+ *
+ * @private
+ *
+ * @returns {?SupportTests} Support tests, or null if not set or older than 1 week.
+ */
+function getSessionSupportTests() {
+	try {
+		/** @type {SessionSupportTests} */
+		const item = JSON.parse(
+			sessionStorage.getItem( sessionStorageKey )
+		);
+		if (
+			typeof item === 'object' &&
+			typeof item.timestamp === 'number' &&
+			new Date().valueOf() < item.timestamp + 604800 && // Note: Number is a week in seconds.
+			typeof item.supportTests === 'object'
+		) {
+			return item.supportTests;
+		}
+	} catch ( e ) {}
+	return null;
+}
+
+/**
+ * Persist the supports in session storage.
+ *
+ * @since 6.3.0
+ *
+ * @private
+ *
+ * @param {SupportTests} supportTests Support tests.
+ */
+function setSessionSupportTests( supportTests ) {
+	try {
+		/** @type {SessionSupportTests} */
+		const item = {
+			supportTests: supportTests,
+			timestamp: new Date().valueOf()
+		};
+
+		sessionStorage.setItem(
+			sessionStorageKey,
+			JSON.stringify( item )
+		);
+	} catch ( e ) {}
+}
+
+/**
+ * Checks if two sets of Emoji characters render the same visually.
+ *
+ * This is used to determine if the browser is rendering an emoji with multiple data points
+ * correctly. set1 is the emoji in the correct form, using a zero-width joiner. set2 is the emoji
+ * in the incorrect form, using a zero-width space. If the two sets render the same, then the browser
+ * does not support the emoji correctly.
+ *
+ * This function may be serialized to run in a Worker. Therefore, it cannot refer to variables from the containing
+ * scope. Everything must be passed by parameters.
+ *
+ * @since 4.9.0
+ *
+ * @private
+ *
+ * @param {CanvasRenderingContext2D} context 2D Context.
+ * @param {string} set1 Set of Emoji to test.
+ * @param {string} set2 Set of Emoji to test.
+ *
+ * @return {boolean} True if the two sets render the same.
+ */
+function emojiSetsRenderIdentically( context, set1, set2 ) {
+	// Cleanup from previous test.
+	context.clearRect( 0, 0, context.canvas.width, context.canvas.height );
+	context.fillText( set1, 0, 0 );
+	const rendered1 = new Uint32Array(
+		context.getImageData(
+			0,
+			0,
+			context.canvas.width,
+			context.canvas.height
+		).data
+	);
+
+	// Cleanup from previous test.
+	context.clearRect( 0, 0, context.canvas.width, context.canvas.height );
+	context.fillText( set2, 0, 0 );
+	const rendered2 = new Uint32Array(
+		context.getImageData(
+			0,
+			0,
+			context.canvas.width,
+			context.canvas.height
+		).data
+	);
+
+	return rendered1.every( ( rendered2Data, index ) => {
+		return rendered2Data === rendered2[ index ];
+	} );
+}
+
+/**
+ * Checks if the center point of a single emoji is empty.
+ *
+ * This is used to determine if the browser is rendering an emoji with a single data point
+ * correctly. The center point of an incorrectly rendered emoji will be empty. A correctly
+ * rendered emoji will have a non-zero value at the center point.
+ *
+ * This function may be serialized to run in a Worker. Therefore, it cannot refer to variables from the containing
+ * scope. Everything must be passed by parameters.
+ *
+ * @since 6.8.2
+ *
+ * @private
+ *
+ * @param {CanvasRenderingContext2D} context 2D Context.
+ * @param {string} emoji Emoji to test.
+ *
+ * @return {boolean} True if the center point is empty.
+ */
+function emojiRendersEmptyCenterPoint( context, emoji ) {
+	// Cleanup from previous test.
+	context.clearRect( 0, 0, context.canvas.width, context.canvas.height );
+	context.fillText( emoji, 0, 0 );
+
+	// Test if the center point (16, 16) is empty (0,0,0,0).
+	const centerPoint = context.getImageData(16, 16, 1, 1);
+	for ( let i = 0; i < centerPoint.data.length; i++ ) {
+		if ( centerPoint.data[ i ] !== 0 ) {
+			// Stop checking the moment it's known not to be empty.
+			return false;
+		}
+	}
+
+	return true;
+}
+
+/**
+ * Determines if the browser properly renders Emoji that Twemoji can supplement.
+ *
+ * This function may be serialized to run in a Worker. Therefore, it cannot refer to variables from the containing
+ * scope. Everything must be passed by parameters.
+ *
+ * @since 4.2.0
+ *
+ * @private
+ *
+ * @param {CanvasRenderingContext2D} context 2D Context.
+ * @param {string} type Whether to test for support of "flag" or "emoji".
+ * @param {Function} emojiSetsRenderIdentically Reference to emojiSetsRenderIdentically function, needed due to minification.
+ * @param {Function} emojiRendersEmptyCenterPoint Reference to emojiRendersEmptyCenterPoint function, needed due to minification.
+ *
+ * @return {boolean} True if the browser can render emoji, false if it cannot.
+ */
+function browserSupportsEmoji( context, type, emojiSetsRenderIdentically, emojiRendersEmptyCenterPoint ) {
+	let isIdentical;
+
+	switch ( type ) {
+		case 'flag':
+			/*
+			 * Test for Transgender flag compatibility. Added in Unicode 13.
+			 *
+			 * To test for support, we try to render it, and compare the rendering to how it would look if
+			 * the browser doesn't render it correctly (white flag emoji + transgender symbol).
+			 */
+			isIdentical = emojiSetsRenderIdentically(
+				context,
+				'\uD83C\uDFF3\uFE0F\u200D\u26A7\uFE0F', // as a zero-width joiner sequence
+				'\uD83C\uDFF3\uFE0F\u200B\u26A7\uFE0F' // separated by a zero-width space
+			);
+
+			if ( isIdentical ) {
+				return false;
+			}
+
+			/*
+			 * Test for Sark flag compatibility. This is the least supported of the letter locale flags,
+			 * so gives us an easy test for full support.
+			 *
+			 * To test for support, we try to render it, and compare the rendering to how it would look if
+			 * the browser doesn't render it correctly ([C] + [Q]).
+			 */
+			isIdentical = emojiSetsRenderIdentically(
+				context,
+				'\uD83C\uDDE8\uD83C\uDDF6', // as the sequence of two code points
+				'\uD83C\uDDE8\u200B\uD83C\uDDF6' // as the two code points separated by a zero-width space
+			);
+
+			if ( isIdentical ) {
+				return false;
+			}
+
+			/*
+			 * Test for English flag compatibility. England is a country in the United Kingdom, it
+			 * does not have a two letter locale code but rather a five letter sub-division code.
+			 *
+			 * To test for support, we try to render it, and compare the rendering to how it would look if
+			 * the browser doesn't render it correctly (black flag emoji + [G] + [B] + [E] + [N] + [G]).
+			 */
+			isIdentical = emojiSetsRenderIdentically(
+				context,
+				// as the flag sequence
+				'\uD83C\uDFF4\uDB40\uDC67\uDB40\uDC62\uDB40\uDC65\uDB40\uDC6E\uDB40\uDC67\uDB40\uDC7F',
+				// with each code point separated by a zero-width space
+				'\uD83C\uDFF4\u200B\uDB40\uDC67\u200B\uDB40\uDC62\u200B\uDB40\uDC65\u200B\uDB40\uDC6E\u200B\uDB40\uDC67\u200B\uDB40\uDC7F'
+			);
+
+			return ! isIdentical;
+		case 'emoji':
+			/*
+			 * Is there a large, hairy, humanoid mythical creature living in the browser?
+			 *
+			 * To test for Emoji 17.0 support, try to render a new emoji: Hairy Creature.
+			 *
+			 * The hairy creature emoji is a single code point emoji. Testing for browser
+			 * support required testing the center point of the emoji to see if it is empty.
+			 *
+			 * 0xD83E 0x1FAC8 (\uD83E\u1FAC8) == 🫈 Hairy creature.
+			 *
+			 * When updating this test, please ensure that the emoji is either a single code point
+			 * or switch to using the emojiSetsRenderIdentically function and testing with a zero-width
+			 * joiner vs a zero-width space.
+			 */
+			const notSupported = emojiRendersEmptyCenterPoint( context, '\uD83E\u1FAC8' );
+			return ! notSupported;
+	}
+
+	return false;
+}
+
+/**
+ * Checks emoji support tests.
+ *
+ * This function may be serialized to run in a Worker. Therefore, it cannot refer to variables from the containing
+ * scope. Everything must be passed by parameters.
+ *
+ * @since 6.3.0
+ *
+ * @private
+ *
+ * @param {string[]} tests Tests.
+ * @param {Function} browserSupportsEmoji Reference to browserSupportsEmoji function, needed due to minification.
+ * @param {Function} emojiSetsRenderIdentically Reference to emojiSetsRenderIdentically function, needed due to minification.
+ * @param {Function} emojiRendersEmptyCenterPoint Reference to emojiRendersEmptyCenterPoint function, needed due to minification.
+ *
+ * @return {SupportTests} Support tests.
+ */
+function testEmojiSupports( tests, browserSupportsEmoji, emojiSetsRenderIdentically, emojiRendersEmptyCenterPoint ) {
+	let canvas;
+	if (
+		typeof WorkerGlobalScope !== 'undefined' &&
+		self instanceof WorkerGlobalScope
+	) {
+		canvas = new OffscreenCanvas( 300, 150 ); // Dimensions are default for HTMLCanvasElement.
+	} else {
+		canvas = document.createElement( 'canvas' );
+	}
+
+	const context = canvas.getContext( '2d', { willReadFrequently: true } );
+
+	/*
+	 * Chrome on OS X added native emoji rendering in M41. Unfortunately,
+	 * it doesn't work when the font is bolder than 500 weight. So, we
+	 * check for bold rendering support to avoid invisible emoji in Chrome.
+	 */
+	context.textBaseline = 'top';
+	context.font = '600 32px Arial';
+
+	const supports = {};
+	tests.forEach( ( test ) => {
+		supports[ test ] = browserSupportsEmoji( context, test, emojiSetsRenderIdentically, emojiRendersEmptyCenterPoint );
+	} );
+	return supports;
+}
+
+/**
+ * Adds a script to the head of the document.
+ *
+ * @ignore
+ *
+ * @since 4.2.0
+ *
+ * @param {string} src The url where the script is located.
+ *
+ * @return {void}
+ */
+function addScript( src ) {
+	const script = document.createElement( 'script' );
+	script.src = src;
+	script.defer = true;
+	document.head.appendChild( script );
+}
+
+settings.supports = {
+	everything: true,
+	everythingExceptFlag: true
+};
+
+// Obtain the emoji support from the browser, asynchronously when possible.
+new Promise( ( resolve ) => {
+	let supportTests = getSessionSupportTests();
+	if ( supportTests ) {
+		resolve( supportTests );
+		return;
+	}
+
+	if ( supportsWorkerOffloading() ) {
+		try {
+			// Note that the functions are being passed as arguments due to minification.
+			const workerScript =
+				'postMessage(' +
+				testEmojiSupports.toString() +
+				'(' +
+				[
+					JSON.stringify( tests ),
+					browserSupportsEmoji.toString(),
+					emojiSetsRenderIdentically.toString(),
+					emojiRendersEmptyCenterPoint.toString()
+				].join( ',' ) +
+				'));';
+			const blob = new Blob( [ workerScript ], {
+				type: 'text/javascript'
+			} );
+			const worker = new Worker( URL.createObjectURL( blob ), { name: 'wpTestEmojiSupports' } );
+			worker.onmessage = ( event ) => {
+				supportTests = event.data;
+				setSessionSupportTests( supportTests );
+				worker.terminate();
+				resolve( supportTests );
+			};
+			return;
+		} catch ( e ) {}
+	}
+
+	supportTests = testEmojiSupports( tests, browserSupportsEmoji, emojiSetsRenderIdentically, emojiRendersEmptyCenterPoint );
+	setSessionSupportTests( supportTests );
+	resolve( supportTests );
+} )
+	// Once the browser emoji support has been obtained from the session, finalize the settings.
+	.then( ( supportTests ) => {
+		/*
+		 * Tests the browser support for flag emojis and other emojis, and adjusts the
+		 * support settings accordingly.
+		 */
+		for ( const test in supportTests ) {
+			settings.supports[ test ] = supportTests[ test ];
+
+			settings.supports.everything =
+				settings.supports.everything && settings.supports[ test ];
+
+			if ( 'flag' !== test ) {
+				settings.supports.everythingExceptFlag =
+					settings.supports.everythingExceptFlag &&
+					settings.supports[ test ];
+			}
+		}
+
+		settings.supports.everythingExceptFlag =
+			settings.supports.everythingExceptFlag &&
+			! settings.supports.flag;
+
+		// When the browser can not render everything we need to load a polyfill.
+		if ( ! settings.supports.everything ) {
+			const src = settings.source || {};
+
+			if ( src.concatemoji ) {
+				addScript( src.concatemoji );
+			} else if ( src.wpemoji && src.twemoji ) {
+				addScript( src.twemoji );
+				addScript( src.wpemoji );
+			}
+		}
+	} );
+//# sourceURL=https://digitalvite.id/wp-includes/js/wp-emoji-loader.js
+</script>
+	</body>
 </html>
