@@ -1560,16 +1560,21 @@ const a=JSON.parse(document.getElementById("wp-emoji-settings").textContent),o=(
   }
   const db = firebase.firestore();
 
-    window.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('commentform-137920');
+      window.addEventListener('DOMContentLoaded', () => {
+    // 1. KITA PAKSA SEMUA WRAPPERNYA MUNCUL
+    const wrapComments = document.getElementById('saic-wrap-comment-137920');
     const container = document.getElementById('saic-container-comment-137920');
     
-    // --- INI KUNCI BIAR LANGSUNG MUNCUL ---
-    const wrapComments = document.getElementById('saic-wrap-comment-137920');
     if (wrapComments) {
-      wrapComments.style.setProperty('display', 'block', 'important');
-	}
-    // 1. FUNGSI TAMPILIN DATA (Selalu Jalan & Realtime)
+      // Kita hajar CSS-nya biar nggak bisa disembunyiin script lain
+      wrapComments.style.cssText = "display: block !important; visibility: visible !important; opacity: 1 !important; height: auto !important; overflow: visible !important;";
+    }
+    
+    if (container) {
+      container.style.cssText = "display: block !important; list-style: none !important; padding: 0 !important;";
+    }
+
+    // 2. FUNGSI TAMPILIN DATA FIREBASE
     db.collection("ucapan").orderBy("timestamp", "desc")
       .onSnapshot((querySnapshot) => {
         container.innerHTML = ""; 
@@ -1579,41 +1584,37 @@ const a=JSON.parse(document.getElementById("wp-emoji-settings").textContent),o=(
         querySnapshot.forEach((doc) => {
           const data = doc.data();
           totalPesan++;
-          
-          // Ambil angka doang dari jumlah_tamu (misal "5 Orang" jadi 5)
           const jml = parseInt(data.jumlah_tamu) || 0;
-          if(data.kehadiran === "present") { // Sesuai value HTML lu: present = hadir
-             totalSeluruhTamu += jml;
-          }
+          if(data.kehadiran === "present") totalSeluruhTamu += jml;
 
           const li = document.createElement('li');
-          li.style.cssText = "background:#fff; padding:15px; border-radius:8px; margin-bottom:10px; border:1px solid #ddd; list-style:none; display:block !important; color:#333;";
+          // Kasih style biar cakep & kontras sama background putih lu
+          li.style.cssText = "background: #fdfdfd; padding: 15px; border-radius: 10px; margin-bottom: 12px; border: 1px solid #eee; box-shadow: 0 2px 5px rgba(0,0,0,0.05); list-style: none; display: block !important;";
           
-          // TAMPILAN UCAPAN (Nama + Jumlah Tamu di bawahnya)
           li.innerHTML = `
-            <div style="display:flex; justify-content:space-between; align-items:flex-start; border-bottom:1px solid #eee; padding-bottom:5px; margin-bottom:5px;">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; border-bottom:1px solid #f0f0f0; padding-bottom:5px; margin-bottom:8px;">
               <div>
-                <b style="color:#d81b60; font-size:15px; text-transform:capitalize;">${data.nama}</b>
-                <div style="font-size:11px; color:#666; font-weight:bold;">Membawa: ${jml} Orang</div>
+                <b style="color:#b5893e; font-size:14px; text-transform:capitalize;">${data.nama}</b>
+                <div style="font-size:10px; color:#888;">${data.kehadiran === 'present' ? '✅ Membawa '+jml+' Orang' : '❌ Absen'}</div>
               </div>
-              <span style="font-size:10px; background:#e8f5e9; color:#2e7d32; padding:2px 8px; border-radius:10px;">${data.kehadiran === 'present' ? 'Hadir' : 'Tidak Hadir'}</span>
+              <span style="font-size:9px; background:#b5893e; color:#fff; padding:2px 6px; border-radius:4px;">${data.kehadiran === 'present' ? 'HADIR' : 'RAGU/TIDAK'}</span>
             </div>
-            <div style="font-size:14px; color:#444; line-height:1.5;">${data.pesan}</div>
+            <div style="font-size:13px; color:#444; line-height:1.4; text-align:left;">${data.pesan}</div>
           `;
           container.appendChild(li);
         });
 
-        // Update Counter (Angka ucapan & Total Tamu di layar)
-        if(document.querySelector('#saic-link-137920 span')) {
-            document.querySelector('#saic-link-137920 span').innerText = totalPesan;
-        }
+        // Update angka di tombol "2 Ucapan" itu
+        document.querySelectorAll('#saic-link-137920 span').forEach(b => b.innerText = totalPesan);
         
-        // Lu bisa buat elemen id="total-tamu" di HTML kalau mau nampilin angka totalnya
+        // Update counter total tamu jika ada elemennya
         const elTotal = document.getElementById('total-tamu-counter');
         if(elTotal) elTotal.innerText = totalSeluruhTamu;
-        
-        console.log("Total tamu yang bakal dateng: " + totalSeluruhTamu);
       });
+      
+      // ... (Sisa fungsi kirim ucapan lu yang kemarin tetap sama)
+  });
+
 
         // 2. FUNGSI KIRIM UCAPAN (FIX LOGIC VALIDASI)
     if(form) {
