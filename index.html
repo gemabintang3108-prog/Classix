@@ -1587,28 +1587,51 @@ const a=JSON.parse(document.getElementById("wp-emoji-settings").textContent),o=(
     }
   };
 
-  // 2. FUNGSI TAMPILIN UCAPAN SECARA REALTIME
-  db.collection("ucapan").orderBy("timestamp", "desc")
-    .onSnapshot((querySnapshot) => {
-      container.innerHTML = "";
-      let count = 0;
-      
-      querySnapshot.forEach((doc) => {
-        const data = doc.data();
-        count++;
+      // === 2. FUNGSI TAMPILIN DATA (REVISI MAKSA) ===
+    db.collection("ucapan").orderBy("timestamp", "desc")
+      .onSnapshot((querySnapshot) => {
+        console.log("Data masuk: ", querySnapshot.size);
         
-        // Template desain list ucapan (Bisa lu modif CSS-nya)
-        const html = `
-          <li style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; margin-bottom: 10px; list-style: none; border: 1px solid #ddd;">
-            <div style="display:flex; justify-content: space-between; align-items: center;">
-                <strong style="color: #333;">${data.nama}</strong>
-                <span style="font-size: 10px; background: #eee; padding: 2px 8px; border-radius: 20px;">${data.kehadiran}</span>
+        // Target container tempat ucapan muncul
+        const container = document.getElementById('saic-container-comment-137920');
+        const wrapUcapan = document.getElementById('saic-wrap-comment-137920');
+
+        if(wrapUcapan) wrapUcapan.style.display = 'block'; // Paksa muncul box-nya
+        
+        container.innerHTML = ""; // Bersihin loading/teks lama
+        let total = 0;
+
+        querySnapshot.forEach((doc) => {
+          const data = doc.data();
+          total++;
+          
+          // Kita bikin elemen <li> supaya sesuai sama struktur CSS template lu
+          const li = document.createElement('li');
+          li.className = 'saic-comment'; // Pakai class bawaan template biar rapi
+          li.style.cssText = "background: #fff; padding: 15px; border-radius: 8px; margin-bottom: 10px; border: 1px solid #eee; list-style:none; display:block !important; visibility:visible !important; opacity:1 !important;";
+          
+          li.innerHTML = `
+            <div class="saic-comment-content">
+              <div class="saic-comment-header" style="display:flex; justify-content:space-between; border-bottom:1px dashed #ccc; margin-bottom:5px;">
+                <b style="color:#e64a19; text-transform: capitalize;">${data.nama}</b>
+                <span style="font-size:10px; color:#777; background:#f0f0f0; padding:2px 5px; border-radius:4px;">${data.kehadiran || 'Hadir'}</span>
+              </div>
+              <div class="saic-comment-text" style="color:#444; font-size:14px; line-height:1.5;">
+                ${data.pesan}
+              </div>
             </div>
-            <p style="margin: 8px 0 0 0; font-size: 14px; color: #555;">${data.pesan}</p>
-          </li>
-        `;
-        container.innerHTML += html;
+          `;
+          container.appendChild(li);
+        });
+
+        // Update badge angka di atas
+        const badges = document.querySelectorAll('#saic-link-137920 span');
+        badges.forEach(b => b.innerText = total);
+        
+      }, (error) => {
+        console.error("Firebase Error: ", error);
       });
+
 
       // Update angka jumlah ucapan di atas
       const badge = document.querySelector('#saic-link-137920 span');
