@@ -1182,13 +1182,18 @@ btnAmplop.onclick = function() {
 							</div>
 
 						
-						<div class="saic-wrap-guest" style="display: none;">
-							<select name="guest" id="guest" class="saic-select">
-								<option value="" selected="" disabled>Jumlah Tamu</option>
-															</select>
-							<span class="saic-required">*</span>
-							<span class="saic-error-info saic-error-info-guest">Pilih jumlah tamu</span>
-						</div>
+						<div class="saic-wrap-guest" style="display: block !important; margin-bottom: 15px;">
+    <select name="guest" id="guest" class="saic-select" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;">
+        <option value="" disabled selected>Pilih Jumlah Tamu</option>
+        <option value="1">1 Orang</option>
+        <option value="2">2 Orang</option>
+        <option value="3">3 Orang</option>
+        <option value="4">4 Orang</option>
+        <option value="5">5 Orang atau lebih</option>
+    </select>
+    <span class="saic-required">*</span>
+</div>
+
 
 						<div class="saic-wrap-textarea">
 							<textarea name="comment" id="saic-textarea-137920" class="waci_comment saic-textarea autosize-textarea" aria-required="true" placeholder="Tulis ucapan" rows="1"></textarea>
@@ -1555,73 +1560,81 @@ const a=JSON.parse(document.getElementById("wp-emoji-settings").textContent),o=(
   }
   const db = firebase.firestore();
 
-  window.addEventListener('DOMContentLoaded', () => {
+    window.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('commentform-137920');
     const container = document.getElementById('saic-container-comment-137920');
     const wrapUcapan = document.getElementById('saic-wrap-comment-137920');
 
-    // === 2. FUNGSI TAMPILIN DATA (READ) ===
+    // 1. FUNGSI TAMPILIN DATA (Selalu Jalan & Realtime)
     db.collection("ucapan").orderBy("timestamp", "desc")
       .onSnapshot((querySnapshot) => {
-        console.log("Data masuk: ", querySnapshot.size);
-        
-        // Maksa box ucapan muncul biar gak disembunyiin template
-        if(wrapUcapan) {
-            wrapUcapan.style.setProperty('display', 'block', 'important');
-            wrapUcapan.style.setProperty('visibility', 'visible', 'important');
-        }
-        
         container.innerHTML = ""; 
-        let total = 0;
+        let totalSeluruhTamu = 0;
+        let totalPesan = 0;
 
         querySnapshot.forEach((doc) => {
           const data = doc.data();
-          total++;
+          totalPesan++;
           
+          // Ambil angka doang dari jumlah_tamu (misal "5 Orang" jadi 5)
+          const jml = parseInt(data.jumlah_tamu) || 0;
+          if(data.kehadiran === "present") { // Sesuai value HTML lu: present = hadir
+             totalSeluruhTamu += jml;
+          }
+
           const li = document.createElement('li');
-          li.style.cssText = "background: #fff; padding: 15px; border-radius: 8px; margin-bottom: 10px; border: 1px solid #ddd; list-style:none; display:block !important; color: #333 !important;";
+          li.style.cssText = "background:#fff; padding:15px; border-radius:8px; margin-bottom:10px; border:1px solid #ddd; list-style:none; display:block !important; color:#333;";
           
+          // TAMPILAN UCAPAN (Nama + Jumlah Tamu di bawahnya)
           li.innerHTML = `
-            <div style="border-bottom: 1px solid #eee; padding-bottom: 5px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
-              <b style="color: #d81b60; font-size: 14px; text-transform: capitalize;">${data.nama}</b>
-              <span style="font-size: 10px; background: #f0f0f0; padding: 2px 6px; border-radius: 4px; color: #666;">${data.kehadiran || 'Hadir'}</span>
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; border-bottom:1px solid #eee; padding-bottom:5px; margin-bottom:5px;">
+              <div>
+                <b style="color:#d81b60; font-size:15px; text-transform:capitalize;">${data.nama}</b>
+                <div style="font-size:11px; color:#666; font-weight:bold;">Membawa: ${jml} Orang</div>
+              </div>
+              <span style="font-size:10px; background:#e8f5e9; color:#2e7d32; padding:2px 8px; border-radius:10px;">${data.kehadiran === 'present' ? 'Hadir' : 'Tidak Hadir'}</span>
             </div>
-            <div style="font-size: 13px; line-height: 1.4; color: #444; text-align: left;">
-              ${data.pesan}
-            </div>
+            <div style="font-size:14px; color:#444; line-height:1.5;">${data.pesan}</div>
           `;
           container.appendChild(li);
         });
 
-        // Update angka jumlah ucapan
-        document.querySelectorAll('#saic-link-137920 span').forEach(b => b.innerText = total);
+        // Update Counter (Angka ucapan & Total Tamu di layar)
+        if(document.querySelector('#saic-link-137920 span')) {
+            document.querySelector('#saic-link-137920 span').innerText = totalPesan;
+        }
         
-      }, (error) => {
-        console.error("Firebase Error Cok: ", error);
+        // Lu bisa buat elemen id="total-tamu" di HTML kalau mau nampilin angka totalnya
+        const elTotal = document.getElementById('total-tamu-counter');
+        if(elTotal) elTotal.innerText = totalSeluruhTamu;
+        
+        console.log("Total tamu yang bakal dateng: " + totalSeluruhTamu);
       });
 
-    // === 3. FUNGSI KIRIM DATA (WRITE) ===
+    // 2. FUNGSI KIRIM UCAPAN
     if(form) {
       form.onsubmit = async (e) => {
         e.preventDefault();
         const nama = document.getElementById('author').value;
         const hadir = document.getElementById('attendance').value;
+        const tamu = document.getElementById('guest').value;
         const pesan = document.getElementById('saic-textarea-137920').value;
 
-        if(!nama || !pesan) return alert("Nama dan Ucapan jangan dikosongin Cok!");
+        if(!nama || !pesan || !tamu) return alert("Lengkapin dulu datanya Cok!");
 
         try {
           await db.collection("ucapan").add({
             nama: nama,
-            kehadiran: hadir || "Hadir",
+            kehadiran: hadir,
+            jumlah_tamu: tamu, // Kesimpen sebagai string "1", "2", dst
             pesan: pesan,
             timestamp: firebase.firestore.FieldValue.serverTimestamp()
           });
           form.reset();
-          alert("Sip, ucapan lu udah masuk!");
+          alert("Mantap! Ucapan lu udah mejeng di bawah.");
         } catch (err) {
           console.error(err);
-          alert("Gagal kirim! Cek Rules Firestore lu udah 'true' belum?");
+          alert("Gagal kirim Cok!");
         }
       };
     }
