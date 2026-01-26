@@ -1535,108 +1535,97 @@ const a=JSON.parse(document.getElementById("wp-emoji-settings").textContent),o=(
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
 <script>
-  // Konfigurasi Firebase Lu
+  // Konfigurasi Asli Lu
   const firebaseConfig = {
-    apiKey: "AIzaSyBY4i8moa3g2VUw_N7yfv8aYhB51xR65fs" , // Ambil di Project Settings -> General -> Web Apps
+    apiKey: "AIzaSyBY4i8moa3g2VUw_N7yfv8aYhB51xR65fs",
     authDomain: "naya-6fd3f.firebaseapp.com",
     projectId: "naya-6fd3f",
     storageBucket: "naya-6fd3f.appspot.com",
-    messagingSenderId: "29582673064", // Contoh (cek di setting)
-    appId: "1:29582673064:web:781e159c5fdca7cf72ae9d" // Contoh (cek di setting)
+    messagingSenderId: "29582673064",
+    appId: "1:29582673064:web:781e159c5fdca7cf72ae9d"
   };
 
   // Initialize Firebase
   if (!firebase.apps.length) {
-      firebase.initializeApp(firebaseConfig);
+    firebase.initializeApp(firebaseConfig);
   }
   const db = firebase.firestore();
-  const form = document.getElementById('commentform-137920');
-  const container = document.getElementById('saic-container-comment-137920');
 
-  // 1. FUNGSI KIRIM UCAPAN KE FIRESTORE
-  form.onsubmit = async (e) => {
-    e.preventDefault();
-    
-    const submitBtn = document.getElementById('submit-137920');
-    const nama = document.getElementById('author').value;
-    const kehadiran = document.getElementById('attendance').value;
-    const pesan = document.getElementById('saic-textarea-137920').value;
+  window.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('commentform-137920');
+    const container = document.getElementById('saic-container-comment-137920');
+    const wrapUcapan = document.getElementById('saic-wrap-comment-137920');
 
-    if(!nama || !pesan) return alert("Isi nama & pesan dulu Cok!");
-
-    submitBtn.value = "Mengirim...";
-    submitBtn.disabled = true;
-
-    try {
-      await db.collection("ucapan").add({
-        nama: nama,
-        kehadiran: kehadiran,
-        pesan: pesan,
-        timestamp: firebase.firestore.FieldValue.serverTimestamp()
-      });
-      
-      form.reset();
-      alert("Ucapan terkirim!");
-    } catch (error) {
-      console.error("Error Cok: ", error);
-      alert("Gagal kirim, cek console!");
-    } finally {
-      submitBtn.value = "Kirim";
-      submitBtn.disabled = false;
-    }
-  };
-
-      // === 2. FUNGSI TAMPILIN DATA (REVISI MAKSA) ===
+    // === 2. FUNGSI TAMPILIN DATA (READ) ===
     db.collection("ucapan").orderBy("timestamp", "desc")
       .onSnapshot((querySnapshot) => {
         console.log("Data masuk: ", querySnapshot.size);
         
-        // Target container tempat ucapan muncul
-        const container = document.getElementById('saic-container-comment-137920');
-        const wrapUcapan = document.getElementById('saic-wrap-comment-137920');
-
-        if(wrapUcapan) wrapUcapan.style.display = 'block'; // Paksa muncul box-nya
+        // Maksa box ucapan muncul biar gak disembunyiin template
+        if(wrapUcapan) {
+            wrapUcapan.style.setProperty('display', 'block', 'important');
+            wrapUcapan.style.setProperty('visibility', 'visible', 'important');
+        }
         
-        container.innerHTML = ""; // Bersihin loading/teks lama
+        container.innerHTML = ""; 
         let total = 0;
 
         querySnapshot.forEach((doc) => {
           const data = doc.data();
           total++;
           
-          // Kita bikin elemen <li> supaya sesuai sama struktur CSS template lu
           const li = document.createElement('li');
-          li.className = 'saic-comment'; // Pakai class bawaan template biar rapi
-          li.style.cssText = "background: #fff; padding: 15px; border-radius: 8px; margin-bottom: 10px; border: 1px solid #eee; list-style:none; display:block !important; visibility:visible !important; opacity:1 !important;";
+          li.style.cssText = "background: #fff; padding: 15px; border-radius: 8px; margin-bottom: 10px; border: 1px solid #ddd; list-style:none; display:block !important; color: #333 !important;";
           
           li.innerHTML = `
-            <div class="saic-comment-content">
-              <div class="saic-comment-header" style="display:flex; justify-content:space-between; border-bottom:1px dashed #ccc; margin-bottom:5px;">
-                <b style="color:#e64a19; text-transform: capitalize;">${data.nama}</b>
-                <span style="font-size:10px; color:#777; background:#f0f0f0; padding:2px 5px; border-radius:4px;">${data.kehadiran || 'Hadir'}</span>
-              </div>
-              <div class="saic-comment-text" style="color:#444; font-size:14px; line-height:1.5;">
-                ${data.pesan}
-              </div>
+            <div style="border-bottom: 1px solid #eee; padding-bottom: 5px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+              <b style="color: #d81b60; font-size: 14px; text-transform: capitalize;">${data.nama}</b>
+              <span style="font-size: 10px; background: #f0f0f0; padding: 2px 6px; border-radius: 4px; color: #666;">${data.kehadiran || 'Hadir'}</span>
+            </div>
+            <div style="font-size: 13px; line-height: 1.4; color: #444; text-align: left;">
+              ${data.pesan}
             </div>
           `;
           container.appendChild(li);
         });
 
-        // Update badge angka di atas
-        const badges = document.querySelectorAll('#saic-link-137920 span');
-        badges.forEach(b => b.innerText = total);
+        // Update angka jumlah ucapan
+        document.querySelectorAll('#saic-link-137920 span').forEach(b => b.innerText = total);
         
       }, (error) => {
-        console.error("Firebase Error: ", error);
+        console.error("Firebase Error Cok: ", error);
       });
 
+    // === 3. FUNGSI KIRIM DATA (WRITE) ===
+    if(form) {
+      form.onsubmit = async (e) => {
+        e.preventDefault();
+        const nama = document.getElementById('author').value;
+        const hadir = document.getElementById('attendance').value;
+        const pesan = document.getElementById('saic-textarea-137920').value;
 
-      // Update angka jumlah ucapan di atas
-      const badge = document.querySelector('#saic-link-137920 span');
-      if(badge) badge.innerText = count;
-    });
+        if(!nama || !pesan) return alert("Nama dan Ucapan jangan dikosongin Cok!");
+
+        try {
+          await db.collection("ucapan").add({
+            nama: nama,
+            kehadiran: hadir || "Hadir",
+            pesan: pesan,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+          });
+          form.reset();
+          alert("Sip, ucapan lu udah masuk!");
+        } catch (err) {
+          console.error(err);
+          alert("Gagal kirim! Cek Rules Firestore lu udah 'true' belum?");
+        }
+      };
+    }
+  });
 </script>
 	
 </body>
