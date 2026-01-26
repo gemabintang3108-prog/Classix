@@ -1363,8 +1363,9 @@ var WdsAudio = {"source":"url","audio_link":"https:\/\/vitee.id\/wp-content\/upl
                 </div>
 
                 
-                                        <div class='wdk-dear' style='width: auto !important;' >Kpd Bpk/Ibu/Saudara/i</div>
-                                <div class='wdk-name namatamu' style='width: auto !important;'></div>
+                                <div id="penerima-undangan" class="wdk-dear namatamu" style="width: auto !important; font-weight: bold;">
+                                Kpd Bpk/Ibu/Saudara/i</div>
+
                     
                                 <div class='wdk-button-wrapper' id='wdk-button-wrapper'>
                     <button class='elementor-button'>
@@ -1643,6 +1644,28 @@ const a=JSON.parse(document.getElementById("wp-emoji-settings").textContent),o=(
   });
 
 </script>
+
+	<script>
+window.addEventListener('DOMContentLoaded', () => {
+    // Fungsi ambil nama dari link (?to=...)
+    const urlParams = new URLSearchParams(window.location.search);
+    const namaTamu = urlParams.get('to');
+
+    if (namaTamu) {
+        // Ganti tanda + jadi spasi
+        const namaBersih = namaTamu.replace(/\+/g, ' ');
+        
+        // Tembak elemen yang tadi kita kasih ID
+        const targetTeks = document.getElementById('penerima-undangan');
+        
+        if (targetTeks) {
+            // Ganti total teksnya
+            targetTeks.innerHTML = "Kepada " + namaBersih;
+        }
+    }
+});
+	</script>
+	
 	
 </body>
 </html>
