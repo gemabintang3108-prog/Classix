@@ -1563,8 +1563,12 @@ const a=JSON.parse(document.getElementById("wp-emoji-settings").textContent),o=(
     window.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('commentform-137920');
     const container = document.getElementById('saic-container-comment-137920');
-    const wrapUcapan = document.getElementById('saic-wrap-comment-137920');
-
+    
+    // --- INI KUNCI BIAR LANGSUNG MUNCUL ---
+    const wrapComments = document.getElementById('saic-wrap-comment-137920');
+    if (wrapComments) {
+      wrapComments.style.setProperty('display', 'block', 'important');
+	}
     // 1. FUNGSI TAMPILIN DATA (Selalu Jalan & Realtime)
     db.collection("ucapan").orderBy("timestamp", "desc")
       .onSnapshot((querySnapshot) => {
@@ -1611,33 +1615,41 @@ const a=JSON.parse(document.getElementById("wp-emoji-settings").textContent),o=(
         console.log("Total tamu yang bakal dateng: " + totalSeluruhTamu);
       });
 
-    // 2. FUNGSI KIRIM UCAPAN
+        // 2. FUNGSI KIRIM UCAPAN (FIX LOGIC VALIDASI)
     if(form) {
       form.onsubmit = async (e) => {
         e.preventDefault();
         const nama = document.getElementById('author').value;
-        const hadir = document.getElementById('attendance').value;
+        const hadir = document.getElementById('attendance').value; // present, notpresent, notsure
         const tamu = document.getElementById('guest').value;
         const pesan = document.getElementById('saic-textarea-137920').value;
 
-        if(!nama || !pesan || !tamu) return alert("Lengkapin dulu datanya Cok!");
+        // Validasi dasar: Nama & Pesan harus ada
+        if(!nama || !pesan) return alert("Nama dan Pesan wajib diisi Cok!");
+        
+        // Validasi khusus: Kalau hadir, harus pilih jumlah tamu
+        if(hadir === "present" && !tamu) {
+          return alert("Tolong pilih jumlah tamu yang mau diajak Cok!");
+        }
 
         try {
           await db.collection("ucapan").add({
             nama: nama,
             kehadiran: hadir,
-            jumlah_tamu: tamu, // Kesimpen sebagai string "1", "2", dst
+            // Kalau tidak hadir/ragu, simpan 0. Kalau hadir, ambil nilai dropdown.
+            jumlah_tamu: (hadir === "present") ? tamu : "0", 
             pesan: pesan,
             timestamp: firebase.firestore.FieldValue.serverTimestamp()
           });
           form.reset();
-          alert("Mantap! Ucapan lu udah mejeng di bawah.");
+          alert("Mantap! Ucapan lu udah masuk.");
         } catch (err) {
           console.error(err);
           alert("Gagal kirim Cok!");
         }
       };
     }
+
   });
 </script>
 	
