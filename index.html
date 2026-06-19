@@ -1,460 +1,122 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pengayaan Sejarah - Proklamasi Kemerdekaan</title>
-    <!-- Font & Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proklamasi Kemerdekaan Indonesia</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+        
+        .font-vintage { font-family: 'Cinzel', serif; }
+        .font-sans-custom { font-family: 'Plus Jakarta Sans', sans-serif; }
+        
         body {
-            font-family: 'Poppins', sans-serif;
-            background: #f4f1ea;
-            color: #1e2b3c;
-            scroll-behavior: smooth;
+            background-color: #f7f4eb;
+            color: #2c2523;
         }
-
-        /* Header / Hero */
-        .hero {
-            background: linear-gradient(135deg, #1e2b3c 0%, #2c3e50 100%);
-            color: white;
-            padding: 3rem 1.5rem 2rem;
-            text-align: center;
-            border-bottom: 6px solid #c0392b;
-        }
-
-        .hero h1 {
-            font-size: 2.8rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-        }
-
-        .hero h1 i {
-            color: #f1c40f;
-            margin-right: 10px;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            font-weight: 300;
-            margin-top: 10px;
-            opacity: 0.9;
-        }
-
-        .hero .badge {
-            display: inline-block;
-            margin-top: 15px;
-            background: #c0392b;
-            padding: 8px 24px;
-            border-radius: 40px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-        }
-
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 2rem 1.5rem 4rem;
-        }
-
-        /* Bagian informasi tugas */
-        .info-tugas {
-            background: white;
-            border-radius: 20px;
-            padding: 1.8rem 2rem;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-            margin-bottom: 2.5rem;
-            border-left: 8px solid #c0392b;
-        }
-
-        .info-tugas h2 {
-            font-size: 1.6rem;
-            font-weight: 600;
-            color: #1e2b3c;
-            margin-bottom: 0.5rem;
-        }
-
-        .info-tugas h2 i {
-            color: #c0392b;
-            margin-right: 12px;
-        }
-
-        .info-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem 2.5rem;
-            margin-top: 1rem;
-        }
-
-        .info-grid span {
-            font-weight: 400;
-            background: #f0ede8;
-            padding: 6px 18px;
-            border-radius: 40px;
-            font-size: 0.95rem;
-        }
-
-        .info-grid i {
-            margin-right: 8px;
-            color: #c0392b;
-        }
-
-        .deadline {
-            background: #fef9e7;
-            padding: 10px 20px;
-            border-radius: 12px;
-            margin-top: 12px;
-            font-weight: 600;
-            border: 1px dashed #c0392b;
-            display: inline-block;
-        }
-
-        .deadline i {
-            color: #c0392b;
-            margin-right: 10px;
-        }
-
-        /* Konten utama: pilihan materi */
-        .section-title {
-            font-size: 2rem;
-            font-weight: 600;
-            margin: 2.5rem 0 1.2rem;
-            border-bottom: 4px solid #c0392b;
-            padding-bottom: 8px;
-            display: inline-block;
-        }
-
-        .card-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin: 1.5rem 0 2.5rem;
-        }
-
-        .card {
-            background: white;
-            border-radius: 24px;
-            padding: 2rem 1.8rem;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.04);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            border: 1px solid #eae5dd;
-        }
-
-        .card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 18px 35px rgba(0,0,0,0.08);
-        }
-
-        .card i {
-            font-size: 2.8rem;
-            color: #c0392b;
-            margin-bottom: 12px;
-        }
-
-        .card h3 {
-            font-size: 1.6rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-
-        .card p {
-            color: #3d4e5f;
-            line-height: 1.7;
-            font-weight: 300;
-        }
-
-        .card ul {
-            list-style: none;
-            margin-top: 16px;
-        }
-
-        .card ul li {
-            padding: 6px 0;
-            border-bottom: 1px solid #f0ede8;
-            font-size: 0.95rem;
-        }
-
-        .card ul li i {
-            font-size: 1rem;
-            margin-right: 12px;
-            color: #f1c40f;
-        }
-
-        .btn {
-            display: inline-block;
-            margin-top: 20px;
-            background: #1e2b3c;
-            color: white;
-            padding: 10px 28px;
-            border-radius: 60px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: 0.2s;
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn:hover {
-            background: #c0392b;
-        }
-
-        .btn i {
-            margin-right: 8px;
-        }
-
-        /* Preview web (simulasi) */
-        .preview-box {
-            background: white;
-            border-radius: 24px;
-            padding: 2rem;
-            margin: 2.5rem 0;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.04);
-            border: 1px solid #eae5dd;
-        }
-
-        .preview-box h3 {
-            font-size: 1.8rem;
-            font-weight: 600;
-            margin-bottom: 6px;
-        }
-
-        .preview-box h3 i {
-            color: #c0392b;
-            margin-right: 12px;
-        }
-
-        .preview-box .sub {
-            color: #5d6f80;
-            margin-bottom: 20px;
-        }
-
-        .mock-web {
-            background: #f8f6f2;
-            padding: 1.5rem;
-            border-radius: 16px;
-            border: 1px solid #ddd8cf;
-        }
-
-        .mock-web .mock-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid #c0392b;
-            padding-bottom: 12px;
-            margin-bottom: 18px;
-        }
-
-        .mock-web .mock-header h4 {
-            font-weight: 700;
-            font-size: 1.2rem;
-        }
-
-        .mock-web .mock-header span {
-            background: #c0392b;
-            color: white;
-            padding: 4px 16px;
-            border-radius: 40px;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-
-        .mock-content {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .mock-content .box {
-            background: white;
-            padding: 14px 20px;
-            border-radius: 12px;
-            flex: 1 1 120px;
-            border: 1px solid #e0dad2;
-            text-align: center;
-        }
-
-        .mock-content .box i {
-            font-size: 2rem;
-            color: #c0392b;
-            display: block;
-            margin-bottom: 6px;
-        }
-
-        .mock-content .box small {
-            display: block;
-            color: #4a5a6b;
-            font-weight: 300;
-        }
-
-        .footer-note {
-            margin-top: 3rem;
-            background: #eae5dd;
-            border-radius: 20px;
-            padding: 1.8rem 2rem;
-            text-align: center;
-            color: #1e2b3c;
-        }
-
-        .footer-note i {
-            color: #c0392b;
-            margin: 0 6px;
-        }
-
-        /* Responsive */
-        @media (max-width: 700px) {
-            .card-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .info-grid {
-                flex-direction: column;
-                gap: 6px;
-            }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #991b1b 0%, #450a0a 100%);
         }
     </style>
 </head>
-<body>
+<body class="font-sans-custom antialiased selection:bg-red-800 selection:text-white">
 
-<!-- HERO -->
-<header class="hero">
-    <h1><i class="fas fa-landmark"></i> Pengayaan Sejarah</h1>
-    <p>Proklamasi Kemerdekaan Indonesia · 17 Agustus 1945</p>
-    <div class="badge"><i class="fas fa-globe"></i> Karya Online — Web</div>
-</header>
-
-<div class="container">
-
-    <!-- INFO TUGAS -->
-    <div class="info-tugas">
-        <h2><i class="fas fa-clipboard-list"></i> Informasi Tugas</h2>
-        <div class="info-grid">
-            <span><i class="fas fa-calendar-alt"></i> Deadline: Sabtu, 20 Juni 2026 · 15.00</span>
-            <span><i class="fas fa-user-graduate"></i> Tidak wajib · Pengayaan</span>
-            <span><i class="fas fa-video"></i> Fisik: foto / unjuk langsung Senin</span>
-            <span><i class="fas fa-folder-open"></i> Folder Drive (nama individu)</span>
-        </div>
-        <div class="deadline">
-            <i class="fas fa-clock"></i> Karya fisik difoto &amp; ditunjukkan hari Senin
-        </div>
-    </div>
-
-    <!-- PILIHAN MATERI -->
-    <h2 class="section-title"><i class="fas fa-book-open"></i> Pilih Materi</h2>
-    <div class="card-grid">
-        <!-- Card 1: Pendudukan Jepang -->
-        <div class="card">
-            <i class="fas fa-flag"></i>
-            <h3>Pendudukan Jepang</h3>
-            <p>1942–1945 · Dampak sosial, politik, dan ekonomi. Propaganda, Romusha, dan persiapan kemerdekaan.</p>
-            <ul>
-                <li><i class="fas fa-check-circle"></i> Latar belakang kedatangan Jepang</li>
-                <li><i class="fas fa-check-circle"></i> Kebijakan &amp; perlawanan</li>
-                <li><i class="fas fa-check-circle"></i> BPUPKI &amp; PPKI</li>
-            </ul>
-            <a href="#" class="btn" onclick="alert('Materi Pendudukan Jepang — silakan eksplorasi lebih lanjut!')"><i class="fas fa-arrow-right"></i> Jelajahi</a>
-        </div>
-
-        <!-- Card 2: Proklamasi Kemerdekaan -->
-        <div class="card">
-            <i class="fas fa-star"></i>
-            <h3>Proklamasi Kemerdekaan</h3>
-            <p>17 Agustus 1945 · Perumusan naskah, detik-detik proklamasi, dan makna bagi bangsa Indonesia.</p>
-            <ul>
-                <li><i class="fas fa-check-circle"></i> Peristiwa Rengasdengklok</li>
-                <li><i class="fas fa-check-circle"></i> Naskah &amp; pembacaan teks</li>
-                <li><i class="fas fa-check-circle"></i> Sambutan &amp; pengakuan dunia</li>
-            </ul>
-            <a href="#" class="btn" onclick="alert('Materi Proklamasi — semangat kemerdekaan!')"><i class="fas fa-arrow-right"></i> Jelajahi</a>
-        </div>
-    </div>
-
-    <!-- PREVIEW WEB (Simulasi karya online) -->
-    <div class="preview-box">
-        <h3><i class="fas fa-desktop"></i> Pratinjau Karya Online</h3>
-        <p class="sub">Ini adalah tampilan web yang bisa kamu gunakan sebagai portofolio pengayaan sejarah.</p>
-        <div class="mock-web">
-            <div class="mock-header">
-                <h4><i class="fas fa-scroll" style="color:#c0392b;"></i> Sejarah Indonesia</h4>
-                <span>Proklamasi</span>
-            </div>
-            <div class="mock-content">
-                <div class="box">
-                    <i class="fas fa-calendar-day"></i>
-                    <strong>17 Agustus 1945</strong>
-                    <small>Hari Proklamasi</small>
-                </div>
-                <div class="box">
-                    <i class="fas fa-file-alt"></i>
-                    <strong>Teks Proklamasi</strong>
-                    <small>Naskah asli</small>
-                </div>
-                <div class="box">
-                    <i class="fas fa-users"></i>
-                    <strong>Tokoh</strong>
-                    <small>Soekarno-Hatta</small>
-                </div>
-                <div class="box">
-                    <i class="fas fa-flag"></i>
-                    <strong>Bendera Merah Putih</strong>
-                    <small>Jahitan Ibu Fatmawati</small>
-                </div>
-            </div>
-            <div style="margin-top: 20px; text-align: right; border-top: 1px solid #ddd8cf; padding-top: 14px;">
-                <span style="background: #1e2b3c; color: white; padding: 5px 18px; border-radius: 40px; font-size:0.8rem;">
-                    <i class="fas fa-link"></i> Karya Online · 2026
-                </span>
+    <nav class="sticky top-0 z-50 bg-[#f7f4eb]/80 backdrop-blur-md border-b border-red-900/10 px-6 py-4">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <span class="font-vintage text-xl font-bold tracking-wider text-red-800">17 AGUSTUS 1945</span>
+            <div class="space-x-6 text-sm font-semibold text-stone-600">
+                <a href="#beranda" class="hover:text-red-800 transition-colors">Beranda</a>
+                <a href="#tokoh" class="hover:text-red-800 transition-colors">Tokoh</a>
+                <a href="#naskah" class="hover:text-red-800 transition-colors">Naskah</a>
             </div>
         </div>
-        <p style="margin-top: 18px; font-style: italic; color: #3d4e5f;">
-            <i class="fas fa-quote-left" style="color:#c0392b;"></i> 
-            Web ini bisa dikembangkan dengan tambahan video, timeline, atau kuis interaktif.
-        </p>
-        <a href="#" class="btn" onclick="alert('Web siap dikembangkan! Tambahkan konten sesuai materi pilihanmu.')">
-            <i class="fas fa-edit"></i> Kembangkan Web
-        </a>
-    </div>
+    </nav>
 
-    <!-- Panduan Pengumpulan -->
-    <div style="background: #fff8f0; border-radius: 20px; padding: 1.8rem 2rem; border: 1px solid #e3dcd2; margin-top: 1.5rem;">
-        <h4 style="display: flex; align-items: center; gap: 10px; font-size: 1.4rem;">
-            <i class="fas fa-upload" style="color:#c0392b;"></i> Cara Pengumpulan
-        </h4>
-        <div style="display: flex; flex-wrap: wrap; gap: 0.8rem 2rem; margin-top: 10px;">
-            <span><i class="fas fa-check-circle" style="color:#27ae60;"></i> Buat folder di Drive (kelas → nama individu)</span>
-            <span><i class="fas fa-check-circle" style="color:#27ae60;"></i> Jika fisik: foto + tunjukkan langsung Senin</span>
-            <span><i class="fas fa-check-circle" style="color:#27ae60;"></i> Deadline Sabtu, 20 Juni 2026 jam 15.00</span>
+    <header id="beranda" class="hero-gradient text-white py-24 px-6 relative overflow-hidden shadow-xl">
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <span class="inline-block px-4 py-1.5 bg-red-700/50 border border-red-500/30 rounded-full text-xs font-bold tracking-widest uppercase mb-6 text-red-200">
+                Karya Pengayaan Sejarah Indonesia
+            </span>
+            <h1 class="font-vintage text-4xl md:text-6xl font-bold tracking-tight mb-6 leading-tight">
+                PROKLAMASI<br><span class="text-red-400">KEMERDEKAAN</span>
+            </h1>
+            <p class="text-lg md:text-xl text-stone-300 max-w-2xl mx-auto leading-relaxed font-light">
+                Detik-detik krusial yang mengubah jalannya sejarah bangsa. Titik balik perjuangan menuju kedaulatan penuh Republik Indonesia.
+            </p>
         </div>
-        <div style="margin-top: 14px; background: #1e2b3c; color: white; padding: 12px 20px; border-radius: 60px; display: inline-block;">
-            <i class="fas fa-folder"></i> PJ dimohon membuat folder utama
+    </header>
+
+    <section id="tokoh" class="py-20 px-6 max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="font-vintage text-3xl font-bold text-red-900 mb-2">Tokoh Proklamator & Pejuang</h2>
+            <div class="h-1 w-20 bg-red-800 mx-auto rounded"></div>
+            <p class="text-stone-500 mt-4 text-sm">Para pahlawan di balik layar dan panggung utama kemerdekaan.</p>
         </div>
-    </div>
 
-    <!-- Footer -->
-    <div class="footer-note">
-        <i class="fas fa-graduation-cap"></i> Pengayaan Sejarah · SMA/MA · 
-        <i class="fas fa-calendar-alt"></i> 2026 · 
-        <i class="fas fa-mobile-alt"></i> Karya online / fisik bebas pilih
-    </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-stone-200/60 hover:shadow-md transition-shadow">
+                <div class="w-12 h-12 rounded-xl bg-red-50 flex items-center justify-center mb-6 text-red-800 font-bold text-lg">
+                    01
+                </div>
+                <h3 class="font-vintage text-xl font-bold text-stone-800 mb-2">Ir. Soekarno</h3>
+                <p class="text-sm font-semibold text-red-800 mb-4">Penyusun & Pembaca Teks</p>
+                <p class="text-stone-600 text-sm leading-relaxed">
+                    Merumuskan naskah proklamasi di rumah Laksamana Maeda bersama Hatta dan Subardjo, serta membacakannya langsung di Jalan Pegangsaan Timur No. 56.
+                </p>
+            </div>
 
-</div>
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-stone-200/60 hover:shadow-md transition-shadow">
+                <div class="w-12 h-12 rounded-xl bg-red-50 flex items-center justify-center mb-6 text-red-800 font-bold text-lg">
+                    02
+                </div>
+                <h3 class="font-vintage text-xl font-bold text-stone-800 mb-2">Drs. Mohammad Hatta</h3>
+                <p class="text-sm font-semibold text-red-800 mb-4">Pendamping Proklamator</p>
+                <p class="text-stone-600 text-sm leading-relaxed">
+                    Turut serta menyumbangkan pemikiran secara lisan pada kalimat kedua naskah proklamasi dan ikut menandatangani teks autentik tersebut.
+                </p>
+            </div>
 
-<!-- (opsional) sedikit interaksi -->
-<script>
-    // Tidak ada fungsi khusus, hanya alert pada tombol.
-    console.log('Web pengayaan sejarah siap digunakan!');
-</script>
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-stone-200/60 hover:shadow-md transition-shadow">
+                <div class="w-12 h-12 rounded-xl bg-red-50 flex items-center justify-center mb-6 text-red-800 font-bold text-lg">
+                    03
+                </div>
+                <h3 class="font-vintage text-xl font-bold text-stone-800 mb-2">Sayuti Melik</h3>
+                <p class="text-sm font-semibold text-red-800 mb-4">Pengetik Naskah</p>
+                <p class="text-stone-600 text-sm leading-relaxed">
+                    Mengubah beberapa kata hasil tulisan tangan Bung Karno menjadi lebih formal (seperti 'tempoh' menjadi 'tempo') saat mengetik naskah proklamasi.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="naskah" class="bg-stone-900 text-stone-100 py-20 px-6">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="font-vintage text-3xl font-bold text-red-400 mb-2">Naskah Otentik Proklamasi</h2>
+                <div class="h-1 w-20 bg-red-500 mx-auto rounded"></div>
+            </div>
+            
+            <div class="bg-stone-800 border border-stone-700 p-8 md:p-12 rounded-2xl shadow-inner max-w-2xl mx-auto text-center">
+                <p class="font-vintage text-2xl font-bold tracking-widest text-red-400 mb-8 border-b border-stone-700 pb-4">P R O K L A M A S I</p>
+                <p class="text-base md:text-lg leading-loose font-medium text-stone-200 italic mb-8">
+                    Kami bangsa Indonesia dengan ini menjatakan Kemerdekaan Indonesia.<br>
+                    Hal-hal jang mengenai pemindahan kekuasaan d.l.l., diselenggarakan dengan tjara seksama dan dalam tempo jang sesingkat-singkatnja.
+                </p>
+                <div class="text-sm text-stone-400 text-right space-y-1 border-t border-stone-700 pt-4 font-light">
+                    <p>Djakarta, hari 17 bulan 8 tahun 05</p>
+                    <p class="pt-4 font-semibold text-stone-200 text-base">Atas nama bangsa Indonesia</p>
+                    <p class="font-vintage tracking-wider text-red-400 font-bold pt-1">Soekarno / Hatta.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-stone-950 text-stone-500 py-8 px-6 text-center text-xs tracking-wider border-t border-stone-900">
+        <p>&copy; 2026 Tugas Pengayaan Sejarah - Dirgahayu Republik Indonesia.</p>
+    </footer>
 
 </body>
 </html>
