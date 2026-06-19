@@ -1,401 +1,460 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pengayaan Sejarah · Jepang & Proklamasi</title>
-    <!-- Font & gaya modern -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
-    <!-- Font Awesome untuk ikon -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pengayaan Sejarah - Proklamasi Kemerdekaan</title>
+    <!-- Font & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
         body {
-            font-family: 'Inter', sans-serif;
-            background: #f5f2eb;
-            background-image: radial-gradient(circle at 10% 20%, rgba(255, 215, 175, 0.2) 0%, transparent 50%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem 1rem;
-        }
-        .card {
-            max-width: 1100px;
-            width: 100%;
-            background: rgba(255, 250, 240, 0.85);
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
-            border-radius: 48px 48px 40px 40px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 8px 20px rgba(0,0,0,0.05);
-            padding: 2.5rem 2.8rem;
-            border: 1px solid rgba(255, 235, 200, 0.5);
-            transition: all 0.2s ease;
-        }
-        @media (max-width: 700px) {
-            .card { padding: 1.8rem 1.2rem; border-radius: 32px; }
+            font-family: 'Poppins', sans-serif;
+            background: #f4f1ea;
+            color: #1e2b3c;
+            scroll-behavior: smooth;
         }
 
-        /* header */
-        .header-title {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            flex-wrap: wrap;
+        /* Header / Hero */
+        .hero {
+            background: linear-gradient(135deg, #1e2b3c 0%, #2c3e50 100%);
+            color: white;
+            padding: 3rem 1.5rem 2rem;
+            text-align: center;
+            border-bottom: 6px solid #c0392b;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .hero h1 i {
+            color: #f1c40f;
+            margin-right: 10px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            font-weight: 300;
+            margin-top: 10px;
+            opacity: 0.9;
+        }
+
+        .hero .badge {
+            display: inline-block;
+            margin-top: 15px;
+            background: #c0392b;
+            padding: 8px 24px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 4rem;
+        }
+
+        /* Bagian informasi tugas */
+        .info-tugas {
+            background: white;
+            border-radius: 20px;
+            padding: 1.8rem 2rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            margin-bottom: 2.5rem;
+            border-left: 8px solid #c0392b;
+        }
+
+        .info-tugas h2 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #1e2b3c;
             margin-bottom: 0.5rem;
         }
-        .header-title h1 {
-            font-size: 2.4rem;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            background: linear-gradient(145deg, #8b3a1f, #4f2b1a);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            line-height: 1.2;
-        }
-        .header-title i {
-            font-size: 2.2rem;
-            color: #b45f3b;
-            background: #f0e3d4;
-            padding: 10px 14px;
-            border-radius: 60px;
-            box-shadow: inset 0 -2px 0 #d6b89c;
-        }
-        .subhead {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2.5rem;
-            border-bottom: 2px dashed #dccbbc;
-            padding-bottom: 1rem;
-        }
-        .subhead p {
-            font-weight: 500;
-            color: #422b1d;
-            background: #ede3d6;
-            padding: 0.4rem 1.2rem;
-            border-radius: 40px;
-            font-size: 0.9rem;
-            letter-spacing: 0.3px;
-        }
-        .subhead .deadline {
-            background: #2b1c12;
-            color: #f7efe6;
-            padding: 0.4rem 1.4rem;
-            border-radius: 60px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .deadline i {
-            font-size: 0.9rem;
-            color: #f7c9a2;
-        }
-        .grid-dua {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin: 2.5rem 0 2rem;
-        }
-        @media (max-width: 750px) {
-            .grid-dua { grid-template-columns: 1fr; gap: 1.5rem; }
+
+        .info-tugas h2 i {
+            color: #c0392b;
+            margin-right: 12px;
         }
 
-        .box {
-            background: #fcf7f1;
-            border-radius: 32px;
-            padding: 1.8rem 1.5rem 2rem;
-            box-shadow: 0 10px 20px -8px rgba(80, 50, 30, 0.10);
-            border: 1px solid #efe2d2;
-            transition: 0.2s;
-        }
-        .box:hover {
-            border-color: #ccb097;
-            box-shadow: 0 16px 30px -10px rgba(110, 70, 40, 0.15);
-        }
-        .box h2 {
-            font-size: 1.7rem;
-            font-weight: 600;
+        .info-grid {
             display: flex;
-            align-items: center;
-            gap: 12px;
-            color: #371f13;
-            margin-bottom: 1.5rem;
-            letter-spacing: -0.3px;
-            border-bottom: 3px solid #dabb9f;
-            padding-bottom: 0.6rem;
+            flex-wrap: wrap;
+            gap: 1rem 2.5rem;
+            margin-top: 1rem;
         }
-        .box h2 i {
-            color: #945f3e;
-            font-size: 1.8rem;
-            width: 2rem;
+
+        .info-grid span {
+            font-weight: 400;
+            background: #f0ede8;
+            padding: 6px 18px;
+            border-radius: 40px;
+            font-size: 0.95rem;
         }
-        .list-opsi {
-            list-style: none;
+
+        .info-grid i {
+            margin-right: 8px;
+            color: #c0392b;
         }
-        .list-opsi li {
-            display: flex;
-            align-items: flex-start;
-            gap: 14px;
-            margin-bottom: 1.2rem;
-            font-size: 1rem;
-            color: #332116;
-        }
-        .list-opsi li i {
-            min-width: 24px;
-            color: #7b4f32;
-            font-size: 1.2rem;
-            margin-top: 2px;
-        }
-        .list-opsi li strong {
+
+        .deadline {
+            background: #fef9e7;
+            padding: 10px 20px;
+            border-radius: 12px;
+            margin-top: 12px;
             font-weight: 600;
-            color: #4f2c18;
-        }
-        .tag {
-            background: #e6d6c4;
-            padding: 0.2rem 0.9rem;
-            border-radius: 30px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: #392318;
-            letter-spacing: 0.3px;
+            border: 1px dashed #c0392b;
             display: inline-block;
         }
 
-        .materi-wrap {
-            margin: 2.2rem 0 1.8rem;
-            background: #f5ebe0;
-            border-radius: 40px;
-            padding: 1.8rem 2rem;
-            border-left: 6px solid #b47d5c;
+        .deadline i {
+            color: #c0392b;
+            margin-right: 10px;
         }
-        .materi-wrap h3 {
+
+        /* Konten utama: pilihan materi */
+        .section-title {
+            font-size: 2rem;
             font-weight: 600;
-            font-size: 1.4rem;
-            color: #2d1b0f;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 0.8rem;
+            margin: 2.5rem 0 1.2rem;
+            border-bottom: 4px solid #c0392b;
+            padding-bottom: 8px;
+            display: inline-block;
         }
-        .materi-wrap h3 i {
-            color: #8f5d3b;
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 1.5rem 0 2.5rem;
         }
-        .chip-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem 2rem;
-            margin-top: 0.3rem;
-        }
-        .chip {
+
+        .card {
             background: white;
-            padding: 0.5rem 1.8rem;
-            border-radius: 60px;
-            font-weight: 500;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
-            border: 1px solid #dccbbc;
-            color: #3a2417;
+            border-radius: 24px;
+            padding: 2rem 1.8rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border: 1px solid #eae5dd;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 18px 35px rgba(0,0,0,0.08);
+        }
+
+        .card i {
+            font-size: 2.8rem;
+            color: #c0392b;
+            margin-bottom: 12px;
+        }
+
+        .card h3 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #3d4e5f;
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        .card ul {
+            list-style: none;
+            margin-top: 16px;
+        }
+
+        .card ul li {
+            padding: 6px 0;
+            border-bottom: 1px solid #f0ede8;
             font-size: 0.95rem;
         }
-        .chip i {
-            margin-right: 8px;
-            color: #9b6d4b;
-        }
-        .chip.active {
-            background: #3f271b;
-            border-color: #3f271b;
-            color: white;
-        }
-        .chip.active i { color: #eaceb8; }
 
-        .catatan-hari {
-            background: #f0e5d9;
-            border-radius: 30px;
-            padding: 1.2rem 1.8rem;
+        .card ul li i {
+            font-size: 1rem;
+            margin-right: 12px;
+            color: #f1c40f;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 20px;
+            background: #1e2b3c;
+            color: white;
+            padding: 10px 28px;
+            border-radius: 60px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #c0392b;
+        }
+
+        .btn i {
+            margin-right: 8px;
+        }
+
+        /* Preview web (simulasi) */
+        .preview-box {
+            background: white;
+            border-radius: 24px;
+            padding: 2rem;
+            margin: 2.5rem 0;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+            border: 1px solid #eae5dd;
+        }
+
+        .preview-box h3 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .preview-box h3 i {
+            color: #c0392b;
+            margin-right: 12px;
+        }
+
+        .preview-box .sub {
+            color: #5d6f80;
+            margin-bottom: 20px;
+        }
+
+        .mock-web {
+            background: #f8f6f2;
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 1px solid #ddd8cf;
+        }
+
+        .mock-web .mock-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #c0392b;
+            padding-bottom: 12px;
+            margin-bottom: 18px;
+        }
+
+        .mock-web .mock-header h4 {
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .mock-web .mock-header span {
+            background: #c0392b;
+            color: white;
+            padding: 4px 16px;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .mock-content {
             display: flex;
             flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            margin-top: 2.2rem;
-            border: 1px solid #dfcdbb;
+            gap: 20px;
         }
-        .catatan-hari .kiri {
-            display: flex;
-            align-items: center;
-            gap: 16px;
+
+        .mock-content .box {
+            background: white;
+            padding: 14px 20px;
+            border-radius: 12px;
+            flex: 1 1 120px;
+            border: 1px solid #e0dad2;
+            text-align: center;
         }
-        .catatan-hari i {
-            font-size: 1.8rem;
-            color: #7a4d2b;
+
+        .mock-content .box i {
+            font-size: 2rem;
+            color: #c0392b;
+            display: block;
+            margin-bottom: 6px;
         }
-        .catatan-hari .kanan {
-            background: #1f140e;
-            color: #f3e2d2;
-            padding: 0.4rem 1.6rem;
-            border-radius: 60px;
-            font-weight: 600;
-            font-size: 0.9rem;
+
+        .mock-content .box small {
+            display: block;
+            color: #4a5a6b;
+            font-weight: 300;
         }
 
         .footer-note {
-            margin-top: 2rem;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            gap: 1rem;
-            font-size: 0.9rem;
-            color: #5f4432;
-            background: #eee3d6;
-            padding: 1rem 1.6rem;
-            border-radius: 40px;
-            align-items: center;
+            margin-top: 3rem;
+            background: #eae5dd;
+            border-radius: 20px;
+            padding: 1.8rem 2rem;
+            text-align: center;
+            color: #1e2b3c;
         }
+
         .footer-note i {
-            margin-right: 6px;
-            color: #8f623f;
-        }
-        .btn-drive {
-            background: #1f2a36;
-            color: white;
-            padding: 0.4rem 1.4rem;
-            border-radius: 40px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: 0.15s;
-            border: 1px solid #2f4050;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .btn-drive i {
-            color: #bdd1e3;
-        }
-        .btn-drive:hover {
-            background: #2d3d4d;
-            border-color: #62748b;
+            color: #c0392b;
+            margin: 0 6px;
         }
 
-        .highlight {
-            background: #e4d1bd;
-            padding: 0.1rem 0.6rem;
-            border-radius: 30px;
-            font-weight: 500;
-        }
+        /* Responsive */
+        @media (max-width: 700px) {
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
 
-        /* tambahan kecil */
-        .text-muted {
-            opacity: 0.7;
-            font-size: 0.85rem;
-        }
-        @media (max-width: 480px) {
-            .header-title h1 { font-size: 1.8rem; }
-        }
+            .hero h1 {
+                font-size: 2rem;
+            }
 
-        .inline-icon {
-            margin-right: 4px;
+            .info-grid {
+                flex-direction: column;
+                gap: 6px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="card">
 
-        <!-- ASSALAMUALAIKUM + JUDUL -->
-        <div class="header-title">
-            <i class="fas fa-scroll"></i>
-            <h1>Pengayaan Sejarah</h1>
+<!-- HERO -->
+<header class="hero">
+    <h1><i class="fas fa-landmark"></i> Pengayaan Sejarah</h1>
+    <p>Proklamasi Kemerdekaan Indonesia · 17 Agustus 1945</p>
+    <div class="badge"><i class="fas fa-globe"></i> Karya Online — Web</div>
+</header>
+
+<div class="container">
+
+    <!-- INFO TUGAS -->
+    <div class="info-tugas">
+        <h2><i class="fas fa-clipboard-list"></i> Informasi Tugas</h2>
+        <div class="info-grid">
+            <span><i class="fas fa-calendar-alt"></i> Deadline: Sabtu, 20 Juni 2026 · 15.00</span>
+            <span><i class="fas fa-user-graduate"></i> Tidak wajib · Pengayaan</span>
+            <span><i class="fas fa-video"></i> Fisik: foto / unjuk langsung Senin</span>
+            <span><i class="fas fa-folder-open"></i> Folder Drive (nama individu)</span>
         </div>
-        <div class="subhead">
-            <p><i class="fas fa-flag" style="margin-right: 8px; color:#8f5d3b;"></i> Merdeka! · Pendudukan Jepang & Proklamasi</p>
-            <span class="deadline"><i class="fas fa-calendar-check"></i> Sabtu, 20 Juni 2026 · 15.00</span>
-        </div>
-
-        <!-- GRID FISIK vs ONLINE -->
-        <div class="grid-dua">
-            <!-- KOLOM FISIK -->
-            <div class="box">
-                <h2><i class="fas fa-pen-fancy"></i> Fisik</h2>
-                <ul class="list-opsi">
-                    <li><i class="fas fa-file-alt"></i> <div><strong>Tulisan</strong> — esai, makalah, atau cerita sejarah</div></li>
-                    <li><i class="fas fa-video"></i> <div><strong>Video</strong> — presentasi, dokumenter pendek, atau vlog</div></li>
-                    <li><i class="fas fa-file-powerpoint"></i> <div><strong>PPT</strong> — slide interaktif (bisa dicetak atau ditayangkan)</div></li>
-                    <li><i class="fas fa-palette"></i> <div><strong>Penunjang lain</strong> — poster, komik sejarah, diorama, dll.</div></li>
-                </ul>
-                <div style="margin-top: 1.2rem; background: #e7d8c7; border-radius: 60px; padding: 0.3rem 1.2rem; display: inline-block;">
-                    <i class="fas fa-camera" style="margin-right: 8px;"></i> Foto hasil & tunjukkan Senin
-                </div>
-                <p style="margin-top: 1rem; font-size: 0.9rem; color: #4f3624;"><i class="fas fa-info-circle" style="color: #7a4d2b;"></i> Jika fisik, foto hasilnya dan hari Senin tunjukkan langsung.</p>
-            </div>
-
-            <!-- KOLOM ONLINE -->
-            <div class="box">
-                <h2><i class="fas fa-globe-asia"></i> Online</h2>
-                <ul class="list-opsi">
-                    <li><i class="fas fa-code"></i> <div><strong>Web / HTML</strong> — halaman interaktif seperti ini</div></li>
-                    <li><i class="fas fa-question-circle"></i> <div><strong>Quiz</strong> — kuis interaktif (Google Form, Kahoot, dll.)</div></li>
-                    <li><i class="fas fa-share-alt"></i> <div><strong>Link medsos</strong> — unggahan IG, TikTok, atau Twitter/X</div></li>
-                    <li><i class="fas fa-arrow-right"></i> <div><strong>Penunjang lain</strong> — infografis digital, podcast, dll.</div></li>
-                </ul>
-                <div style="margin-top: 1.2rem; background: #e7d8c7; border-radius: 60px; padding: 0.3rem 1.2rem; display: inline-block;">
-                    <i class="fas fa-link" style="margin-right: 8px;"></i> Karya online · tautan atau embed
-                </div>
-                <p style="margin-top: 1rem; font-size: 0.9rem; color: #4f3624;"><i class="fas fa-info-circle" style="color: #7a4d2b;"></i> Pastikan link dapat diakses oleh PJ & guru.</p>
-            </div>
-        </div>
-
-        <!-- MATERI : JEPANG / PROKLAMASI -->
-        <div class="materi-wrap">
-            <h3><i class="fas fa-landmark"></i> Pilih Materi</h3>
-            <div class="chip-group">
-                <span class="chip active"><i class="fas fa-flag"></i> Pendudukan Jepang</span>
-                <span class="chip"><i class="fas fa-star"></i> Proklamasi Kemerdekaan</span>
-                <span class="chip"><i class="fas fa-arrows-left-right"></i> Bisa pilih salah satu</span>
-            </div>
-            <p style="margin-top: 1rem; font-size: 0.95rem; color: #39281b;"><i class="fas fa-check-circle" style="color: #7b583b;"></i> Kembangkan karya berdasarkan tema yang kamu pilih. Kreatif dan mendalam!</p>
-        </div>
-
-        <!-- KETENTUAN PENTING -->
-        <div class="catatan-hari">
-            <div class="kiri">
-                <i class="fas fa-bullhorn"></i>
-                <div>
-                    <strong style="color: #2b1a0d;">Bersifat tidak wajib</strong>
-                    <span style="display: block; font-size: 0.9rem; color: #4b3222;">Pengayaan sukarela · nilai tambah</span>
-                </div>
-            </div>
-            <div class="kanan">
-                <i class="fas fa-upload" style="margin-right: 8px;"></i> Kumpul max Sabtu, 20 Juni 2026 · 15.00
-            </div>
-        </div>
-
-        <!-- FOLDER / DRIVE + PJ -->
-        <div class="footer-note">
-            <span><i class="fas fa-folder-open"></i> <strong>Folder/Drive kelas</strong> — PJ bantu membuat folder, di dalamnya diberi keterangan nama masing-masing individu.</span>
-            <a href="#" class="btn-drive" onclick="alert('PJ: buat folder utama, lalu subfolder nama siswa. Contoh: /Pengayaan_Sejarah/NamaSiswa/')">
-                <i class="fas fa-google-drive"></i> Bantuan PJ
-            </a>
-        </div>
-
-        <!-- PENGINGAT SINGKAT -->
-        <div style="display: flex; flex-wrap: wrap; gap: 0.8rem 1.8rem; margin-top: 1.8rem; border-top: 1px solid #ddcdbb; padding-top: 1.5rem; font-size: 0.9rem; color: #3f2d1d;">
-            <span><i class="fas fa-check-circle" style="color: #6b8f5c;"></i> Karya fisik → foto & tunjukkan hari Senin</span>
-            <span><i class="fas fa-check-circle" style="color: #6b8f5c;"></i> Karya online → link/akses langsung</span>
-            <span><i class="fas fa-check-circle" style="color: #6b8f5c;"></i> Folder Drive dengan nama setiap individu</span>
-        </div>
-
-        <!-- salam penutup -->
-        <div style="margin-top: 1.5rem; text-align: right; font-weight: 400; color: #5b3f2b; border-top: 1px solid #ebddd0; padding-top: 1rem;">
-            <i class="fas fa-hand-peace" style="margin-right: 6px; color: #ac7f5b;"></i> Selamat berkarya & semangat!
+        <div class="deadline">
+            <i class="fas fa-clock"></i> Karya fisik difoto &amp; ditunjukkan hari Senin
         </div>
     </div>
+
+    <!-- PILIHAN MATERI -->
+    <h2 class="section-title"><i class="fas fa-book-open"></i> Pilih Materi</h2>
+    <div class="card-grid">
+        <!-- Card 1: Pendudukan Jepang -->
+        <div class="card">
+            <i class="fas fa-flag"></i>
+            <h3>Pendudukan Jepang</h3>
+            <p>1942–1945 · Dampak sosial, politik, dan ekonomi. Propaganda, Romusha, dan persiapan kemerdekaan.</p>
+            <ul>
+                <li><i class="fas fa-check-circle"></i> Latar belakang kedatangan Jepang</li>
+                <li><i class="fas fa-check-circle"></i> Kebijakan &amp; perlawanan</li>
+                <li><i class="fas fa-check-circle"></i> BPUPKI &amp; PPKI</li>
+            </ul>
+            <a href="#" class="btn" onclick="alert('Materi Pendudukan Jepang — silakan eksplorasi lebih lanjut!')"><i class="fas fa-arrow-right"></i> Jelajahi</a>
+        </div>
+
+        <!-- Card 2: Proklamasi Kemerdekaan -->
+        <div class="card">
+            <i class="fas fa-star"></i>
+            <h3>Proklamasi Kemerdekaan</h3>
+            <p>17 Agustus 1945 · Perumusan naskah, detik-detik proklamasi, dan makna bagi bangsa Indonesia.</p>
+            <ul>
+                <li><i class="fas fa-check-circle"></i> Peristiwa Rengasdengklok</li>
+                <li><i class="fas fa-check-circle"></i> Naskah &amp; pembacaan teks</li>
+                <li><i class="fas fa-check-circle"></i> Sambutan &amp; pengakuan dunia</li>
+            </ul>
+            <a href="#" class="btn" onclick="alert('Materi Proklamasi — semangat kemerdekaan!')"><i class="fas fa-arrow-right"></i> Jelajahi</a>
+        </div>
+    </div>
+
+    <!-- PREVIEW WEB (Simulasi karya online) -->
+    <div class="preview-box">
+        <h3><i class="fas fa-desktop"></i> Pratinjau Karya Online</h3>
+        <p class="sub">Ini adalah tampilan web yang bisa kamu gunakan sebagai portofolio pengayaan sejarah.</p>
+        <div class="mock-web">
+            <div class="mock-header">
+                <h4><i class="fas fa-scroll" style="color:#c0392b;"></i> Sejarah Indonesia</h4>
+                <span>Proklamasi</span>
+            </div>
+            <div class="mock-content">
+                <div class="box">
+                    <i class="fas fa-calendar-day"></i>
+                    <strong>17 Agustus 1945</strong>
+                    <small>Hari Proklamasi</small>
+                </div>
+                <div class="box">
+                    <i class="fas fa-file-alt"></i>
+                    <strong>Teks Proklamasi</strong>
+                    <small>Naskah asli</small>
+                </div>
+                <div class="box">
+                    <i class="fas fa-users"></i>
+                    <strong>Tokoh</strong>
+                    <small>Soekarno-Hatta</small>
+                </div>
+                <div class="box">
+                    <i class="fas fa-flag"></i>
+                    <strong>Bendera Merah Putih</strong>
+                    <small>Jahitan Ibu Fatmawati</small>
+                </div>
+            </div>
+            <div style="margin-top: 20px; text-align: right; border-top: 1px solid #ddd8cf; padding-top: 14px;">
+                <span style="background: #1e2b3c; color: white; padding: 5px 18px; border-radius: 40px; font-size:0.8rem;">
+                    <i class="fas fa-link"></i> Karya Online · 2026
+                </span>
+            </div>
+        </div>
+        <p style="margin-top: 18px; font-style: italic; color: #3d4e5f;">
+            <i class="fas fa-quote-left" style="color:#c0392b;"></i> 
+            Web ini bisa dikembangkan dengan tambahan video, timeline, atau kuis interaktif.
+        </p>
+        <a href="#" class="btn" onclick="alert('Web siap dikembangkan! Tambahkan konten sesuai materi pilihanmu.')">
+            <i class="fas fa-edit"></i> Kembangkan Web
+        </a>
+    </div>
+
+    <!-- Panduan Pengumpulan -->
+    <div style="background: #fff8f0; border-radius: 20px; padding: 1.8rem 2rem; border: 1px solid #e3dcd2; margin-top: 1.5rem;">
+        <h4 style="display: flex; align-items: center; gap: 10px; font-size: 1.4rem;">
+            <i class="fas fa-upload" style="color:#c0392b;"></i> Cara Pengumpulan
+        </h4>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.8rem 2rem; margin-top: 10px;">
+            <span><i class="fas fa-check-circle" style="color:#27ae60;"></i> Buat folder di Drive (kelas → nama individu)</span>
+            <span><i class="fas fa-check-circle" style="color:#27ae60;"></i> Jika fisik: foto + tunjukkan langsung Senin</span>
+            <span><i class="fas fa-check-circle" style="color:#27ae60;"></i> Deadline Sabtu, 20 Juni 2026 jam 15.00</span>
+        </div>
+        <div style="margin-top: 14px; background: #1e2b3c; color: white; padding: 12px 20px; border-radius: 60px; display: inline-block;">
+            <i class="fas fa-folder"></i> PJ dimohon membuat folder utama
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer-note">
+        <i class="fas fa-graduation-cap"></i> Pengayaan Sejarah · SMA/MA · 
+        <i class="fas fa-calendar-alt"></i> 2026 · 
+        <i class="fas fa-mobile-alt"></i> Karya online / fisik bebas pilih
+    </div>
+
+</div>
+
+<!-- (opsional) sedikit interaksi -->
+<script>
+    // Tidak ada fungsi khusus, hanya alert pada tombol.
+    console.log('Web pengayaan sejarah siap digunakan!');
+</script>
+
 </body>
 </html>
