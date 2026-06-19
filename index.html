@@ -6,247 +6,416 @@
     <title>Arsip Digital: Proklamasi Kemerdekaan Indonesia</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght=600;700;800&family=Plus+Jakarta+Sans:wght=300;400;500;600;700&family=Playfair+Display:ital,wght=0,600;1,400&display=swap');
-        
-        .font-vintage { font-family: 'Cinzel', serif; }
-        .font-sans-custom { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .font-serif-custom { font-family: 'Playfair Display', serif; }
-        
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,400;1,500&display=swap');
+
+        .font-vintage {
+            font-family: 'Cinzel', serif;
+        }
+        .font-sans-custom {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .font-serif-custom {
+            font-family: 'Playfair Display', serif;
+        }
+
         body {
             background-color: #fcfbf7;
             color: #1c1917;
         }
-        
+
         .hero-bg {
-            background: linear-gradient(rgba(28, 25, 23, 0.45), rgba(28, 25, 23, 0.9)), url('https://images.unsplash.com/photo-1599707367072-cd6ada2bc375?q=80&w=2000&auto=format&fit=crop');
+            background: linear-gradient(rgba(28, 25, 23, 0.4), rgba(28, 25, 23, 0.85)), url('https://images.unsplash.com/photo-1599707367072-cd6ada2bc375?q=80&w=2000&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
         }
-        
+
         .paper-texture {
             background-color: #f7f4eb;
             background-image: radial-gradient(#d6d3d1 0.5px, transparent 0.5px), radial-gradient(#d6d3d1 0.5px, #f7f4eb 0.5px);
             background-size: 20px 20px;
             background-position: 0 0, 10px 10px;
         }
+
+        .timeline-dot {
+            box-shadow: 0 0 0 4px #fcfbf7, 0 0 0 6px #991b1b;
+        }
+        .timeline-dot:hover {
+            box-shadow: 0 0 0 4px #fcfbf7, 0 0 0 8px #b91c1c;
+            transition: box-shadow 0.3s ease;
+        }
+        .glow-red {
+            text-shadow: 0 0 40px rgba(220, 38, 38, 0.3);
+        }
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .card-hover:hover {
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.25);
+            border-color: #991b1b;
+        }
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background-color: #991b1b;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .quote-mark {
+            font-size: 4rem;
+            line-height: 0;
+            opacity: 0.15;
+            font-family: 'Playfair Display', serif;
+        }
+        .bg-gradient-red {
+            background: linear-gradient(135deg, #7f1d1d 0%, #991b1b 50%, #7f1d1d 100%);
+        }
     </style>
 </head>
 <body class="font-sans-custom antialiased selection:bg-red-800 selection:text-white">
 
     <!-- Navbar -->
-    <nav class="sticky top-0 z-50 bg-[#fcfbf7]/90 backdrop-blur-md border-b border-stone-200 px-6 py-4">
-        <div class="max-w-6xl mx-auto flex justify-between items-center">
-            <a href="#" class="font-vintage text-lg md:text-xl font-extrabold tracking-wider text-red-800">MEMORANDUM 1945</a>
+    <nav class="sticky top-0 z-50 bg-[#fcfbf7]/95 backdrop-blur-md border-b border-stone-200/70 px-6 py-3 transition-shadow duration-300 shadow-sm">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="#" class="font-vintage text-xl md:text-2xl font-extrabold tracking-wider text-red-800 flex items-center gap-2">
+                <span class="text-2xl">🇮🇩</span> MEMORANDUM 1945
+            </a>
             <div class="hidden md:flex space-x-8 text-sm font-semibold text-stone-600">
-                <a href="#peristiwa" class="hover:text-red-800 transition-colors">Kronologi</a>
-                <a href="#tokoh" class="hover:text-red-800 transition-colors">Tokoh Utama</a>
-                <a href="#naskah" class="hover:text-red-800 transition-colors">Teks Otentik</a>
-                <a href="#makna" class="hover:text-red-800 transition-colors">Makna</a>
+                <a href="#peristiwa" class="nav-link hover:text-red-800 transition-colors">Kronologi</a>
+                <a href="#tokoh" class="nav-link hover:text-red-800 transition-colors">Tokoh Utama</a>
+                <a href="#naskah" class="nav-link hover:text-red-800 transition-colors">Teks Otentik</a>
+                <a href="#makna" class="nav-link hover:text-red-800 transition-colors">Makna</a>
+                <a href="#refleksi" class="nav-link hover:text-red-800 transition-colors">Refleksi</a>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <header class="hero-bg text-white py-36 px-6 relative text-center">
-        <div class="max-w-4xl mx-auto relative z-10">
-            <span class="inline-block px-4 py-1 bg-red-700/60 border border-red-500/40 rounded-full text-xs font-bold tracking-widest uppercase mb-6 text-red-200">
-                Eksplorasi Sejarah &bull; Media Pembelajaran
+    <header class="hero-bg text-white py-40 px-6 relative text-center">
+        <div class="max-w-5xl mx-auto relative z-10">
+            <span class="inline-block px-5 py-1.5 bg-red-700/60 border border-red-500/40 rounded-full text-xs font-bold tracking-widest uppercase mb-6 text-red-100 backdrop-blur-sm">
+                Eksplorasi Sejarah &bull; Media Pembelajaran Interaktif
             </span>
-            <h1 class="font-vintage text-4xl md:text-7xl font-extrabold tracking-tight mb-6 leading-tight">
+            <h1 class="font-vintage text-5xl md:text-8xl font-extrabold tracking-tight mb-6 leading-[1.1] glow-red">
                 Fajar Kemerdekaan<br><span class="text-red-500">Indonesia</span>
             </h1>
             <p class="text-lg md:text-2xl text-stone-300 max-w-3xl mx-auto leading-relaxed font-light font-serif-custom italic">
                 "Kami bangsa Indonesia dengan ini menjatakan Kemerdekaan Indonesia..."
             </p>
-            <div class="mt-10">
-                <a href="#peristiwa" class="bg-red-800 hover:bg-red-700 text-white px-8 py-3.5 rounded-full text-sm font-bold tracking-wide shadow-lg transition-all inline-block">
+            <div class="mt-12 flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#peristiwa" class="bg-red-800 hover:bg-red-700 text-white px-10 py-4 rounded-full text-sm font-bold tracking-wide shadow-xl transition-all duration-300 hover:shadow-red-900/30 hover:scale-105 inline-block border border-red-700">
                     Mulai Telusuri Sejarah
                 </a>
+                <a href="#naskah" class="bg-transparent hover:bg-white/10 text-white px-10 py-4 rounded-full text-sm font-bold tracking-wide transition-all duration-300 border border-white/40 hover:border-white inline-block">
+                    Baca Naskah Asli
+                </a>
+            </div>
+            <div class="mt-16 flex items-center justify-center gap-2 text-stone-400 text-xs uppercase tracking-widest">
+                <span class="w-8 h-px bg-stone-600"></span>
+                Detik-Detik Bersejarah
+                <span class="w-8 h-px bg-stone-600"></span>
             </div>
         </div>
     </header>
 
-    <!-- Section 1: Kronologi Peristiwa -->
-    <section id="peristiwa" class="py-24 px-6 max-w-5xl mx-auto">
-        <div class="text-center mb-16">
-            <span class="text-red-800 font-bold text-xs uppercase tracking-widest">Garis Waktu</span>
-            <h2 class="font-vintage text-3xl md:text-4xl font-bold text-stone-900 mt-2">Kronologi Detik-Detik Proklamasi</h2>
-            <div class="h-1 w-16 bg-red-800 mx-auto mt-4 rounded"></div>
+    <!-- Section 1: Kronologi Peristiwa (Diperkaya) -->
+    <section id="peristiwa" class="py-28 px-6 max-w-6xl mx-auto">
+        <div class="text-center mb-20">
+            <span class="text-red-800 font-bold text-xs uppercase tracking-widest bg-red-50 px-4 py-1.5 rounded-full">Garis Waktu</span>
+            <h2 class="font-vintage text-4xl md:text-5xl font-bold text-stone-900 mt-4">Kronologi Detik-Detik Proklamasi</h2>
+            <div class="h-1 w-20 bg-red-800 mx-auto mt-5 rounded"></div>
+            <p class="text-stone-500 max-w-2xl mx-auto mt-4 text-sm">Perjalanan panjang menuju puncak kemerdekaan, dari kekalahan Jepang hingga pembacaan teks sakral.</p>
         </div>
 
-        <div class="relative border-l-2 border-stone-200 ml-4 md:ml-32 space-y-12">
+        <div class="relative border-l-4 border-red-800/30 ml-4 md:ml-36 space-y-16">
             <!-- Event 1 -->
-            <div class="relative pl-8">
-                <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-red-800 border-4 border-white"></div>
-                <span class="absolute left-4 md:-left-32 top-1 text-sm font-bold text-red-800 bg-red-50 px-2 py-0.5 rounded md:bg-transparent md:p-0">6 & 9 Agustus 1945</span>
-                <h3 class="text-xl font-bold text-stone-800 mb-2 pt-6 md:pt-0">Pengeboman Hiroshima & Nagasaki</h3>
-                <p class="text-stone-600 text-sm leading-relaxed">
-                    Kota Hiroshima dan Nagasaki dijatuhi bom atom oleh Sekutu. Kejadian ini melumpuhkan kekuatan militer Kekaisaran Jepang di Asia Tenggara dan memaksa mereka menyerah tanpa syarat.
+            <div class="relative pl-10 group">
+                <div class="absolute -left-[13px] top-1.5 w-6 h-6 rounded-full bg-red-800 border-4 border-white timeline-dot"></div>
+                <span class="absolute left-6 md:-left-44 top-0 text-sm font-bold text-red-800 bg-red-50/80 px-3 py-1 rounded-lg md:bg-transparent md:p-0 backdrop-blur-sm">6 & 9 Agustus 1945</span>
+                <h3 class="text-2xl font-bold text-stone-800 mb-3 pt-10 md:pt-0 group-hover:text-red-800 transition-colors">Pengeboman Hiroshima & Nagasaki</h3>
+                <p class="text-stone-600 text-base leading-relaxed max-w-2xl">
+                    Kota Hiroshima dan Nagasaki dijatuhi bom atom oleh Sekutu. Kejadian ini melumpuhkan kekuatan militer Kekaisaran Jepang di Asia Tenggara dan memaksa mereka menyerah tanpa syarat kepada Sekutu pada 15 Agustus 1945. Kekosongan kekuasaan ini menjadi celah emas bagi bangsa Indonesia untuk segera memproklamasikan kemerdekaan.
                 </p>
             </div>
 
             <!-- Event 2 -->
-            <div class="relative pl-8">
-                <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-red-800 border-4 border-white"></div>
-                <span class="absolute left-4 md:-left-32 top-1 text-sm font-bold text-red-800 bg-red-50 px-2 py-0.5 rounded md:bg-transparent md:p-0">16 Agustus 1945</span>
-                <h3 class="text-xl font-bold text-stone-800 mb-2 pt-6 md:pt-0">Peristiwa Rengasdengklok</h3>
-                <p class="text-stone-600 text-sm leading-relaxed">
-                    Para pemuda (Golongan Muda) membawa Soekarno dan Hatta ke Rengasdengklok demi mengamankan mereka dari intervensi Jepang, sekaligus mendesak agar proklamasi segera dilaksanakan tanpa menunggu janji BPUPKI/PPKI.
+            <div class="relative pl-10 group">
+                <div class="absolute -left-[13px] top-1.5 w-6 h-6 rounded-full bg-red-800 border-4 border-white timeline-dot"></div>
+                <span class="absolute left-6 md:-left-44 top-0 text-sm font-bold text-red-800 bg-red-50/80 px-3 py-1 rounded-lg md:bg-transparent md:p-0 backdrop-blur-sm">16 Agustus 1945</span>
+                <h3 class="text-2xl font-bold text-stone-800 mb-3 pt-10 md:pt-0 group-hover:text-red-800 transition-colors">Peristiwa Rengasdengklok</h3>
+                <p class="text-stone-600 text-base leading-relaxed max-w-2xl">
+                    Para pemuda (Golongan Muda) membawa Soekarno dan Hatta ke Rengasdengklok, Karawang, demi mengamankan mereka dari intervensi Jepang yang berupaya menghalangi proklamasi. Mereka mendesak agar proklamasi segera dilaksanakan tanpa menunggu janji BPUPKI/PPKI. Peristiwa ini menjadi simbol ketegangan antara golongan muda dan tua yang berakhir dengan kesepakatan untuk segera memproklamasikan kemerdekaan.
                 </p>
             </div>
 
             <!-- Event 3 -->
-            <div class="relative pl-8">
-                <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-red-800 border-4 border-white"></div>
-                <span class="absolute left-4 md:-left-32 top-1 text-sm font-bold text-red-800 bg-red-50 px-2 py-0.5 rounded md:bg-transparent md:p-0">16-17 Agustus (Malam)</span>
-                <h3 class="text-xl font-bold text-stone-800 mb-2 pt-6 md:pt-0">Perumusan Teks di Rumah Laksamana Maeda</h3>
-                <p class="text-stone-600 text-sm leading-relaxed">
-                    Kembali dari Rengasdengklok, Soekarno, Hatta, dan Ahmad Soebardjo merumuskan konsep teks proklamasi di ruang makan Laksamana Tadashi Maeda, seorang perwira tinggi angkatan laut Jepang yang bersimpati pada Indonesia.
+            <div class="relative pl-10 group">
+                <div class="absolute -left-[13px] top-1.5 w-6 h-6 rounded-full bg-red-800 border-4 border-white timeline-dot"></div>
+                <span class="absolute left-6 md:-left-44 top-0 text-sm font-bold text-red-800 bg-red-50/80 px-3 py-1 rounded-lg md:bg-transparent md:p-0 backdrop-blur-sm">16-17 Agustus (Malam)</span>
+                <h3 class="text-2xl font-bold text-stone-800 mb-3 pt-10 md:pt-0 group-hover:text-red-800 transition-colors">Perumusan Teks di Rumah Laksamana Maeda</h3>
+                <p class="text-stone-600 text-base leading-relaxed max-w-2xl">
+                    Kembali dari Rengasdengklok, Soekarno, Hatta, dan Ahmad Soebardjo merumuskan konsep teks proklamasi di ruang makan Laksamana Tadashi Maeda, seorang perwira tinggi angkatan laut Jepang yang bersimpati pada Indonesia. Di tempat inilah, naskah proklamasi ditulis tangan oleh Soekarno dengan konsep yang disempurnakan oleh Hatta dan Soebardjo.
                 </p>
             </div>
 
             <!-- Event 4 -->
-            <div class="relative pl-8">
-                <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-red-800 border-4 border-white"></div>
-                <span class="absolute left-4 md:-left-32 top-1 text-sm font-bold text-red-800 bg-red-50 px-2 py-0.5 rounded md:bg-transparent md:p-0">17 Agustus 1945</span>
-                <h3 class="text-xl font-bold text-stone-800 mb-2 pt-6 md:pt-0">Pembacaan Proklamasi Kemerdekaan</h3>
-                <p class="text-stone-600 text-sm leading-relaxed">
-                    Tepat pukul 10.00 WIB, di halaman rumah Ir. Soekarno, Jalan Pegangsaan Timur No. 56, Jakarta, naskah proklamasi dibacakan secara khidmat, dilanjutkan dengan pengibaran bendera Sang Saka Merah Putih.
+            <div class="relative pl-10 group">
+                <div class="absolute -left-[13px] top-1.5 w-6 h-6 rounded-full bg-red-800 border-4 border-white timeline-dot"></div>
+                <span class="absolute left-6 md:-left-44 top-0 text-sm font-bold text-red-800 bg-red-50/80 px-3 py-1 rounded-lg md:bg-transparent md:p-0 backdrop-blur-sm">17 Agustus 1945</span>
+                <h3 class="text-2xl font-bold text-stone-800 mb-3 pt-10 md:pt-0 group-hover:text-red-800 transition-colors">Pembacaan Proklamasi Kemerdekaan</h3>
+                <p class="text-stone-600 text-base leading-relaxed max-w-2xl">
+                    Tepat pukul 10.00 WIB, di halaman rumah Ir. Soekarno di Jalan Pegangsaan Timur No. 56, Jakarta, naskah proklamasi dibacakan secara khidmat oleh Soekarno, didampingi oleh Mohammad Hatta. Suasana haru dan sakral menyelimuti seluruh hadirin, yang kemudian dilanjutkan dengan pengibaran bendera Sang Saka Merah Putih yang dijahit oleh Fatmawati. Inilah momen kelahiran bangsa Indonesia sebagai negara yang merdeka dan berdaulat.
                 </p>
             </div>
         </div>
     </section>
 
-    <!-- Section 2: Tokoh Bangsa -->
-    <section id="tokoh" class="bg-stone-100 py-24 px-6">
-        <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-16">
-                <span class="text-red-800 font-bold text-xs uppercase tracking-widest">Kolektif Sejarah</span>
-                <h2 class="font-vintage text-3xl md:text-4xl font-bold text-stone-900 mt-2">6 Tokoh Kunci Kemerdekaan</h2>
-                <div class="h-1 w-16 bg-red-800 mx-auto mt-4 rounded"></div>
+    <!-- Section 2: Tokoh Bangsa (Diperkaya) -->
+    <section id="tokoh" class="bg-gradient-to-b from-stone-100 to-stone-200/60 py-28 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20">
+                <span class="text-red-800 font-bold text-xs uppercase tracking-widest bg-white/70 px-4 py-1.5 rounded-full">Kolektif Sejarah</span>
+                <h2 class="font-vintage text-4xl md:text-5xl font-bold text-stone-900 mt-4">7 Tokoh Kunci Kemerdekaan</h2>
+                <div class="h-1 w-20 bg-red-800 mx-auto mt-5 rounded"></div>
+                <p class="text-stone-500 max-w-2xl mx-auto mt-4 text-sm">Mereka adalah para arsitek bangsa, yang dengan gagah berani dan penuh dedikasi mengukir sejarah.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 <!-- Card 1 -->
-                <div class="bg-white p-8 rounded-2xl border border-stone-200/80 shadow-sm hover:-translate-y-1 transition-all duration-300">
+                <div class="bg-white p-8 rounded-2xl border border-stone-200 shadow-sm card-hover">
+                    <div class="w-14 h-14 rounded-full bg-red-100 flex items-center justify-center mb-4 text-2xl">🇮🇩</div>
                     <h3 class="font-vintage text-lg font-bold text-stone-900 mb-1">Ir. Soekarno</h3>
-                    <p class="text-xs text-red-800 font-bold uppercase tracking-wider mb-4">Penyusun & Pembaca Teks</p>
+                    <p class="text-xs text-red-800 font-bold uppercase tracking-wider mb-3">Penyusun & Pembaca Teks</p>
                     <p class="text-stone-600 text-sm leading-relaxed">
-                        Menuliskan draf teks proklamasi secara langsung menggunakan tangan, lalu membacakannya di hadapan rakyat sebagai penanda lahirnya bangsa baru.
+                        Menuliskan draf teks proklamasi secara langsung menggunakan tangan, lalu membacakannya di hadapan rakyat sebagai penanda lahirnya bangsa baru. Beliau adalah Proklamator sekaligus Presiden pertama RI.
                     </p>
                 </div>
                 <!-- Card 2 -->
-                <div class="bg-white p-8 rounded-2xl border border-stone-200/80 shadow-sm hover:-translate-y-1 transition-all duration-300">
+                <div class="bg-white p-8 rounded-2xl border border-stone-200 shadow-sm card-hover">
+                    <div class="w-14 h-14 rounded-full bg-red-100 flex items-center justify-center mb-4 text-2xl">🤝</div>
                     <h3 class="font-vintage text-lg font-bold text-stone-900 mb-1">Drs. Mohammad Hatta</h3>
-                    <p class="text-xs text-red-800 font-bold uppercase tracking-wider mb-4">Konseptor & Pendamping</p>
+                    <p class="text-xs text-red-800 font-bold uppercase tracking-wider mb-3">Konseptor & Pendamping</p>
                     <p class="text-stone-600 text-sm leading-relaxed">
-                        Merumuskan kalimat kedua dalam naskah yang berbunyi tentang pemindahan kekuasaan, serta mendampingi Bung Karno saat proklamasi.
+                        Merumuskan kalimat kedua dalam naskah tentang pemindahan kekuasaan, serta mendampingi Bung Karno saat proklamasi. Beliau adalah Proklamator dan Wakil Presiden pertama RI.
                     </p>
                 </div>
                 <!-- Card 3 -->
-                <div class="bg-white p-8 rounded-2xl border border-stone-200/80 shadow-sm hover:-translate-y-1 transition-all duration-300">
+                <div class="bg-white p-8 rounded-2xl border border-stone-200 shadow-sm card-hover">
+                    <div class="w-14 h-14 rounded-full bg-red-100 flex items-center justify-center mb-4 text-2xl">✍️</div>
                     <h3 class="font-vintage text-lg font-bold text-stone-900 mb-1">Achmad Soebardjo</h3>
-                    <p class="text-xs text-red-800 font-bold uppercase tracking-wider mb-4">Penengah & Konseptor</p>
+                    <p class="text-xs text-red-800 font-bold uppercase tracking-wider mb-3">Penengah & Konseptor</p>
                     <p class="text-stone-600 text-sm leading-relaxed">
-                        Tokoh golongan tua yang berhasil menjamin para pemuda di Rengasdengklok, serta menyumbang ide kalimat pertama naskah proklamasi.
+                        Tokoh golongan tua yang berhasil menjamin para pemuda di Rengasdengklok, serta menyumbang ide kalimat pertama naskah proklamasi. Beliau adalah diplomat ulung.
                     </p>
                 </div>
                 <!-- Card 4 -->
-                <div class="bg-white p-8 rounded-2xl border border-stone-200/80 shadow-sm hover:-translate-y-1 transition-all duration-300">
+                <div class="bg-white p-8 rounded-2xl border border-stone-200 shadow-sm card-hover">
+                    <div class="w-14 h-14 rounded-full bg-red-100 flex items-center justify-center mb-4 text-2xl">⌨️</div>
                     <h3 class="font-vintage text-lg font-bold text-stone-900 mb-1">Sayuti Melik</h3>
-                    <p class="text-xs text-red-800 font-bold uppercase tracking-wider mb-4">Pengetik Teks Proklamasi</p>
+                    <p class="text-xs text-red-800 font-bold uppercase tracking-wider mb-3">Pengetik Teks Proklamasi</p>
                     <p class="text-stone-600 text-sm leading-relaxed">
-                        Mematangkan naskah mentah dengan mengetiknya menggunakan mesin tik, serta mengubah beberapa diksi agar terlihat lebih formal dan baku.
+                        Mematangkan naskah mentah dengan mengetiknya menggunakan mesin tik, serta mengubah beberapa diksi agar terlihat lebih formal dan baku. Jasanya sangat krusial.
                     </p>
                 </div>
                 <!-- Card 5 -->
-                <div class="bg-white p-8 rounded-2xl border border-stone-200/80 shadow-sm hover:-translate-y-1 transition-all duration-300">
+                <div class="bg-white p-8 rounded-2xl border border-stone-200 shadow-sm card-hover">
+                    <div class="w-14 h-14 rounded-full bg-red-100 flex items-center justify-center mb-4 text-2xl">🧵</div>
                     <h3 class="font-vintage text-lg font-bold text-stone-900 mb-1">Fatmawati</h3>
-                    <p class="text-xs text-red-800 font-bold uppercase tracking-wider mb-4">Penjahit Bendera Pusaka</p>
+                    <p class="text-xs text-red-800 font-bold uppercase tracking-wider mb-3">Penjahit Bendera Pusaka</p>
                     <p class="text-stone-600 text-sm leading-relaxed">
-                        Menjahit lembaran kain merah dan putih secara manual dengan tangan dalam kondisi fisik yang rapuh demi berkibarnya simbol kedaulatan negara.
+                        Menjahit lembaran kain merah dan putih secara manual dengan tangan dalam kondisi fisik yang rapuh demi berkibarnya simbol kedaulatan negara. Ibu negara pertama yang penuh perjuangan.
                     </p>
                 </div>
                 <!-- Card 6 -->
-                <div class="bg-white p-8 rounded-2xl border border-stone-200/80 shadow-sm hover:-translate-y-1 transition-all duration-300">
+                <div class="bg-white p-8 rounded-2xl border border-stone-200 shadow-sm card-hover">
+                    <div class="w-14 h-14 rounded-full bg-red-100 flex items-center justify-center mb-4 text-2xl">💡</div>
                     <h3 class="font-vintage text-lg font-bold text-stone-900 mb-1">Sukarni Kartodiwirjo</h3>
-                    <p class="text-xs text-red-800 font-bold uppercase tracking-wider mb-4">Inisiator Tanda Tangan</p>
+                    <p class="text-xs text-red-800 font-bold uppercase tracking-wider mb-3">Inisiator Tanda Tangan</p>
                     <p class="text-stone-600 text-sm leading-relaxed">
-                        Tokoh pemuda yang mengusulkan agar teks proklamasi cukup ditandatangani oleh Soekarno dan Hatta atas nama seluruh bangsa Indonesia.
+                        Tokoh pemuda yang mengusulkan agar teks proklamasi cukup ditandatangani oleh Soekarno dan Hatta atas nama seluruh bangsa Indonesia. Usulnya disepakati bulat.
+                    </p>
+                </div>
+                <!-- Card 7 - Tokoh Tambahan -->
+                <div class="bg-white p-8 rounded-2xl border border-stone-200 shadow-sm card-hover">
+                    <div class="w-14 h-14 rounded-full bg-red-100 flex items-center justify-center mb-4 text-2xl">⚓</div>
+                    <h3 class="font-vintage text-lg font-bold text-stone-900 mb-1">Laksamana Tadashi Maeda</h3>
+                    <p class="text-xs text-red-800 font-bold uppercase tracking-wider mb-3">Penyedia Tempat Perumusan</p>
+                    <p class="text-stone-600 text-sm leading-relaxed">
+                        Perwira tinggi Angkatan Laut Jepang yang berani memberikan rumahnya sebagai tempat perumusan naskah proklamasi, meskipun berisiko besar. Simbol simpati dari pihak asing.
                     </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Section 3: Teks & Naskah -->
-    <section id="naskah" class="py-24 px-6 paper-texture border-y border-stone-200">
-        <div class="max-w-4xl mx-auto text-center">
-            <span class="text-red-800 font-bold text-xs uppercase tracking-widest">Dokumen Negara</span>
-            <h2 class="font-vintage text-3xl font-bold text-stone-900 mt-2 mb-12">Naskah Autentik Proklamasi</h2>
-            
-            <div class="bg-white border-2 border-stone-300/60 p-8 md:p-16 rounded-2xl shadow-xl max-w-2xl mx-auto text-center relative">
-                <div class="absolute inset-4 border border-stone-200 pointer-events-none rounded-xl"></div>
-                
-                <p class="font-vintage text-3xl font-extrabold tracking-widest text-red-800 mb-10 border-b-2 border-stone-200 pb-6">P R O K L A M A S I</p>
-                
-                <p class="text-lg md:text-xl leading-loose font-serif-custom tracking-wide text-stone-800 italic mb-10 px-4">
-                    Kami bangsa Indonesia dengan ini menjatakan Kemerdekaan Indonesia.<br><br>
-                    Hal-hal jang mengenai pemindahan kekuasaan d.l.l., diselenggarakan dengan tjara seksama dan dalam tempo jang sesingkat-singkatnja.
-                </p>
-                
-                <div class="text-sm text-stone-600 text-right space-y-1 border-t border-stone-200 pt-6 pr-4">
-                    <p class="font-serif-custom">Djakarta, hari 17 bulan 8 tahun '05</p>
-                    <p class="pt-6 font-bold text-stone-800 text-base">Atas nama bangsa Indonesia</p>
-                    <p class="font-vintage tracking-wider text-red-800 font-extrabold text-lg pt-2">Soekarno / Hatta.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Section 4: Makna Proklamasi -->
-    <section id="makna" class="bg-stone-900 text-stone-100 py-24 px-6">
+    <!-- Section 3: Teks & Naskah (Diperkaya) -->
+    <section id="naskah" class="py-28 px-6 paper-texture border-y border-stone-200">
         <div class="max-w-5xl mx-auto">
             <div class="text-center mb-16">
-                <span class="text-red-400 font-bold text-xs uppercase tracking-widest">Esensi Perjuangan</span>
-                <h2 class="font-vintage text-3xl font-bold text-white mt-2">Makna Besar Bagi Bangsa</h2>
-                <div class="h-1 w-16 bg-red-500 mx-auto mt-4 rounded"></div>
+                <span class="text-red-800 font-bold text-xs uppercase tracking-widest bg-white/70 px-4 py-1.5 rounded-full">Dokumen Negara</span>
+                <h2 class="font-vintage text-4xl font-bold text-stone-900 mt-4">Naskah Autentik Proklamasi</h2>
+                <div class="h-1 w-20 bg-red-800 mx-auto mt-5 rounded"></div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                <div class="space-y-4">
-                    <div class="text-red-400 text-2xl font-bold font-vintage">01. Aspek Hukum</div>
+            <div class="flex flex-col lg:flex-row gap-12 items-start">
+                <!-- Teks Naskah -->
+                <div class="bg-white border-2 border-stone-300/60 p-8 md:p-12 rounded-2xl shadow-2xl flex-1 relative">
+                    <div class="absolute inset-4 border border-stone-200 pointer-events-none rounded-xl"></div>
+                    <div class="relative z-10">
+                        <p class="font-vintage text-3xl font-extrabold tracking-widest text-red-800 mb-8 border-b-2 border-stone-200 pb-6 text-center">P R O K L A M A S I</p>
+                        <p class="text-lg md:text-xl leading-loose font-serif-custom tracking-wide text-stone-800 italic mb-10 px-2">
+                            Kami bangsa Indonesia dengan ini menjatakan Kemerdekaan Indonesia.<br><br>
+                            Hal-hal jang mengenai pemindahan kekuasaan d.l.l., diselenggarakan dengan tjara seksama dan dalam tempo jang sesingkat-singkatnja.
+                        </p>
+                        <div class="text-sm text-stone-600 text-right space-y-1 border-t border-stone-200 pt-6 pr-2">
+                            <p class="font-serif-custom">Djakarta, hari 17 bulan 8 tahun '05</p>
+                            <p class="pt-6 font-bold text-stone-800 text-base">Atas nama bangsa Indonesia</p>
+                            <p class="font-vintage tracking-wider text-red-800 font-extrabold text-xl pt-2">Soekarno / Hatta.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fakta Menarik -->
+                <div class="lg:w-1/3 space-y-6">
+                    <div class="bg-stone-800 text-white p-8 rounded-2xl shadow-xl">
+                        <h4 class="font-vintage text-lg font-bold text-red-400 mb-4">⚡ Fakta Menarik</h4>
+                        <ul class="space-y-4 text-sm text-stone-300">
+                            <li class="flex gap-3">
+                                <span class="text-red-400 font-bold">1.</span>
+                                Naskah asli ditulis tangan oleh Soekarno di atas kertas dari blok note.
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-red-400 font-bold">2.</span>
+                                Kata "tempoh" diubah menjadi "tempo" oleh Sayuti Melik saat mengetik.
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-red-400 font-bold">3.</span>
+                                Teks proklamasi hanya terdiri dari dua paragraf dan 45 kata.
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-red-400 font-bold">4.</span>
+                                Naskah ini disimpan di Arsip Nasional Republik Indonesia.
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="bg-red-50 p-6 rounded-2xl border border-red-200">
+                        <p class="text-sm text-stone-700 italic font-serif-custom leading-relaxed">
+                            "Naskah ini adalah jiwa dari bangsa. Setiap goresan tinta adalah darah perjuangan."
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Makna Proklamasi (Diperkaya) -->
+    <section id="makna" class="bg-stone-900 text-stone-100 py-28 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-20">
+                <span class="text-red-400 font-bold text-xs uppercase tracking-widest bg-stone-800/50 px-4 py-1.5 rounded-full">Esensi Perjuangan</span>
+                <h2 class="font-vintage text-4xl md:text-5xl font-bold text-white mt-4">Makna Besar Bagi Bangsa</h2>
+                <div class="h-1 w-20 bg-red-500 mx-auto mt-5 rounded"></div>
+                <p class="text-stone-400 max-w-2xl mx-auto mt-4 text-sm">Proklamasi bukan hanya sekadar pernyataan, melainkan fondasi dari seluruh sendi kehidupan berbangsa dan bernegara.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-stone-800/50 p-8 rounded-2xl border border-stone-700 hover:border-red-700/50 transition-all duration-300">
+                    <div class="text-red-400 text-4xl font-bold font-vintage mb-3">01.</div>
+                    <h4 class="text-xl font-bold text-white mb-3">Aspek Hukum & Konstitusional</h4>
                     <p class="text-stone-300 text-sm leading-relaxed">
-                        Proklamasi merupakan pernyataan yang menghapus tatanan hukum kolonial (penjajahan) dan menggantinya seketika dengan tatanan hukum nasional Indonesia sendiri.
+                        Proklamasi merupakan pernyataan yang menghapus tatanan hukum kolonial (penjajahan) dan menggantinya seketika dengan tatanan hukum nasional Indonesia sendiri. Ini adalah fondasi bagi lahirnya UUD 1945 dan seluruh perangkat hukum negara.
                     </p>
                 </div>
-                <div class="space-y-4">
-                    <div class="text-red-400 text-2xl font-bold font-vintage">02. Aspek Politik</div>
+                <div class="bg-stone-800/50 p-8 rounded-2xl border border-stone-700 hover:border-red-700/50 transition-all duration-300">
+                    <div class="text-red-400 text-4xl font-bold font-vintage mb-3">02.</div>
+                    <h4 class="text-xl font-bold text-white mb-3">Aspek Politik & Kedaulatan</h4>
                     <p class="text-stone-300 text-sm leading-relaxed">
-                        Melalui proklamasi, Indonesia menyatakan diri sebagai negara yang berdaulat penuh, sejajar dengan bangsa-bangsa merdeka lain di dunia tanpa intervensi asing.
+                        Melalui proklamasi, Indonesia menyatakan diri sebagai negara yang berdaulat penuh, sejajar dengan bangsa-bangsa merdeka lain di dunia tanpa intervensi asing. Ini adalah titik tolak diplomasi dan hubungan internasional Indonesia.
                     </p>
                 </div>
-                <div class="space-y-4">
-                    <div class="text-red-400 text-2xl font-bold font-vintage">03. Puncak Perjuangan</div>
+                <div class="bg-stone-800/50 p-8 rounded-2xl border border-stone-700 hover:border-red-700/50 transition-all duration-300">
+                    <div class="text-red-400 text-4xl font-bold font-vintage mb-3">03.</div>
+                    <h4 class="text-xl font-bold text-white mb-3">Puncak Perjuangan & Pengorbanan</h4>
                     <p class="text-stone-300 text-sm leading-relaxed">
-                        Menjadi klimaks atau titik puncak dari pergerakan serta pengorbanan para pahlawan yang telah berjuang berabad-abad lamanya melawan penjajah.
+                        Menjadi klimaks atau titik puncak dari pergerakan serta pengorbanan para pahlawan yang telah berjuang berabad-abad lamanya melawan penjajah. Setiap tetes darah dan doa tercurahkan dalam momen ini.
                     </p>
                 </div>
-                <div class="space-y-4">
-                    <div class="text-red-400 text-2xl font-bold font-vintage">04. Gerbang Kebebasan</div>
+                <div class="bg-stone-800/50 p-8 rounded-2xl border border-stone-700 hover:border-red-700/50 transition-all duration-300">
+                    <div class="text-red-400 text-4xl font-bold font-vintage mb-3">04.</div>
+                    <h4 class="text-xl font-bold text-white mb-3">Gerbang Kebebasan & Keadilan</h4>
                     <p class="text-stone-300 text-sm leading-relaxed">
-                        Sebagai pintu masuk utama untuk menata kehidupan masyarakat yang adil, makmur, cerdas, dan menentukan nasib bangsanya sendiri.
+                        Sebagai pintu masuk utama untuk menata kehidupan masyarakat yang adil, makmur, cerdas, dan menentukan nasib bangsanya sendiri. Proklamasi membuka jalan bagi cita-cita kemerdekaan yang sesungguhnya.
                     </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5: Refleksi & Kutipan (Baru) -->
+    <section id="refleksi" class="py-28 px-6 bg-gradient-to-br from-stone-50 to-white">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-red-800 font-bold text-xs uppercase tracking-widest bg-red-50 px-4 py-1.5 rounded-full">Renungan</span>
+                <h2 class="font-vintage text-4xl font-bold text-stone-900 mt-4">Refleksi & Semangat Proklamasi</h2>
+                <div class="h-1 w-20 bg-red-800 mx-auto mt-5 rounded"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-10 rounded-2xl shadow-lg border border-stone-100 relative">
+                    <div class="absolute -top-3 -left-3 text-6xl text-red-200 font-serif-custom">"</div>
+                    <p class="text-lg font-serif-custom italic text-stone-700 leading-relaxed pl-4 pt-6">
+                        Kami bangsa Indonesia dengan ini menjatakan kemerdekaan Indonesia. Bukan hanya sekadar kata, tetapi sebuah tekad untuk berdiri di atas kaki sendiri.
+                    </p>
+                    <p class="text-right text-sm font-bold text-stone-500 mt-6">— Ir. Soekarno</p>
+                </div>
+                <div class="bg-white p-10 rounded-2xl shadow-lg border border-stone-100 relative">
+                    <div class="absolute -top-3 -left-3 text-6xl text-red-200 font-serif-custom">"</div>
+                    <p class="text-lg font-serif-custom italic text-stone-700 leading-relaxed pl-4 pt-6">
+                        Kemerdekaan adalah hak segala bangsa. Proklamasi mengajarkan kita bahwa persatuan dan keberanian adalah kunci untuk meraih cita-cita luhur.
+                    </p>
+                    <p class="text-right text-sm font-bold text-stone-500 mt-6">— Mohammad Hatta</p>
+                </div>
+            </div>
+
+            <div class="mt-16 bg-stone-800 rounded-3xl p-10 text-center text-white shadow-2xl">
+                <h3 class="font-vintage text-2xl font-bold text-red-400 mb-4">Warisan Untuk Generasi Muda</h3>
+                <p class="text-stone-300 max-w-3xl mx-auto text-sm leading-relaxed">
+                    Proklamasi 17 Agustus 1945 adalah bukti nyata bahwa bangsa Indonesia mampu menentukan nasibnya sendiri. Semangat ini harus terus hidup dalam setiap generasi, untuk mengisi kemerdekaan dengan karya, prestasi, dan kebajikan bagi seluruh rakyat Indonesia.
+                </p>
+                <div class="mt-8 flex items-center justify-center gap-3 text-xs uppercase tracking-widest text-stone-500">
+                    <span class="w-8 h-px bg-stone-600"></span>
+                    Dirgahayu Republik Indonesia
+                    <span class="w-8 h-px bg-stone-600"></span>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-stone-950 text-stone-500 py-12 px-6 text-center text-xs tracking-wider border-t border-stone-900">
-        <p class="font-vintage text-stone-400 mb-2 font-bold">DIRGAHAYU REPUBLIK INDONESIA</p>
-        <p>&copy; 2026 Portofolio Pengayaan Sejarah. Dibuat dengan dedikasi penuh.</p>
+    <footer class="bg-stone-950 text-stone-500 py-16 px-6 text-center text-xs tracking-wider border-t border-stone-900">
+        <div class="max-w-4xl mx-auto">
+            <p class="font-vintage text-stone-400 mb-3 font-bold text-lg tracking-widest">DIRGAHAYU REPUBLIK INDONESIA</p>
+            <p class="text-stone-600 max-w-lg mx-auto text-xs leading-relaxed">
+                Media pembelajaran sejarah ini didedikasikan untuk seluruh pahlawan bangsa dan generasi penerus yang terus menjaga semangat persatuan.
+            </p>
+            <div class="flex justify-center gap-8 mt-6 text-stone-700 text-[10px] uppercase">
+                <a href="#" class="hover:text-stone-400 transition-colors">Tentang</a>
+                <a href="#" class="hover:text-stone-400 transition-colors">Sumber</a>
+                <a href="#" class="hover:text-stone-400 transition-colors">Kontak</a>
+            </div>
+            <div class="h-px w-full bg-stone-800/50 my-6"></div>
+            <p>&copy; 2026 Portofolio Pengayaan Sejarah. Dibuat dengan dedikasi penuh.</p>
+        </div>
     </footer>
 
 </body>
