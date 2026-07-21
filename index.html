@@ -852,6 +852,11 @@ async function seedAdminIfNeeded(){
     const snap = await db.ref('users/admin').once('value');
     if(!snap.exists()){
       await db.ref('users/admin').set({nama:'Administrator',username:'admin',password:'admin',nip:'',kelasMengajar:[],waliKelas:'',piketHari:[],hak:{admin:true,piketKerohanian:false,piketSekolah:false}});
+    } else {
+      const data = snap.val();
+      if(!data.hak || data.hak.admin !== true){
+        await db.ref('users/admin/hak').update({admin:true});
+      }
     }
   }catch(e){
     console.error('Gagal seed admin:', e);
