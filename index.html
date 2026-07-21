@@ -274,8 +274,7 @@ select.form-input option{background:var(--bg-elevated);color:var(--text-primary)
           <div class="hero-title" id="homeGreeting">Absensi SMAN 12</div>
           <div class="hero-subtitle" id="homeSub">© Gema Bintang</div>
         </div>
-        <div class="stats-inline">
-          <div class="stat-card"><div class="stat-number" style="color:var(--accent-teal);" id="homeHadir">0</div><div class="stat-desc">Hadir Hari Ini</div></div>
+        <div class="stats-inline" style="grid-template-columns:1fr;">
           <div class="stat-card"><div class="stat-number" style="color:var(--accent-amber);" id="homeTotal">0</div><div class="stat-desc">Total Siswa</div></div>
         </div>
         <div class="menu-grid" id="homeMenuGrid"></div>
@@ -628,6 +627,27 @@ select.form-input option{background:var(--bg-elevated);color:var(--text-primary)
     </div>
 
     <!-- KEROHANIAN (presensi dzuhur/keputrian) -->
+    <!-- AKUN KEROHANIAN (murid petugas scan, akses terbatas) -->
+    <div class="screen" id="screenAkunKerohanian">
+      <div class="screen-header"><button class="btn-back" onclick="navigateTo('home')"><i class="fas fa-arrow-left"></i></button>
+        <div class="screen-header-title">Akun Kerohanian</div><div class="screen-header-accent" style="background:var(--accent-purple);"></div></div>
+      <div class="screen-body">
+        <div class="section-card">
+          <div class="section-title"><i class="fas fa-user-plus" style="color:var(--accent-purple);"></i> <span id="akrFormTitle">TAMBAH AKUN PETUGAS KEROHANIAN</span></div>
+          <p style="font-size:10px;color:var(--text-tertiary);margin-bottom:12px;">Akun ini cuma bisa akses scan presensi Kerohanian, tidak bisa masuk fitur lain.</p>
+          <div class="form-group"><label class="form-label">Nama</label><input type="text" id="akrNama" class="form-input" placeholder="Nama petugas"></div>
+          <div class="form-row">
+            <div class="form-group"><label class="form-label">Username</label><input type="text" id="akrUsername" class="form-input" placeholder="username"></div>
+            <div class="form-group"><label class="form-label">Password</label><input type="text" id="akrPassword" class="form-input" placeholder="password"></div>
+          </div>
+          <button onclick="simpanAkunKerohanian()" class="btn btn-primary" style="margin-bottom:8px;"><i class="fas fa-save"></i> Simpan Akun</button>
+          <button onclick="resetFormAkunKerohanian()" class="btn btn-outline btn-sm"><i class="fas fa-undo"></i> Reset Form</button>
+        </div>
+        <div style="font-size:12px;font-weight:700;margin-bottom:10px;"><i class="fas fa-list" style="color:var(--accent-purple);"></i> Daftar Akun Petugas</div>
+        <div id="listAkunKerohanian"></div>
+      </div>
+    </div>
+
     <div class="screen" id="screenKerohanian">
       <div class="screen-header"><button class="btn-back" onclick="navigateTo('home')"><i class="fas fa-arrow-left"></i></button>
         <div class="screen-header-title">Presensi Kerohanian</div><div class="screen-header-accent" style="background:var(--accent-purple);"></div></div>
@@ -965,14 +985,17 @@ window.logout = function(){
 };
 
 function afterLogin(){
-  const label = isAdmin(currentUser) ? 'Administrator' : (canKerohanian(currentUser)&&canSekolah(currentUser) ? 'Admin Piket' : canKerohanian(currentUser) ? 'Admin Piket Kerohanian' : canSekolah(currentUser) ? 'Admin Piket Sekolah' : 'Guru');
+  const label = currentUser.scopeKerohanianOnly ? 'Petugas Kerohanian' :
+    isAdmin(currentUser) ? 'Administrator' :
+    (canAdminKerohanian(currentUser)&&canSekolah(currentUser)) ? 'Admin Piket' :
+    canAdminKerohanian(currentUser) ? 'Admin Piket Kerohanian' :
+    canSekolah(currentUser) ? 'Admin Piket Sekolah' : 'Guru';
   document.getElementById('navRoleLabel').innerText = label;
   document.getElementById('homeUserTag').innerText = currentUser.nama + ' • ' + label;
   document.getElementById('homeGreeting').innerText = 'Halo, '+currentUser.nama;
   buildHomeMenu();
   updateHomeStats();
-  listenLogPiket();
-  listenLogDispensasi();
+  if(!currentUser.scopeKerohanianOnly){ listenLogPiket(); listenLogDispensasi(); }
 }
 
 function isPiketHariIni(){
@@ -983,6 +1006,15 @@ function isPiketHariIni(){
 
 function buildHomeMenu(){
   const g = document.getElementById('homeMenuGrid');
+  if(currentUser.scopeKerohanianOnly){
+    g.innerHTML = `
+    <div class="menu-item" onclick="navigateTo('kerohanian')">
+      <div class="menu-item-icon accent-purple"><i class="fas fa-mosque"></i></div>
+      <div class="menu-item-title">Presensi Kerohanian</div>
+      <div class="menu-item-desc">Scan dzuhur & keputrian</div>
+    </div>`;
+    return;
+  }
   let items = [
     {s:'profile',icon:'fa-id-badge',c:'accent-blue',t:'Profile Saya',d:'Data & jadwal piket'},
     {s:'pelajaran',icon:'fa-book',c:'accent-sky',t:'Pelajaran',d:'Presensi per kelas ajar'},
@@ -993,18 +1025,21 @@ function buildHomeMenu(){
   if(currentUser.waliKelas){
     items.push({s:'walikelas',icon:'fa-chalkboard-user',c:'accent-rose',t:'Wali Kelas',d:'Kelola kelas '+currentUser.waliKelas});
   }
-  if(canAkunTab(currentUser)){
+  if(isAdmin(currentUser)){
     items.push({s:'akun',icon:'fa-user-gear',c:'accent-purple',t:'Akun Guru',d:'Kelola akun pengguna'});
   }
   if(canSekolah(currentUser)){
     items.push({s:'jadwalpiket',icon:'fa-calendar-days',c:'accent-teal',t:'Jadwal Piket',d:'Atur piket guru'});
     items.push({s:'pengaturan',icon:'fa-sliders',c:'accent-amber',t:'Pengaturan',d:'Batas waktu & data'});
-  }
-  if(canSekolah(currentUser) || canKerohanian(currentUser)){
     items.push({s:'naikkelas',icon:'fa-graduation-cap',c:'accent-purple',t:'Naik Kelas',d:'Migrasi ke kelas baru'});
+  }
+  if(canAdminKerohanian(currentUser)){
     items.push({s:'datasiswa',icon:'fa-database',c:'accent-blue',t:'Data Siswa',d:'Database & export'});
     items.push({s:'tambahsiswa',icon:'fa-user-plus',c:'accent-teal',t:'Tambah Siswa',d:'Buat kartu QR baru'});
     items.push({s:'importexcel',icon:'fa-file-excel',c:'accent-green',t:'Import Excel',d:'Generate kartu massal'});
+  }
+  if(canAdminKerohanian(currentUser)){
+    items.push({s:'akunkerohanian',icon:'fa-user-shield',c:'accent-purple',t:'Akun Kerohanian',d:'Akun petugas scan'});
   }
   if(canKerohanian(currentUser)){
     items.push({s:'kerohanian',icon:'fa-mosque',c:'accent-purple',t:'Presensi Kerohanian',d:'Scan dzuhur & keputrian'});
@@ -1020,13 +1055,16 @@ function buildHomeMenu(){
 window.navigateTo = function(screen){
   if(!currentUser){ return; }
   stopPiketCam(); stopPelajaranCam(); stopWaliCam(); stopScanNaikKelas(); stopKerohanianCam();
+  if(currentUser.scopeKerohanianOnly && screen!=='home' && screen!=='kerohanian'){ return; }
   if(screen==='piket' && !canSekolah(currentUser) && !isPiketHariIni()){ showToast('Bukan jadwal piket Anda hari ini','error'); return; }
   if(screen==='walikelas' && !currentUser.waliKelas){ return; }
-  if(screen==='akun' && !canAkunTab(currentUser)){ return; }
+  if(screen==='akun' && !isAdmin(currentUser)){ return; }
+  if(screen==='akunkerohanian' && !canAdminKerohanian(currentUser)){ return; }
   if((screen==='jadwalpiket'||screen==='pengaturan') && !canSekolah(currentUser)){ return; }
-  if((screen==='naikkelas'||screen==='datasiswa'||screen==='tambahsiswa'||screen==='importexcel') && !canSekolah(currentUser) && !canKerohanian(currentUser)){ return; }
+  if(screen==='naikkelas' && !canSekolah(currentUser)){ return; }
+  if((screen==='datasiswa'||screen==='tambahsiswa'||screen==='importexcel') && !canAdminKerohanian(currentUser)){ return; }
   if(screen==='kerohanian' && !canKerohanian(currentUser)){ return; }
-  const map = {home:'screenHome',profile:'screenProfile',akun:'screenAkun',jadwalpiket:'screenJadwalPiket',pengaturan:'screenPengaturan',
+  const map = {home:'screenHome',profile:'screenProfile',akun:'screenAkun',akunkerohanian:'screenAkunKerohanian',jadwalpiket:'screenJadwalPiket',pengaturan:'screenPengaturan',
     piket:'screenPiket',pelajaran:'screenPelajaran',walikelas:'screenWaliKelas',naikkelas:'screenNaikKelas',datasiswa:'screenDataSiswa',
     tambahsiswa:'screenTambahSiswa',importexcel:'screenImportExcel',kerohanian:'screenKerohanian'};
   Object.values(map).forEach(id=>document.getElementById(id)?.classList.remove('active'));
@@ -1035,6 +1073,7 @@ window.navigateTo = function(screen){
   if(screen==='home') updateHomeStats();
   if(screen==='profile') renderProfile();
   if(screen==='akun') { listenListAkun(); }
+  if(screen==='akunkerohanian') { listenListAkunKerohanian(); }
   if(screen==='jadwalpiket') renderJadwalPiket();
   if(screen==='pengaturan') loadPengaturan();
   if(screen==='piket') loadDispKelasReady();
@@ -1052,10 +1091,6 @@ async function updateHomeStats(){
   let t=0; const d=ss.val()||{};
   for(let k in d) t+=Object.keys(d[k]||{}).length;
   document.getElementById('homeTotal').innerText=t;
-  const ps = await db.ref('presensiSekolah/'+todayKey()).once('value');
-  const p=ps.val()||{};
-  const h=Object.values(p).filter(e=>e.status==='HADIR'||e.status==='TERLAMBAT').length;
-  document.getElementById('homeHadir').innerText=h;
 }
 
 // ===================== PROFILE =====================
@@ -1069,9 +1104,9 @@ function renderProfile(){
 
 // ===================== AKUN GURU (admin) =====================
 function isAdmin(u){ return !!(u && u.hak && u.hak.admin); }
-function canKerohanian(u){ return isAdmin(u) || !!(u && u.hak && u.hak.piketKerohanian); }
+function canAdminKerohanian(u){ return isAdmin(u) || !!(u && u.hak && u.hak.piketKerohanian); }
+function canKerohanian(u){ return canAdminKerohanian(u) || !!(u && u.scopeKerohanianOnly); }
 function canSekolah(u){ return isAdmin(u) || !!(u && u.hak && u.hak.piketSekolah); }
-function canAkunTab(u){ return isAdmin(u) || (u && u.hak && (u.hak.piketKerohanian||u.hak.piketSekolah)); }
 
 function setupAkunHakVisibility(){
   const viewerAdmin = isAdmin(currentUser);
@@ -1171,7 +1206,7 @@ function listenListAkun(){
   db.ref('users').on('value', snap=>{
     const d = snap.val()||{};
     cacheAllUsers = d;
-    const list = Object.values(d).sort((a,b)=>a.nama.localeCompare(b.nama));
+    const list = Object.values(d).filter(u=>!u.scopeKerohanianOnly).sort((a,b)=>a.nama.localeCompare(b.nama));
     const c = document.getElementById('listAkun');
     if(list.length===0){ c.innerHTML='<div class="empty-placeholder"><i class="fas fa-users"></i><p>Belum ada akun</p></div>'; return; }
     c.innerHTML = list.map(u=>{
@@ -1203,6 +1238,7 @@ window.downloadDataGuru = async function(){
     const d = snap.val()||{};
     const rows = [['NAMA','USERNAME','ADMIN','PIKET KEROHANIAN','PIKET SEKOLAH','NIP','MENGAJAR DI KELAS','WALI KELAS','JADWAL PIKET']];
     Object.values(d).forEach(u=>{
+      if(u.scopeKerohanianOnly) return;
       rows.push([u.nama||'',u.username||'',isAdmin(u)?'Admin':'',(u.hak&&u.hak.piketKerohanian)?'Ya':'',(u.hak&&u.hak.piketSekolah)?'Ya':'',u.nip||'',(u.kelasMengajar||[]).join(', '),u.waliKelas||'',(u.piketHari||[]).join(', ')]);
     });
     const ws = XLSX.utils.aoa_to_sheet(rows);
@@ -1215,12 +1251,76 @@ window.downloadDataGuru = async function(){
   document.getElementById('loadingOverlay').classList.remove('show');
 };
 
+// ===================== AKUN KEROHANIAN (petugas scan, akses terbatas) =====================
+let akunKerohanianEditing = null;
+let cacheAkunKerohanian = {};
+window.resetFormAkunKerohanian = function(){
+  akunKerohanianEditing = null;
+  document.getElementById('akrFormTitle').innerText='TAMBAH AKUN PETUGAS KEROHANIAN';
+  document.getElementById('akrNama').value='';
+  document.getElementById('akrUsername').value='';
+  document.getElementById('akrUsername').removeAttribute('readonly');
+  document.getElementById('akrPassword').value='';
+};
+window.simpanAkunKerohanian = async function(){
+  const nama=document.getElementById('akrNama').value.trim();
+  const username=document.getElementById('akrUsername').value.trim();
+  const password=document.getElementById('akrPassword').value;
+  if(!nama||!username||!password){ showToast('Lengkapi nama, username, password','error'); return; }
+  document.getElementById('loadingOverlay').classList.add('show');
+  try{
+    if(!akunKerohanianEditing){
+      const cek = await db.ref('users/'+username).once('value');
+      if(cek.exists()) throw new Error('Username sudah dipakai');
+    }
+    await db.ref('users/'+username).set({nama, username, password, scopeKerohanianOnly:true});
+    showToast('Akun petugas tersimpan!','success'); playBeep('success');
+    resetFormAkunKerohanian();
+  }catch(e){ showToast('Gagal: '+e.message,'error'); playBeep('error'); }
+  document.getElementById('loadingOverlay').classList.remove('show');
+};
+window.editAkunKerohanian = function(username){
+  const u = cacheAkunKerohanian[username]; if(!u) return;
+  akunKerohanianEditing = username;
+  document.getElementById('akrFormTitle').innerText='EDIT AKUN: '+username;
+  document.getElementById('akrNama').value=u.nama||'';
+  document.getElementById('akrUsername').value=u.username||username;
+  document.getElementById('akrUsername').setAttribute('readonly','readonly');
+  document.getElementById('akrPassword').value=u.password||'';
+  document.getElementById('screenAkunKerohanian').querySelector('.screen-body').scrollTo(0,0);
+};
+window.hapusAkunKerohanian = async function(username){
+  if(!confirm('Hapus akun petugas '+username+'?')) return;
+  await db.ref('users/'+username).remove();
+  showToast('Akun dihapus','success');
+};
+function listenListAkunKerohanian(){
+  db.ref('users').on('value', snap=>{
+    const d = snap.val()||{};
+    const list = Object.values(d).filter(u=>u.scopeKerohanianOnly).sort((a,b)=>a.nama.localeCompare(b.nama));
+    cacheAkunKerohanian = {}; list.forEach(u=>cacheAkunKerohanian[u.username]=u);
+    const c = document.getElementById('listAkunKerohanian');
+    if(list.length===0){ c.innerHTML='<div class="empty-placeholder"><i class="fas fa-users"></i><p>Belum ada akun petugas</p></div>'; return; }
+    c.innerHTML = list.map(u=>`
+      <div class="account-card">
+        <div class="account-card-top">
+          <div><div class="account-name">${u.nama}</div><div class="account-meta">@${u.username}</div></div>
+          <span class="role-badge role-guru">Petugas Kerohanian</span>
+        </div>
+        <div class="btn-row" style="margin-top:10px;">
+          <button onclick="editAkunKerohanian('${u.username}')" class="btn btn-outline btn-sm"><i class="fas fa-pen"></i> Edit</button>
+          <button onclick="hapusAkunKerohanian('${u.username}')" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Hapus</button>
+        </div>
+      </div>`).join('');
+  });
+}
+
 // ===================== JADWAL PIKET (admin) =====================
 function renderJadwalPiket(){
   db.ref('users').on('value', snap=>{
     const d = snap.val()||{};
     cacheAllUsers = d;
-    const guruList = Object.values(d).sort((a,b)=>a.nama.localeCompare(b.nama));
+    const guruList = Object.values(d).filter(u=>!u.scopeKerohanianOnly).sort((a,b)=>a.nama.localeCompare(b.nama));
     const c = document.getElementById('listJadwalPiket');
     if(guruList.length===0){ c.innerHTML='<div class="empty-placeholder"><i class="fas fa-chalkboard-user"></i><p>Belum ada akun guru</p></div>'; return; }
     c.innerHTML = guruList.map(u=>`
@@ -1936,11 +2036,8 @@ window.filterDataSiswa = function(){
   if(f.length===0){ c.innerHTML='<div class="empty-placeholder"><i class="fas fa-search"></i><p>Tidak ada data</p></div>'; return; }
   c.innerHTML = f.map(x=>`
     <div style="background:var(--bg-elevated);border:1px solid var(--border-subtle);border-radius:var(--radius-md);padding:12px 14px;">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;">
-        <div><div style="font-size:13px;font-weight:700;">${x.nama||'-'}</div>
-          <div style="font-size:10px;color:var(--text-tertiary);margin-top:2px;">${x.kelas} • Absen ${x.absen} • ${x.jk==='L'?'L':'P'} • ${x.agama||'-'}</div></div>
-        <div style="background:rgba(61,214,200,.08);color:var(--accent-teal);font-size:12px;font-weight:800;padding:3px 10px;border-radius:6px;">${x.totalHadir||0}x</div>
-      </div>
+      <div style="font-size:13px;font-weight:700;">${x.nama||'-'}</div>
+      <div style="font-size:10px;color:var(--text-tertiary);margin-top:2px;">${x.kelas} • Absen ${x.absen} • ${x.jk==='L'?'L':'P'} • ${x.agama||'-'}</div>
     </div>`).join('');
 };
 window.downloadSemuaDataSiswa = function(){
