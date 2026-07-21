@@ -15,6 +15,7 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.bundle.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
@@ -436,6 +437,139 @@ select.form-input option{background:var(--bg-elevated);color:var(--text-primary)
       </div>
     </div>
 
+    <!-- PELAJARAN (guru) -->
+    <div class="screen" id="screenPelajaran">
+      <div class="screen-header"><button class="btn-back" onclick="navigateTo('home')"><i class="fas fa-arrow-left"></i></button>
+        <div class="screen-header-title">Presensi Pelajaran</div><div class="screen-header-accent" style="background:var(--accent-sky);"></div></div>
+      <div class="screen-body">
+        <div class="section-card">
+          <div class="form-group"><label class="form-label">Pilih Kelas</label>
+            <select id="pelajaranKelas" class="form-input" onchange="gantiKelasPelajaran()"></select>
+          </div>
+          <button onclick="mulaiSesiPelajaran()" class="btn btn-primary btn-sm"><i class="fas fa-play"></i> Mulai Sesi Presensi</button>
+        </div>
+        <div id="pelajaranScanArea" style="display:none;">
+          <div class="camera-wrapper" style="margin-bottom:12px;">
+            <div id="readerPelajaran"></div>
+            <div id="pelajaranCamPlaceholder" class="camera-overlay-placeholder"><i class="fas fa-camera"></i><p>Kamera belum aktif</p></div>
+            <div class="scan-popup" id="pelajaranFeedback"><div class="scan-popup-card" id="pelajaranFbBox">
+              <div class="scan-popup-icon" id="pelajaranFbIcon"></div><div class="scan-popup-name" id="pelajaranFbNama"></div><div class="scan-popup-msg" id="pelajaranFbMsg"></div>
+            </div></div>
+          </div>
+          <div class="btn-row" style="margin-bottom:12px;">
+            <button onclick="startPelajaranCam()" id="btnPelajaranStart" class="btn btn-primary btn-sm"><i class="fas fa-play"></i> Aktifkan Kamera</button>
+            <button onclick="stopPelajaranCam()" id="btnPelajaranStop" class="btn btn-danger btn-sm" style="display:none;"><i class="fas fa-stop"></i></button>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+            <span style="font-size:13px;font-weight:700;"><i class="fas fa-list" style="color:var(--accent-sky);"></i> Sudah Absen Sesi Ini</span>
+            <span style="font-size:14px;font-weight:800;color:var(--accent-sky);" id="pelajaranTotalScan">0</span>
+          </div>
+          <div id="logPelajaran" class="log-list"><div class="empty-placeholder"><i class="fas fa-inbox"></i><p>Belum ada yang absen</p></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WALI KELAS (guru dengan waliKelas) -->
+    <div class="screen" id="screenWaliKelas">
+      <div class="screen-header"><button class="btn-back" onclick="navigateTo('home')"><i class="fas fa-arrow-left"></i></button>
+        <div class="screen-header-title">Wali Kelas</div><div class="screen-header-accent" style="background:var(--accent-rose);"></div></div>
+      <div class="screen-body">
+        <div class="section-card">
+          <div class="section-title"><i class="fas fa-id-card" style="color:var(--accent-rose);"></i> BUAT KARTU MURID — <span id="wkKelasLabel">-</span></div>
+          <div class="form-group"><label class="form-label">Nama Lengkap</label><input type="text" id="wkNama" class="form-input" placeholder="Masukkan nama"></div>
+          <div class="form-row">
+            <div class="form-group"><label class="form-label">No. Absen</label><input type="number" id="wkAbsen" class="form-input" placeholder="01"></div>
+            <div class="form-group"><label class="form-label">Gender</label>
+              <select id="wkJk" class="form-input"><option value="L">Laki-laki</option><option value="P">Perempuan</option></select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label class="form-label">Agama</label>
+              <select id="wkAgama" class="form-input"><option value="Islam">Islam</option><option value="Kristen">Kristen</option><option value="Katolik">Katolik</option><option value="Hindu">Hindu</option><option value="Buddha">Buddha</option><option value="Konghucu">Konghucu</option></select>
+            </div>
+            <div class="form-group"><label class="form-label">Warna Kartu</label><select id="wkWarna" class="form-input"></select></div>
+          </div>
+          <button onclick="buatKartuWali()" class="btn btn-primary btn-sm"><i class="fas fa-qrcode"></i> Generate Kartu</button>
+          <div id="wkQrArea"></div>
+        </div>
+
+        <div class="section-card">
+          <div class="section-title"><i class="fas fa-camera" style="color:var(--accent-green);"></i> SCAN KEHADIRAN — <span id="wkKelasLabel2">-</span></div>
+          <div class="camera-wrapper" style="margin-bottom:12px;">
+            <div id="readerWali"></div>
+            <div id="wkCamPlaceholder" class="camera-overlay-placeholder"><i class="fas fa-camera"></i><p>Kamera belum aktif</p></div>
+            <div class="scan-popup" id="wkFeedback"><div class="scan-popup-card" id="wkFbBox">
+              <div class="scan-popup-icon" id="wkFbIcon"></div><div class="scan-popup-name" id="wkFbNama"></div><div class="scan-popup-msg" id="wkFbMsg"></div>
+            </div></div>
+          </div>
+          <div class="btn-row">
+            <button onclick="startWaliCam()" id="btnWaliStart" class="btn btn-primary btn-sm"><i class="fas fa-play"></i> Aktifkan</button>
+            <button onclick="stopWaliCam()" id="btnWaliStop" class="btn btn-danger btn-sm" style="display:none;"><i class="fas fa-stop"></i></button>
+          </div>
+        </div>
+
+        <div class="section-card">
+          <div class="section-title"><i class="fas fa-file-excel" style="color:var(--accent-green);"></i> DATA ABSENSI KELAS</div>
+          <div class="mode-selector">
+            <button onclick="setWaliExcelMode('harian')" id="wkModeHarian" class="mode-option active">Harian</button>
+            <button onclick="setWaliExcelMode('rekap')" id="wkModeRekap" class="mode-option">Rekap Bulanan</button>
+          </div>
+          <div id="wkHarianPicker" class="form-row" style="margin-bottom:10px;">
+            <select id="wkPilihBulan" class="form-input" onchange="initTanggalHarianWali(this.value)"></select>
+            <select id="wkTanggalHarian" class="form-input"></select>
+          </div>
+          <div id="wkRekapPicker" class="form-group" style="display:none;">
+            <select id="wkPilihBulanRekap" class="form-input"></select>
+          </div>
+          <button onclick="downloadDataWali()" class="btn btn-success btn-sm"><i class="fas fa-download"></i> Download Excel</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- NAIK KELAS (admin) -->
+    <div class="screen" id="screenNaikKelas">
+      <div class="screen-header"><button class="btn-back" onclick="navigateTo('home')"><i class="fas fa-arrow-left"></i></button>
+        <div class="screen-header-title">Naik Kelas</div><div class="screen-header-accent" style="background:var(--accent-purple);"></div></div>
+      <div class="screen-body">
+        <div class="form-group"><label class="form-label">Kelas Tujuan</label><select id="kelasTujuanNaik" class="form-input"></select></div>
+        <div class="camera-wrapper" style="margin-bottom:12px;">
+          <div id="readerNaik"></div>
+          <div id="naikCamPlaceholder" class="camera-overlay-placeholder"><i class="fas fa-camera"></i><p>Kamera belum aktif</p></div>
+          <div class="scan-popup" id="feedbackNaik"><div class="scan-popup-card" id="fbNaikBox">
+            <div class="scan-popup-icon" id="fbNaikIcon"></div><div class="scan-popup-name" id="fbNaikNama"></div><div class="scan-popup-msg" id="fbNaikMsg"></div>
+          </div></div>
+        </div>
+        <div class="btn-row" style="margin-bottom:12px;">
+          <button onclick="startScanNaikKelas()" id="btnStartNaik" class="btn btn-warning btn-sm"><i class="fas fa-play"></i> Scan</button>
+          <button onclick="stopScanNaikKelas()" id="btnStopNaik" class="btn btn-danger btn-sm" style="display:none;"><i class="fas fa-stop"></i></button>
+        </div>
+        <div style="font-size:12px;font-weight:700;margin-bottom:8px;"><i class="fas fa-list-ul" style="color:var(--accent-purple);"></i> Daftar Scan</div>
+        <div id="listScanNaik" style="display:flex;flex-direction:column;gap:6px;margin-bottom:12px;max-height:240px;overflow-y:auto;"></div>
+        <div class="btn-row">
+          <button onclick="simpanNaikKelas()" class="btn btn-primary btn-sm"><i class="fas fa-save"></i> Simpan</button>
+          <button onclick="resetNaikKelas()" class="btn btn-outline btn-sm"><i class="fas fa-trash"></i> Reset</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- DATA SISWA (admin) -->
+    <div class="screen" id="screenDataSiswa">
+      <div class="screen-header"><button class="btn-back" onclick="navigateTo('home')"><i class="fas fa-arrow-left"></i></button>
+        <div class="screen-header-title">Data Siswa</div><div class="screen-header-accent" style="background:var(--accent-blue);"></div></div>
+      <div class="screen-body">
+        <div class="stats-inline" style="margin-bottom:14px;">
+          <div class="stat-card"><div class="stat-number" style="color:var(--accent-blue);" id="dsTotalSiswa">0</div><div class="stat-desc">Total Siswa</div></div>
+          <div class="stat-card"><div class="stat-number" style="color:var(--accent-green);" id="dsTotalKelas">0</div><div class="stat-desc">Total Kelas</div></div>
+        </div>
+        <div style="display:flex;gap:8px;margin-bottom:10px;">
+          <input type="text" id="dsSearch" placeholder="Cari nama..." oninput="filterDataSiswa()" class="form-input">
+          <select id="dsFilterKelas" onchange="filterDataSiswa()" class="form-input" style="width:110px;"><option value="">Semua</option></select>
+        </div>
+        <button onclick="downloadSemuaDataSiswa()" class="btn btn-success btn-sm" style="margin-bottom:12px;"><i class="fas fa-download"></i> Download Semua Data Siswa</button>
+        <div id="listDataSiswa" style="display:flex;flex-direction:column;gap:6px;"></div>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -485,6 +619,97 @@ function playBeep(type){
 function todayKey(){ return new Date().toLocaleDateString('id-ID').replace(/\//g,'-'); }
 function nowHM(){ const d=new Date(); return String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0'); }
 
+// ===================== KARTU QR (dipakai Wali Kelas) =====================
+const COLOR_PRESETS = [
+  { key:'navy',   label:'Navy' },
+  { key:'merah',  label:'Merah/Maroon' },
+  { key:'kuning', label:'Kuning/Gold' },
+  { key:'pink',   label:'Pink' },
+  { key:'hijau',  label:'Hijau/Teal' },
+];
+const CARD_W = 590, CARD_H = 1004;
+
+function loadImage(src){
+  return new Promise((resolve,reject)=>{ const img=new Image(); img.onload=()=>resolve(img); img.onerror=reject; img.src=src; });
+}
+function loadImageFromFile(src){
+  return new Promise((resolve,reject)=>{
+    const img=new Image();
+    img.onload=()=>resolve(img);
+    img.onerror=()=>reject(new Error('Gagal load: '+src));
+    img.src=src;
+  });
+}
+async function qrDataUrl(text,size){
+  const div=document.createElement('div');
+  div.style.cssText='position:absolute;left:-9999px;top:-9999px;';
+  document.body.appendChild(div);
+  new QRCode(div,{text,width:size,height:size,correctLevel:QRCode.CorrectLevel.M});
+  await new Promise(r=>setTimeout(r,150));
+  const el=div.querySelector('img')||div.querySelector('canvas');
+  const url=el.tagName==='CANVAS'?el.toDataURL('image/png'):el.src;
+  document.body.removeChild(div);
+  return url;
+}
+async function generateKodeUnik(){
+  const ALPHA="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+  for(let i=0;i<10;i++){
+    let rand=''; for(let j=0;j<8;j++) rand+=ALPHA[Math.floor(Math.random()*ALPHA.length)];
+    const kode='KRH-'+rand;
+    const snap=await db.ref('kodeIndex/'+kode).once('value');
+    if(!snap.exists()) return kode;
+  }
+  return 'KRH-'+Date.now().toString(36).toUpperCase()+Math.floor(Math.random()*99);
+}
+async function cekSlotSudahDipakai(kelas,absen){
+  const snap=await db.ref('siswa/'+kelas+'/'+absen).once('value');
+  return snap.exists()?snap.val():null;
+}
+async function cekNamaSudahAda(namaUpper,kecualiKelas,kecualiAbsen){
+  const snap=await db.ref('siswa').once('value');
+  const data=snap.val()||{};
+  for(let k in data) for(let a in data[k]){
+    if(k===kecualiKelas && String(a)===String(kecualiAbsen)) continue;
+    if((data[k][a].nama||'').toUpperCase().trim()===namaUpper) return {kelas:k,absen:a};
+  }
+  return null;
+}
+async function generateKartuCanvas({nama,agama,kode,colorKey}){
+  const canvas=document.createElement('canvas'); canvas.width=CARD_W; canvas.height=CARD_H;
+  const ctx=canvas.getContext('2d');
+  const isMuslim=String(agama||'').trim().toLowerCase()==='islam';
+  const prefix=isMuslim?'muslim':'nonmuslim';
+  const templateFile=`templates/${prefix}_${colorKey}.png`;
+  let bg;
+  try{ bg=await loadImageFromFile(templateFile); }
+  catch(e){ bg=await loadImageFromFile(isMuslim?'templates/muslim_navy.png':'templates/nonmuslim_navy.png'); }
+  ctx.drawImage(bg,0,0,CARD_W,CARD_H);
+  const qrSize=300, qrX=(CARD_W-qrSize)/2, qrY=380;
+  ctx.fillStyle='#ffffff'; ctx.shadowColor='rgba(0,0,0,.15)'; ctx.shadowBlur=12;
+  ctx.beginPath(); ctx.roundRect(qrX-10,qrY-10,qrSize+20,qrSize+20,10); ctx.fill(); ctx.shadowBlur=0;
+  const qrUrl=await qrDataUrl(kode,350);
+  const qrImg=await loadImage(qrUrl);
+  ctx.drawImage(qrImg,qrX,qrY,qrSize,qrSize);
+  let displayName=(nama||'').toUpperCase();
+  const maxW=CARD_W*0.66;
+  let fontSize=36; ctx.font=`900 ${fontSize}px Arial, sans-serif`;
+  let textW=ctx.measureText(displayName).width;
+  while(textW>maxW && fontSize>8){ fontSize-=2; ctx.font=`900 ${fontSize}px Arial, sans-serif`; textW=ctx.measureText(displayName).width; }
+  if(textW>maxW){
+    let truncated=displayName;
+    while(truncated.length>15 && ctx.measureText(truncated+'...').width>maxW) truncated=truncated.slice(0,-1);
+    displayName=truncated+'...';
+  }
+  const namaY=qrY+qrSize+72;
+  ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.font=`900 ${fontSize}px Arial, sans-serif`;
+  ctx.fillStyle='#ffffff'; ctx.shadowColor='rgba(0,0,0,.6)'; ctx.shadowBlur=8;
+  ctx.fillText(displayName,CARD_W/2,namaY); ctx.shadowBlur=0;
+  return canvas;
+}
+window.downloadDataUrl = function(dataUrl,filename){
+  const a=document.createElement('a'); a.href=dataUrl; a.download=filename; a.click();
+};
+
 // ===================== INIT / LOGIN =====================
 async function seedAdminIfNeeded(){
   const snap = await db.ref('users/admin').once('value');
@@ -511,6 +736,14 @@ window.onload = async function(){
   });
   document.getElementById('manualKelasSakit').onchange = loadManualAbsenSakitOptions;
   initDropdownBulanSet(); initTanggalHarianSet();
+
+  const kt=document.getElementById('kelasTujuanNaik');
+  if(kt) KELAS_LIST.forEach(k=>kt.innerHTML+=`<option value="${k}">${k}</option>`);
+  const dsf=document.getElementById('dsFilterKelas');
+  if(dsf) KELAS_LIST.forEach(k=>dsf.innerHTML+=`<option value="${k}">${k}</option>`);
+  const wkw=document.getElementById('wkWarna');
+  if(wkw) COLOR_PRESETS.forEach(p=>wkw.innerHTML+=`<option value="${p.key}">${p.label}</option>`);
+  initDropdownBulanWali();
 
   const sesi = localStorage.getItem('sesiUser');
   if(sesi){
@@ -557,6 +790,12 @@ function afterLogin(){
   listenLogDispensasi();
 }
 
+function isPiketHariIni(){
+  if(!currentUser || currentUser.role!=='guru') return false;
+  const namaHariIni = NAMA_HARI[new Date().getDay()];
+  return (currentUser.piketHari||[]).includes(namaHariIni);
+}
+
 function buildHomeMenu(){
   const g = document.getElementById('homeMenuGrid');
   let items = [];
@@ -566,12 +805,20 @@ function buildHomeMenu(){
       {s:'jadwalpiket',icon:'fa-calendar-days',c:'accent-teal',t:'Jadwal Piket',d:'Atur piket guru'},
       {s:'pengaturan',icon:'fa-sliders',c:'accent-amber',t:'Pengaturan',d:'Batas waktu & data'},
       {s:'piket',icon:'fa-camera',c:'accent-green',t:'Piket & Presensi',d:'Scan & dispensasi'},
+      {s:'naikkelas',icon:'fa-graduation-cap',c:'accent-purple',t:'Naik Kelas',d:'Migrasi ke kelas baru'},
+      {s:'datasiswa',icon:'fa-database',c:'accent-blue',t:'Data Siswa',d:'Database & export'},
     ];
   } else if(currentUser.role==='guru'){
     items = [
       {s:'profile',icon:'fa-id-badge',c:'accent-blue',t:'Profile Saya',d:'Data & jadwal piket'},
-      {s:'piket',icon:'fa-camera',c:'accent-green',t:'Piket & Presensi',d:'Scan & dispensasi'},
+      {s:'pelajaran',icon:'fa-book',c:'accent-sky',t:'Pelajaran',d:'Presensi per kelas ajar'},
     ];
+    if(isPiketHariIni()){
+      items.push({s:'piket',icon:'fa-camera',c:'accent-green',t:'Piket & Presensi',d:'Hari ini jadwal piket Anda'});
+    }
+    if(currentUser.waliKelas){
+      items.push({s:'walikelas',icon:'fa-chalkboard-user',c:'accent-rose',t:'Wali Kelas',d:'Kelola kelas '+currentUser.waliKelas});
+    }
   } else {
     items = [{s:'profile',icon:'fa-id-badge',c:'accent-blue',t:'Profile',d:'Fitur orang tua segera hadir'}];
   }
@@ -585,8 +832,11 @@ function buildHomeMenu(){
 
 window.navigateTo = function(screen){
   if(!currentUser){ return; }
-  stopPiketCam();
-  const map = {home:'screenHome',profile:'screenProfile',akun:'screenAkun',jadwalpiket:'screenJadwalPiket',pengaturan:'screenPengaturan',piket:'screenPiket'};
+  stopPiketCam(); stopPelajaranCam(); stopWaliCam(); stopScanNaikKelas();
+  if(screen==='piket' && currentUser.role==='guru' && !isPiketHariIni()){ showToast('Bukan jadwal piket Anda hari ini','error'); return; }
+  if(screen==='walikelas' && currentUser.role==='guru' && !currentUser.waliKelas){ return; }
+  const map = {home:'screenHome',profile:'screenProfile',akun:'screenAkun',jadwalpiket:'screenJadwalPiket',pengaturan:'screenPengaturan',
+    piket:'screenPiket',pelajaran:'screenPelajaran',walikelas:'screenWaliKelas',naikkelas:'screenNaikKelas',datasiswa:'screenDataSiswa'};
   Object.values(map).forEach(id=>document.getElementById(id)?.classList.remove('active'));
   const target = document.getElementById(map[screen]);
   if(target){ target.classList.add('active'); target.querySelector('.screen-body')?.scrollTo(0,0); }
@@ -596,6 +846,10 @@ window.navigateTo = function(screen){
   if(screen==='jadwalpiket') renderJadwalPiket();
   if(screen==='pengaturan') loadPengaturan();
   if(screen==='piket') loadDispKelasReady();
+  if(screen==='pelajaran') initPelajaranScreen();
+  if(screen==='walikelas') initWaliKelasScreen();
+  if(screen==='naikkelas') initNaikKelasScreen();
+  if(screen==='datasiswa') initDataSiswaScreen();
 };
 
 async function updateHomeStats(){
@@ -1085,6 +1339,300 @@ function listenLogDispensasi(){
       </div>`).join('');
   });
 }
-</script>
-</body>
-</html>
+
+// ===================== PELAJARAN (guru) =====================
+let scannerPelajaran = null, pelajaranSesiId = null, pelajaranKelasAktif = null, pelajaranRef = null;
+
+function initPelajaranScreen(){
+  const sel = document.getElementById('pelajaranKelas');
+  sel.innerHTML = (currentUser.kelasMengajar||[]).map(k=>`<option value="${k}">${k}</option>`).join('') || '<option value="">Belum ada kelas ditugaskan</option>';
+  document.getElementById('pelajaranScanArea').style.display='none';
+  pelajaranSesiId=null; pelajaranKelasAktif=null;
+  if(pelajaranRef) pelajaranRef.off();
+}
+window.gantiKelasPelajaran = function(){
+  document.getElementById('pelajaranScanArea').style.display='none';
+  pelajaranSesiId=null;
+};
+window.mulaiSesiPelajaran = function(){
+  const kelas = document.getElementById('pelajaranKelas').value;
+  if(!kelas){ showToast('Anda belum ditugaskan mengajar kelas manapun','error'); return; }
+  pelajaranKelasAktif = kelas;
+  pelajaranSesiId = String(Date.now());
+  document.getElementById('pelajaranScanArea').style.display='';
+  if(pelajaranRef) pelajaranRef.off();
+  pelajaranRef = db.ref('presensiPelajaran/'+todayKey()+'/'+kelas+'/'+pelajaranSesiId);
+  pelajaranRef.on('value', snap=>{
+    const d = snap.val()||{};
+    const entries = Object.values(d);
+    document.getElementById('pelajaranTotalScan').innerText = entries.length;
+    const c = document.getElementById('logPelajaran');
+    if(entries.length===0){ c.innerHTML='<div class="empty-placeholder"><i class="fas fa-inbox"></i><p>Belum ada yang absen</p></div>'; return; }
+    entries.sort((a,b)=>(b.timestamp||0)-(a.timestamp||0));
+    c.innerHTML = entries.map(e=>`
+      <div class="log-entry"><div><div class="log-entry-name">${e.nama}</div><div class="log-entry-detail">${e.kelas} • ${e.jam}</div></div><div class="chip chip-hadir">HADIR</div></div>`).join('');
+  });
+  showToast('Sesi presensi kelas '+kelas+' dimulai','success');
+};
+window.startPelajaranCam = async function(){
+  document.getElementById('btnPelajaranStart').style.display='none';
+  document.getElementById('btnPelajaranStop').style.display='';
+  document.getElementById('pelajaranCamPlaceholder').style.display='none';
+  scannerPelajaran = new Html5Qrcode("readerPelajaran");
+  try{
+    await scannerPelajaran.start({facingMode:"environment"},{fps:5,qrbox:{width:240,height:240},aspectRatio:1.333},
+      text=>{ scannerPelajaran.pause(); prosesScanPelajaran(text); }, ()=>{});
+  }catch(e){
+    showToast('Gagal: '+e,'error');
+    document.getElementById('btnPelajaranStart').style.display='';
+    document.getElementById('btnPelajaranStop').style.display='none';
+    document.getElementById('pelajaranCamPlaceholder').style.display='';
+  }
+};
+window.stopPelajaranCam = function(){
+  try{ if(scannerPelajaran?.isScanning) scannerPelajaran.stop(); }catch(e){}
+  const b=document.getElementById('btnPelajaranStart'); if(b) b.style.display='';
+  const s=document.getElementById('btnPelajaranStop'); if(s) s.style.display='none';
+  const p=document.getElementById('pelajaranCamPlaceholder'); if(p) p.style.display='';
+};
+async function prosesScanPelajaran(text){
+  document.getElementById('loadingOverlay').classList.add('show');
+  try{
+    const resolved = await resolveSiswaDariQR(text);
+    if(resolved.kelas !== pelajaranKelasAktif) throw 'Siswa bukan dari kelas '+pelajaranKelasAktif;
+    const ds = resolved.data||{};
+    await db.ref('presensiPelajaran/'+todayKey()+'/'+pelajaranKelasAktif+'/'+pelajaranSesiId+'/'+resolved.absen)
+      .set({nama:ds.nama, kelas:resolved.kelas, guru:currentUser.nama, jam:nowHM(), timestamp:Date.now()});
+    feedbackPelajaran('✅', ds.nama, 'Absen pelajaran tercatat', 'var(--accent-green)');
+    playBeep('success');
+  }catch(e){
+    feedbackPelajaran('❌','GAGAL', e.toString(), 'var(--accent-red)');
+    showToast(e.toString(),'error'); playBeep('error');
+  }
+  document.getElementById('loadingOverlay').classList.remove('show');
+  setTimeout(()=>{ try{ scannerPelajaran?.resume(); }catch(e){} }, 1500);
+}
+function feedbackPelajaran(icon,name,msg,bg){
+  const fb=document.getElementById('pelajaranFeedback'); if(!fb) return;
+  document.getElementById('pelajaranFbIcon').innerText=icon;
+  document.getElementById('pelajaranFbNama').innerText=name;
+  document.getElementById('pelajaranFbMsg').innerText=msg;
+  document.getElementById('pelajaranFbBox').style=`text-align:center;padding:24px 32px;border-radius:16px;background:${bg};`;
+  fb.classList.add('show');
+  setTimeout(()=>fb.classList.remove('show'),1800);
+}
+
+// ===================== WALI KELAS (guru) =====================
+let scannerWali = null, wkExcelMode = 'harian';
+function initWaliKelasScreen(){
+  const kelas = currentUser.waliKelas;
+  document.getElementById('wkKelasLabel').innerText = kelas || '-';
+  document.getElementById('wkKelasLabel2').innerText = kelas || '-';
+}
+window.buatKartuWali = async function(){
+  const kelas = currentUser.waliKelas;
+  const nama = document.getElementById('wkNama').value.trim();
+  const absen = document.getElementById('wkAbsen').value.trim();
+  const jk = document.getElementById('wkJk').value;
+  const agama = document.getElementById('wkAgama').value;
+  const colorKey = document.getElementById('wkWarna').value || 'navy';
+  if(!kelas){ showToast('Anda bukan wali kelas','error'); return; }
+  if(!nama||!absen){ showToast('Lengkapi data!','error'); return; }
+  document.getElementById('loadingOverlay').classList.add('show');
+  try{
+    const namaUp = nama.toUpperCase();
+    const slotDipakai = await cekSlotSudahDipakai(kelas, absen);
+    if(slotDipakai) throw new Error(`Absen ${absen} sudah dipakai oleh "${slotDipakai.nama}"`);
+    const namaBentrok = await cekNamaSudahAda(namaUp, null, null);
+    if(namaBentrok) throw new Error(`Nama sudah terdaftar di kelas ${namaBentrok.kelas} absen ${namaBentrok.absen}`);
+    const kode = await generateKodeUnik();
+    await db.ref('siswa/'+kelas+'/'+absen).set({nama:namaUp,kelas,absen,jk,agama,kodeUnik:kode,warnaKartu:colorKey,totalHadir:0,terdaftar:Date.now()});
+    await db.ref('kodeIndex/'+kode).set({kelas,absen});
+    const canvas = await generateKartuCanvas({nama:namaUp,agama,kode,colorKey});
+    const dataUrl = canvas.toDataURL('image/png');
+    document.getElementById('wkQrArea').innerHTML = `<div style="background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:var(--radius-lg);padding:16px;text-align:center;margin-top:12px;">
+      <img src="${dataUrl}" style="width:100%;max-width:260px;border-radius:10px;box-shadow:var(--shadow-md);">
+      <div style="font-size:10px;color:var(--text-tertiary);margin-top:8px;">${kelas} • Absen ${absen} • ${kode}</div>
+      <button class="btn btn-primary btn-sm" style="margin-top:10px;" onclick="downloadDataUrl('${dataUrl}','KARTU_${namaUp.replace(/\s+/g,'_')}.png')"><i class="fas fa-download"></i> Download Kartu</button>
+    </div>`;
+    showToast('Kartu berhasil dibuat!','success'); playBeep('success');
+    document.getElementById('wkNama').value=''; document.getElementById('wkAbsen').value='';
+  }catch(e){ showToast('Gagal: '+e.message,'error'); playBeep('error'); }
+  document.getElementById('loadingOverlay').classList.remove('show');
+};
+window.startWaliCam = async function(){
+  document.getElementById('btnWaliStart').style.display='none';
+  document.getElementById('btnWaliStop').style.display='';
+  document.getElementById('wkCamPlaceholder').style.display='none';
+  scannerWali = new Html5Qrcode("readerWali");
+  try{
+    await scannerWali.start({facingMode:"environment"},{fps:5,qrbox:{width:240,height:240},aspectRatio:1.333},
+      text=>{ scannerWali.pause(); prosesScanWali(text); }, ()=>{});
+  }catch(e){
+    showToast('Gagal: '+e,'error');
+    document.getElementById('btnWaliStart').style.display='';
+    document.getElementById('btnWaliStop').style.display='none';
+    document.getElementById('wkCamPlaceholder').style.display='';
+  }
+};
+window.stopWaliCam = function(){
+  try{ if(scannerWali?.isScanning) scannerWali.stop(); }catch(e){}
+  const b=document.getElementById('btnWaliStart'); if(b) b.style.display='';
+  const s=document.getElementById('btnWaliStop'); if(s) s.style.display='none';
+  const p=document.getElementById('wkCamPlaceholder'); if(p) p.style.display='';
+};
+async function prosesScanWali(text){
+  document.getElementById('loadingOverlay').classList.add('show');
+  try{
+    const resolved = await resolveSiswaDariQR(text);
+    if(resolved.kelas !== currentUser.waliKelas) throw 'Bukan siswa kelas Anda ('+currentUser.waliKelas+')!';
+    const ds = resolved.data||{};
+    const today = todayKey();
+    const ref = db.ref('presensiSekolah/'+today+'/'+resolved.kelas+'_'+resolved.absen);
+    if((await ref.once('value')).exists()) throw 'Sudah absen hari ini!';
+    const setting = await getPengaturanCache();
+    const jamNow = nowHM();
+    const status = jamNow <= setting.jamTerlambat ? 'HADIR' : 'TERLAMBAT';
+    await ref.set({nama:ds.nama, kelas:resolved.kelas, absen:resolved.absen, status, jam:jamNow, timestamp:Date.now()});
+    await db.ref('siswa/'+resolved.kelas+'/'+resolved.absen+'/totalHadir').set((ds.totalHadir||0)+1);
+    feedbackWali(status==='HADIR'?'✅':'⏰', ds.nama, status==='HADIR'?'Hadir tepat waktu':'Terlambat', status==='HADIR'?'var(--accent-green)':'var(--accent-amber)');
+    playBeep('success');
+  }catch(e){
+    feedbackWali('❌','GAGAL', e.toString(), 'var(--accent-red)');
+    showToast(e.toString(),'error'); playBeep('error');
+  }
+  document.getElementById('loadingOverlay').classList.remove('show');
+  setTimeout(()=>{ try{ scannerWali?.resume(); }catch(e){} }, 1800);
+}
+function feedbackWali(icon,name,msg,bg){
+  const fb=document.getElementById('wkFeedback'); if(!fb) return;
+  document.getElementById('wkFbIcon').innerText=icon;
+  document.getElementById('wkFbNama').innerText=name;
+  document.getElementById('wkFbMsg').innerText=msg;
+  document.getElementById('wkFbBox').style=`text-align:center;padding:20px 28px;border-radius:14px;background:${bg};`;
+  fb.classList.add('show');
+  setTimeout(()=>fb.classList.remove('show'),1800);
+}
+function initDropdownBulanWali(){
+  ['wkPilihBulan','wkPilihBulanRekap'].forEach(id=>{
+    const s=document.getElementById(id); if(!s) return; s.innerHTML='';
+    const now=new Date();
+    for(let i=0;i<12;i++){ const d=new Date(now.getFullYear(),now.getMonth()-i,1);
+      s.innerHTML+=`<option value="${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}">${d.toLocaleDateString('id-ID',{month:'long',year:'numeric'}).toUpperCase()}</option>`; }
+  });
+}
+window.initTanggalHarianWali = function(ms){
+  const sh=document.getElementById('wkTanggalHarian'); if(!sh) return;
+  let td=new Date(); if(ms){ const [y,m]=ms.split('-'); td=new Date(y,m-1,1); }
+  const bln=td.getMonth(), thn=td.getFullYear(), jh=new Date(thn,bln+1,0).getDate();
+  sh.innerHTML='';
+  for(let i=1;i<=jh;i++){ const t=new Date(thn,bln,i);
+    if(t.getDay()>=1&&t.getDay()<=5) sh.innerHTML+=`<option value="${t.toLocaleDateString('id-ID').replace(/\//g,'-')}">${NAMA_HARI[t.getDay()]}, ${t.toLocaleDateString('id-ID')}</option>`; }
+  const today=todayKey();
+  if(!ms && [...sh.options].some(o=>o.value===today)) sh.value=today;
+};
+window.setWaliExcelMode = function(m){
+  wkExcelMode=m;
+  document.getElementById('wkModeHarian').classList.toggle('active', m==='harian');
+  document.getElementById('wkModeRekap').classList.toggle('active', m==='rekap');
+  document.getElementById('wkHarianPicker').style.display = m==='harian'?'':'none';
+  document.getElementById('wkRekapPicker').style.display = m==='rekap'?'':'none';
+};
+window.downloadDataWali = async function(){
+  const kelas = currentUser.waliKelas;
+  if(!kelas){ showToast('Anda bukan wali kelas','error'); return; }
+  document.getElementById('loadingOverlay').classList.add('show');
+  try{
+    const ss = await db.ref('siswa/'+kelas).once('value');
+    const s = ss.val()||{};
+    const daftar = Object.keys(s).map(Number).sort((a,b)=>a-b);
+    const wb = XLSX.utils.book_new();
+    if(wkExcelMode==='harian'){
+      const key = document.getElementById('wkTanggalHarian').value;
+      if(!key){ showToast('Pilih tanggal','error'); document.getElementById('loadingOverlay').classList.remove('show'); return; }
+      const [d,m,y]=key.split('-').map(Number), tgl=new Date(y,m-1,d);
+      const header = `${NAMA_HARI[tgl.getDay()]}, ${tgl.toLocaleDateString('id-ID')}`;
+      const ps = await db.ref('presensiSekolah/'+key).once('value'), p = ps.val()||{};
+      const rows=[['NO','NAMA',header,'JAM']], warna=[];
+      daftar.forEach(no=>{
+        const si=s[no]||{}, h=p[kelas+'_'+no], ri=rows.length;
+        if(h){ const st=(h.status||'').toUpperCase(); rows.push([no, si.nama||'-', st, h.jam||'-']);
+          if(st==='TERLAMBAT') warna.push({r:ri,c:2,color:'FFFF00'}); else if(st==='ALPA') warna.push({r:ri,c:2,color:'FF0000'});
+        } else rows.push([no, si.nama||'-', '', '']);
+      });
+      const ws = XLSX.utils.aoa_to_sheet(rows);
+      warna.forEach(w=>beriWarnaCell(ws,w.r,w.c,w.color));
+      ws['!cols']=[{wch:8},{wch:28},{wch:14},{wch:10}];
+      XLSX.utils.book_append_sheet(wb,ws,'Harian');
+      XLSX.writeFile(wb, `ABSEN_${kelas}_${key}.xlsx`);
+    } else {
+      const bv = document.getElementById('wkPilihBulanRekap').value;
+      const [y,m] = bv.split('-'); const tgl=new Date(y,m-1,1);
+      const bln=tgl.getMonth(), thn=tgl.getFullYear();
+      const ft=d=>d.toLocaleDateString('id-ID').replace(/\//g,'-');
+      const fh=d=>`${NAMA_HARI[d.getDay()]} ${d.getDate()}/${d.getMonth()+1}`;
+      const st=[]; for(let i=1;i<=new Date(thn,bln+1,0).getDate();i++){ const d=new Date(thn,bln,i); if(d.getDay()>=1&&d.getDay()<=5) st.push(d); }
+      const pb={}; for(let d of st){ pb[ft(d)] = (await db.ref('presensiSekolah/'+ft(d)).once('value')).val()||{}; }
+      const hdr=['NO','NAMA',...st.map(fh),'TOTAL']; const rows=[hdr]; const warna=[];
+      daftar.forEach(no=>{
+        const si=s[no]||{}; const row=[no, si.nama||'-']; const ri=rows.length; let t=0;
+        st.forEach((d,i)=>{ const h=(pb[ft(d)]||{})[kelas+'_'+no]; const ci=2+i;
+          if(h){ const stx=(h.status||'').toUpperCase();
+            if(stx==='TERLAMBAT'){ row.push('TERLAMBAT'); warna.push({r:ri,c:ci,color:'FFFF00'}); t++; }
+            else if(stx==='ALPA'){ row.push('ALPA'); warna.push({r:ri,c:ci,color:'FF0000'}); }
+            else { row.push(stx); if(stx==='HADIR') t++; }
+          } else row.push('');
+        });
+        row.push(t); rows.push(row);
+      });
+      const ws = XLSX.utils.aoa_to_sheet(rows);
+      warna.forEach(w=>beriWarnaCell(ws,w.r,w.c,w.color));
+      ws['!cols']=[{wch:8},{wch:28},...st.map(()=>({wch:12})),{wch:10}];
+      XLSX.utils.book_append_sheet(wb,ws,'Rekap');
+      XLSX.writeFile(wb, `REKAP_${kelas}_${tgl.toLocaleDateString('id-ID',{month:'long',year:'numeric'})}.xlsx`);
+    }
+    showToast('Download selesai!','success');
+  }catch(e){ showToast('Gagal: '+e.message,'error'); }
+  document.getElementById('loadingOverlay').classList.remove('show');
+};
+
+// ===================== NAIK KELAS (admin) =====================
+let listSiswaScannedNaik = [];
+function initNaikKelasScreen(){ renderListNaik(); }
+window.startScanNaikKelas = function(){
+  document.getElementById('btnStartNaik').style.display='none';
+  document.getElementById('btnStopNaik').style.display='';
+  document.getElementById('naikCamPlaceholder').style.display='none';
+  scannerNaik = new Html5Qrcode("readerNaik");
+  scannerNaik.start({facingMode:"environment"},{fps:10,qrbox:180},text=>{ scannerNaik.pause(); prosesQRNaik(text); },()=>{}).catch(e=>{
+    showToast('Gagal: '+e,'error');
+    document.getElementById('btnStartNaik').style.display='';
+    document.getElementById('btnStopNaik').style.display='none';
+    document.getElementById('naikCamPlaceholder').style.display='';
+  });
+};
+window.stopScanNaikKelas = function(){
+  try{ if(scannerNaik?.isScanning) scannerNaik.stop(); }catch(e){}
+  const a=document.getElementById('btnStartNaik'); if(a) a.style.display='';
+  const b=document.getElementById('btnStopNaik'); if(b) b.style.display='none';
+  const c=document.getElementById('naikCamPlaceholder'); if(c) c.style.display='';
+};
+var scannerNaik = null;
+async function prosesQRNaik(text){
+  try{
+    const resolved = await resolveSiswaDariQR(text);
+    const nama = resolved.data?.nama || resolved.namaQR;
+    if(listSiswaScannedNaik.find(s=>s.nama.toUpperCase()===nama.toUpperCase())){
+      showFeedbackNaik('⚠️',nama,'Sudah discan!','var(--accent-amber)');
+      setTimeout(()=>scannerNaik?.resume(),1500); return;
+    }
+    listSiswaScannedNaik.push({...resolved.data, kelasLama:resolved.kelas, absenLama:resolved.absen});
+    renderListNaik();
+    showFeedbackNaik('✅', resolved.data?.nama||nama, `Ditambahkan (${listSiswaScannedNaik.length})`, 'var(--accent-green)');
+    playBeep('success');
+  }catch(e){
+    showFeedbackNaik('❌','GAGAL', e.toString(), 'var(--accent-red)'); playBeep('error');
+  }
+  setTimeout(()=>{ try{ scannerNaik?.resume(); }catch(e){} }, 1800);
+}
+function showFeedbackNaik(icon,na
