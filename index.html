@@ -236,10 +236,15 @@ select.form-input option{background:var(--bg-elevated);color:var(--text-primary)
       </div>
       <div class="form-group">
         <label class="form-label">Password</label>
-        <input type="password" id="loginPassword" class="form-input" placeholder="password" autocomplete="off">
+        <div style="position:relative;">
+          <input type="password" id="loginPassword" class="form-input" placeholder="password" autocomplete="off" style="padding-right:42px;">
+          <button type="button" onclick="toggleLoginPassword()" id="btnTogglePw" style="position:absolute;right:6px;top:50%;transform:translateY(-50%);width:30px;height:30px;border:none;background:transparent;color:var(--text-tertiary);cursor:pointer;">
+            <i class="fas fa-eye" id="iconTogglePw"></i>
+          </button>
+        </div>
       </div>
       <button onclick="doLogin()" class="btn btn-primary"><i class="fas fa-right-to-bracket"></i> LOGIN</button>
-      <div id="loginError" class="login-error-box"><i class="fas fa-exclamation-triangle"></i> Username atau password salah!</div>
+      <div id="loginError" class="login-error-box"><i class="fas fa-exclamation-triangle"></i> <span id="loginErrorMsg">Username atau password salah!</span></div>
     </div>
     <div class="login-dialog-footer"><p>© Gema Bintang • Absensi SMAN 12 (akun awal: admin / admin)</p></div>
   </div>
@@ -712,10 +717,35 @@ window.downloadDataUrl = function(dataUrl,filename){
 
 // ===================== INIT / LOGIN =====================
 async function seedAdminIfNeeded(){
-  const snap = await db.ref('users/admin').once('value');
-  if(!snap.exists()){
-    await db.ref('users/admin').set({nama:'Administrator',username:'admin',password:'admin',role:'admin',nip:'',kelasMengajar:[],waliKelas:'',piketHari:[]});
+  try{
+    const snap = await db.ref('users/admin').once('value');
+    if(!snap.exists()){
+      await db.ref('users/admin').set({nama:'Administrator',username:'admin',password:'admin',role:'admin',nip:'',kelasMengajar:[],waliKelas:'',piketHari:[]});
+    }
+  }catch(e){
+    console.error('Gagal seed admin:', e);
+    showToast('Gagal terhubung ke database: '+e.message,'error');
   }
+}
+
+window.toggleLoginPassword = function(){
+  const inp = document.getElementById('loginPassword');
+  const icon = document.getElementById('iconTogglePw');
+  if(inp.type==='password'){ inp.type='text'; icon.classList.remove('fa-eye'); icon.classList.add('fa-eye-slash'); }
+  else{ inp.type='password'; icon.classList.remove('fa-eye-slash'); icon.classList.add('fa-eye'); }
+};
+
+async function cariUserLogin(usernameInput){
+  const clean = usernameInput.trim();
+  const uLower = clean.toLowerCase();
+  const snap = await db.ref('users/'+clean).once('value');
+  if(snap.exists()) return snap.val();
+  const allSnap = await db.ref('users').once('value');
+  const all = allSnap.val()||{};
+  for(let key in all){
+    if(key.toLowerCase()===uLower || String(all[key].username||'').toLowerCase()===uLower) return all[key];
+  }
+  return null;
 }
 
 window.onload = async function(){
@@ -761,15 +791,25 @@ window.doLogin = async function(){
   if(!u||!p){showToast('Isi username & password','error');return;}
   document.getElementById('loadingOverlay').classList.add('show');
   try{
-    const snap = await db.ref('users/'+u).once('value');
-    if(!snap.exists() || snap.val().password !== p) throw new Error('salah');
-    currentUser = snap.val();
-    localStorage.setItem('sesiUser', JSON.stringify(currentUser));
-    document.getElementById('loginOverlay').style.display='none';
-    document.getElementById('btnLogoutNav').style.display='';
-    afterLogin();
-    showToast('Login berhasil!','success'); playBeep('success');
+    const userData = await cariUserLogin(u);
+    if(!userData){
+      document.getElementById('loginErrorMsg').innerText = 'Username "'+u+'" tidak ditemukan di database!';
+      document.getElementById('loginError').style.display='';
+      playBeep('error');
+    } else if(userData.password !== p){
+      document.getElementById('loginErrorMsg').innerText = 'Password salah! Coba periksa lagi.';
+      document.getElementById('loginError').style.display='';
+      playBeep('error');
+    } else {
+      currentUser = userData;
+      localStorage.setItem('sesiUser', JSON.stringify(currentUser));
+      document.getElementById('loginOverlay').style.display='none';
+      document.getElementById('btnLogoutNav').style.display='';
+      afterLogin();
+      showToast('Login berhasil!','success'); playBeep('success');
+    }
   }catch(e){
+    document.getElementById('loginErrorMsg').innerText = 'Gagal terhubung ke database: '+e.message;
     document.getElementById('loginError').style.display='';
     playBeep('error');
   }
@@ -1635,4 +1675,96 @@ async function prosesQRNaik(text){
   }
   setTimeout(()=>{ try{ scannerNaik?.resume(); }catch(e){} }, 1800);
 }
-function showFeedbackNaik(icon,na
+function showFeedbackNaik(icon,nama,msg,bg){
+  const fb=document.getElementById('feedbackNaik'); if(!fb) return;
+  document.getElementById('fbNaikIcon').innerText=icon;
+  document.getElementById('fbNaikNama').innerText=nama;
+  document.getElementById('fbNaikMsg').innerText=msg;
+  document.getElementById('fbNaikBox').style=`text-align:center;padding:20px 28px;border-radius:14px;background:${bg};`;
+  fb.classList.add('show');
+  setTimeout(()=>fb.classList.remove('show'),1800);
+}
+function renderListNaik(){
+  const c=document.getElementById('listScanNaik'); if(!c) return;
+  if(listSiswaScannedNaik.length===0){ c.innerHTML='<div class="empty-placeholder"><i class="fas fa-user-plus"></i><p>Belum ada scan</p></div>'; return; }
+  c.innerHTML = listSiswaScannedNaik.map((s,i)=>`
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:var(--bg-elevated);border:1px solid var(--border-subtle);border-radius:var(--radius-sm);">
+      <div><div style="font-size:12px;font-weight:700;">${s.nama}</div><div style="font-size:10px;color:var(--text-tertiary);">${s.kelasLama||'?'} → dipindah</div></div>
+      <button onclick="hapusScanNaik(${i})" class="btn-nav danger" style="width:26px;height:26px;font-size:10px;"><i class="fas fa-times"></i></button>
+    </div>`).join('');
+}
+window.hapusScanNaik = function(i){ listSiswaScannedNaik.splice(i,1); renderListNaik(); };
+window.resetNaikKelas = function(){ listSiswaScannedNaik=[]; renderListNaik(); showToast('Reset','success'); };
+window.simpanNaikKelas = async function(){
+  if(listSiswaScannedNaik.length===0){ showToast('Kosong!','error'); return; }
+  const tujuan = document.getElementById('kelasTujuanNaik').value;
+  if(!tujuan){ showToast('Pilih kelas!','error'); return; }
+  document.getElementById('loadingOverlay').classList.add('show');
+  try{
+    const sorted=[...listSiswaScannedNaik].sort((a,b)=>a.nama.localeCompare(b.nama));
+    const existingSnap = await db.ref('siswa/'+tujuan).once('value');
+    const existingData = existingSnap.val()||{};
+    const konflik=[];
+    for(let i=0;i<sorted.length;i++){
+      const absenBaru=String(i+1);
+      const existing = existingData[absenBaru];
+      if(existing && !(sorted[i].kelasLama===tujuan && String(sorted[i].absenLama)===absenBaru)){
+        const masihDipindah = sorted.some(s=>s.kelasLama===tujuan && String(s.absenLama)===absenBaru);
+        if(!masihDipindah) konflik.push(`Absen ${absenBaru} di ${tujuan} sudah dipakai "${existing.nama}"`);
+      }
+    }
+    if(konflik.length>0) throw new Error('Konflik slot: '+konflik.join('; '));
+    for(let i=0;i<sorted.length;i++){
+      const s=sorted[i]; const absenBaru=String(i+1);
+      if(s.kelasLama && s.absenLama) await db.ref('siswa/'+s.kelasLama+'/'+s.absenLama).remove();
+      let kode=s.kodeUnik; if(!kode) kode=await generateKodeUnik();
+      await db.ref('siswa/'+tujuan+'/'+absenBaru).set({nama:s.nama,kelas:tujuan,absen:absenBaru,jk:s.jk||'L',agama:s.agama||'Islam',kodeUnik:kode,warnaKartu:s.warnaKartu||'navy',totalHadir:s.totalHadir||0,terdaftar:s.terdaftar||Date.now()});
+      await db.ref('kodeIndex/'+kode).set({kelas:tujuan,absen:absenBaru});
+    }
+    showToast(`${sorted.length} siswa dipindah ke ${tujuan}!`,'success');
+    listSiswaScannedNaik=[]; renderListNaik();
+  }catch(e){ showToast('Gagal: '+e.message,'error'); }
+  document.getElementById('loadingOverlay').classList.remove('show');
+};
+
+// ===================== DATA SISWA (admin) =====================
+let allSiswaDataCache = [];
+async function initDataSiswaScreen(){
+  const ss = await db.ref('siswa').once('value');
+  const d = ss.val()||{};
+  allSiswaDataCache=[]; let t=0; const kelasSet=new Set();
+  for(let k in d){ kelasSet.add(k); for(let a in d[k]){ t++; allSiswaDataCache.push({...d[k][a],kelas:k,absen:a}); } }
+  document.getElementById('dsTotalSiswa').innerText=t;
+  document.getElementById('dsTotalKelas').innerText=kelasSet.size;
+  filterDataSiswa();
+}
+window.filterDataSiswa = function(){
+  const s=(document.getElementById('dsSearch')?.value||'').toLowerCase();
+  const kf=document.getElementById('dsFilterKelas')?.value||'';
+  let f = allSiswaDataCache.filter(x=>(x.nama||'').toLowerCase().includes(s) && (!kf||x.kelas===kf));
+  f.sort((a,b)=>a.kelas.localeCompare(b.kelas)||parseInt(a.absen)-parseInt(b.absen));
+  const c=document.getElementById('listDataSiswa'); if(!c) return;
+  if(f.length===0){ c.innerHTML='<div class="empty-placeholder"><i class="fas fa-search"></i><p>Tidak ada data</p></div>'; return; }
+  c.innerHTML = f.map(x=>`
+    <div style="background:var(--bg-elevated);border:1px solid var(--border-subtle);border-radius:var(--radius-md);padding:12px 14px;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+        <div><div style="font-size:13px;font-weight:700;">${x.nama||'-'}</div>
+          <div style="font-size:10px;color:var(--text-tertiary);margin-top:2px;">${x.kelas} • Absen ${x.absen} • ${x.jk==='L'?'L':'P'} • ${x.agama||'-'}</div></div>
+        <div style="background:rgba(61,214,200,.08);color:var(--accent-teal);font-size:12px;font-weight:800;padding:3px 10px;border-radius:6px;">${x.totalHadir||0}x</div>
+      </div>
+    </div>`).join('');
+};
+window.downloadSemuaDataSiswa = function(){
+  const rows=[['KELAS','ABSEN','NAMA','JK','AGAMA','TOTAL HADIR']];
+  [...allSiswaDataCache].sort((a,b)=>a.kelas.localeCompare(b.kelas)||parseInt(a.absen)-parseInt(b.absen)).forEach(x=>{
+    rows.push([x.kelas,x.absen,x.nama||'',x.jk||'',x.agama||'',x.totalHadir||0]);
+  });
+  const ws = XLSX.utils.aoa_to_sheet(rows);
+  ws['!cols']=[{wch:8},{wch:8},{wch:28},{wch:6},{wch:12},{wch:12}];
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb,ws,'Data Siswa');
+  XLSX.writeFile(wb, `DATA_SISWA_${todayKey()}.xlsx`);
+};
+</script>
+</body>
+</html>
