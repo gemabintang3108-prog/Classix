@@ -1033,7 +1033,7 @@ function buildHomeMenu(){
     items.push({s:'pengaturan',icon:'fa-sliders',c:'accent-amber',t:'Pengaturan',d:'Batas waktu & data'});
     items.push({s:'naikkelas',icon:'fa-graduation-cap',c:'accent-purple',t:'Naik Kelas',d:'Migrasi ke kelas baru'});
   }
-  if(canAdminKerohanian(currentUser)){
+  if(isAdmin(currentUser)){
     items.push({s:'datasiswa',icon:'fa-database',c:'accent-blue',t:'Data Siswa',d:'Database & export'});
     items.push({s:'tambahsiswa',icon:'fa-user-plus',c:'accent-teal',t:'Tambah Siswa',d:'Buat kartu QR baru'});
     items.push({s:'importexcel',icon:'fa-file-excel',c:'accent-green',t:'Import Excel',d:'Generate kartu massal'});
@@ -1062,7 +1062,7 @@ window.navigateTo = function(screen){
   if(screen==='akunkerohanian' && !canAdminKerohanian(currentUser)){ return; }
   if((screen==='jadwalpiket'||screen==='pengaturan') && !canSekolah(currentUser)){ return; }
   if(screen==='naikkelas' && !canSekolah(currentUser)){ return; }
-  if((screen==='datasiswa'||screen==='tambahsiswa'||screen==='importexcel') && !canAdminKerohanian(currentUser)){ return; }
+  if((screen==='datasiswa'||screen==='tambahsiswa'||screen==='importexcel') && !isAdmin(currentUser)){ return; }
   if(screen==='kerohanian' && !canKerohanian(currentUser)){ return; }
   const map = {home:'screenHome',profile:'screenProfile',akun:'screenAkun',akunkerohanian:'screenAkunKerohanian',jadwalpiket:'screenJadwalPiket',pengaturan:'screenPengaturan',
     piket:'screenPiket',pelajaran:'screenPelajaran',walikelas:'screenWaliKelas',naikkelas:'screenNaikKelas',datasiswa:'screenDataSiswa',
