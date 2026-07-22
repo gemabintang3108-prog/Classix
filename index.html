@@ -1418,6 +1418,8 @@ window.downloadDataSekolah = async function(){
           rows.push([no, si.nama||h.nama||'-', st, h.jam||'-']);
           if(st==='TERLAMBAT') warna.push({r:ri,c:2,color:'FFFF00'});
           else if(st==='ALPA') warna.push({r:ri,c:2,color:'FF0000'});
+          else if(st==='SAKIT') warna.push({r:ri,c:2,color:'87CEEB'});
+          else if(st==='IZIN') warna.push({r:ri,c:2,color:'DDA0DD'});
         } else rows.push([no, si.nama||'-', '', '']);
       });
       const ws = XLSX.utils.aoa_to_sheet(rows);
@@ -1452,10 +1454,12 @@ async function downloadRekapBulananSekolah(){
       daftar.forEach(no=>{
         const si=s[k][no]||{}; const row=[no, si.nama||'-']; const ri=rows.length; let t=0;
         st.forEach((d,i)=>{ const h=(pb[ft(d)]||{})[k+'_'+no]; const ci=2+i;
-          if(h){ const stx=(h.status||'').toUpperCase();
-            if(stx==='TERLAMBAT'){ row.push('TERLAMBAT'); warna.push({r:ri,c:ci,color:'FFFF00'}); t++; }
+          if(h){ const stx=(h.status||'').toUpperCase(); const jamTxt=(h.jam&&h.jam!=='-')?' '+h.jam:'';
+            if(stx==='TERLAMBAT'){ row.push('TERLAMBAT'+jamTxt); warna.push({r:ri,c:ci,color:'FFFF00'}); t++; }
             else if(stx==='ALPA'){ row.push('ALPA'); warna.push({r:ri,c:ci,color:'FF0000'}); }
-            else { row.push(stx); if(stx==='HADIR') t++; }
+            else if(stx==='SAKIT'){ row.push('SAKIT'); warna.push({r:ri,c:ci,color:'87CEEB'}); }
+            else if(stx==='IZIN'){ row.push('IZIN'); warna.push({r:ri,c:ci,color:'DDA0DD'}); }
+            else { row.push(stx+jamTxt); if(stx==='HADIR') t++; }
           } else row.push('');
         });
         row.push(t); rows.push(row);
@@ -1958,7 +1962,10 @@ window.downloadDataWali = async function(){
       daftar.forEach(no=>{
         const si=s[no]||{}, h=p[kelas+'_'+no], ri=rows.length;
         if(h){ const st=(h.status||'').toUpperCase(); rows.push([no, si.nama||'-', st, h.jam||'-']);
-          if(st==='TERLAMBAT') warna.push({r:ri,c:2,color:'FFFF00'}); else if(st==='ALPA') warna.push({r:ri,c:2,color:'FF0000'});
+          if(st==='TERLAMBAT') warna.push({r:ri,c:2,color:'FFFF00'});
+          else if(st==='ALPA') warna.push({r:ri,c:2,color:'FF0000'});
+          else if(st==='SAKIT') warna.push({r:ri,c:2,color:'87CEEB'});
+          else if(st==='IZIN') warna.push({r:ri,c:2,color:'DDA0DD'});
         } else rows.push([no, si.nama||'-', '', '']);
       });
       const ws = XLSX.utils.aoa_to_sheet(rows);
@@ -1978,10 +1985,12 @@ window.downloadDataWali = async function(){
       daftar.forEach(no=>{
         const si=s[no]||{}; const row=[no, si.nama||'-']; const ri=rows.length; let t=0;
         st.forEach((d,i)=>{ const h=(pb[ft(d)]||{})[kelas+'_'+no]; const ci=2+i;
-          if(h){ const stx=(h.status||'').toUpperCase();
-            if(stx==='TERLAMBAT'){ row.push('TERLAMBAT'); warna.push({r:ri,c:ci,color:'FFFF00'}); t++; }
+          if(h){ const stx=(h.status||'').toUpperCase(); const jamTxt=(h.jam&&h.jam!=='-')?' '+h.jam:'';
+            if(stx==='TERLAMBAT'){ row.push('TERLAMBAT'+jamTxt); warna.push({r:ri,c:ci,color:'FFFF00'}); t++; }
             else if(stx==='ALPA'){ row.push('ALPA'); warna.push({r:ri,c:ci,color:'FF0000'}); }
-            else { row.push(stx); if(stx==='HADIR') t++; }
+            else if(stx==='SAKIT'){ row.push('SAKIT'); warna.push({r:ri,c:ci,color:'87CEEB'}); }
+            else if(stx==='IZIN'){ row.push('IZIN'); warna.push({r:ri,c:ci,color:'DDA0DD'}); }
+            else { row.push(stx+jamTxt); if(stx==='HADIR') t++; }
           } else row.push('');
         });
         row.push(t); rows.push(row);
