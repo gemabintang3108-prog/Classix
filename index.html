@@ -387,7 +387,8 @@ select.form-input option{background:var(--bg-elevated);color:var(--text-primary)
 
         <div class="section-card" id="setZonaResetCard" style="border-color:rgba(248,113,113,.2);">
           <div class="section-title" style="color:var(--accent-red);"><i class="fas fa-triangle-exclamation"></i> ZONA RESET</div>
-          <button onclick="resetStatistik()" class="btn btn-warning btn-sm" style="margin-bottom:8px;"><i class="fas fa-rotate-left"></i> Reset Statistik (Kehadiran)</button>
+          <button onclick="resetStatistik()" class="btn btn-warning btn-sm" style="margin-bottom:8px;"><i class="fas fa-rotate-left"></i> Reset Statistik Absensi Sekolah</button>
+          <button onclick="resetDataKerohanian()" class="btn btn-warning btn-sm" style="margin-bottom:8px;"><i class="fas fa-rotate-left"></i> Reset Semua Presensi Kerohanian</button>
           <button onclick="resetAllData()" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Reset Semua Data (Termasuk Siswa)</button>
         </div>
       </div>
@@ -697,10 +698,6 @@ select.form-input option{background:var(--bg-elevated);color:var(--text-primary)
         </div>
         <button onclick="downloadHarianKr()" class="btn btn-primary btn-sm" style="margin-bottom:10px;"><i class="fas fa-download"></i> Download</button>
         <div id="logKerohanian" class="log-list"><div class="empty-placeholder"><i class="fas fa-inbox"></i><p>Belum ada presensi</p></div></div>
-        <div class="section-card" style="margin-top:16px;border-color:rgba(248,113,113,.2);">
-          <div class="section-title" style="color:var(--accent-red);"><i class="fas fa-triangle-exclamation"></i> RESET DATA KEROHANIAN</div>
-          <button onclick="resetDataKerohanian()" class="btn btn-danger btn-sm"><i class="fas fa-rotate-left"></i> Reset Semua Presensi Kerohanian</button>
-        </div>
       </div>
     </div>
 
@@ -2518,7 +2515,9 @@ window.downloadHarianKr = async function(){
   document.getElementById('loadingOverlay').classList.remove('show');
 };
 window.resetDataKerohanian = async function(){
+  if(!isAdmin(currentUser)){ showToast('Hanya Admin yang bisa reset data','error'); return; }
   if(!confirm('Hapus semua data presensi Kerohanian (tidak termasuk data siswa)? Tidak bisa dibatalkan!')) return;
+  if(!mintaKodeReset()) return;
   document.getElementById('loadingOverlay').classList.add('show');
   try{
     await db.ref('presensi').remove();
