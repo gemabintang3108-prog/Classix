@@ -359,7 +359,7 @@ select.form-input option{background:var(--bg-elevated);color:var(--text-primary)
       <div class="screen-header"><button class="btn-back" onclick="navigateTo('home')"><i class="fas fa-arrow-left"></i></button>
         <div class="screen-header-title">Pengaturan</div><div class="screen-header-accent" style="background:var(--accent-amber);"></div></div>
       <div class="screen-body">
-        <div class="section-card">
+        <div class="section-card" id="setBatasWaktuCard">
           <div class="section-title"><i class="fas fa-clock" style="color:var(--accent-amber);"></i> BATAS WAKTU ABSEN</div>
           <div class="form-row">
             <div class="form-group"><label class="form-label">Batas Terlambat</label><input type="time" id="setJamTerlambat" class="form-input"></div>
@@ -370,15 +370,22 @@ select.form-input option{background:var(--bg-elevated);color:var(--text-primary)
 
         <div class="section-card">
           <div class="section-title"><i class="fas fa-file-excel" style="color:var(--accent-green);"></i> DOWNLOAD DATA ABSENSI</div>
-          <div class="form-row" style="margin-bottom:10px;">
+          <div class="mode-selector">
+            <button onclick="setSekolahExcelMode('harian')" id="setModeHarian" class="mode-option active">Harian</button>
+            <button onclick="setSekolahExcelMode('rekap')" id="setModeRekap" class="mode-option">Rekap Bulanan</button>
+          </div>
+          <div id="setHarianPicker" class="form-row" style="margin-bottom:10px;">
             <select id="setPilihBulan" class="form-input" onchange="initTanggalHarianSet(this.value)"></select>
             <select id="setTanggalHarian" class="form-input"></select>
           </div>
-          <button onclick="downloadHarianSekolah()" class="btn btn-success btn-sm"><i class="fas fa-download"></i> Download Excel</button>
+          <div id="setRekapPicker" class="form-group" style="display:none;">
+            <select id="setPilihBulanRekap" class="form-input"></select>
+          </div>
+          <button onclick="downloadDataSekolah()" class="btn btn-success btn-sm"><i class="fas fa-download"></i> Download Excel</button>
           <p style="font-size:10px;color:var(--text-tertiary);margin-top:8px;">Kuning = Terlambat, Merah = Alpa</p>
         </div>
 
-        <div class="section-card" style="border-color:rgba(248,113,113,.2);">
+        <div class="section-card" id="setZonaResetCard" style="border-color:rgba(248,113,113,.2);">
           <div class="section-title" style="color:var(--accent-red);"><i class="fas fa-triangle-exclamation"></i> ZONA RESET</div>
           <button onclick="resetStatistik()" class="btn btn-warning btn-sm" style="margin-bottom:8px;"><i class="fas fa-rotate-left"></i> Reset Statistik (Kehadiran)</button>
           <button onclick="resetAllData()" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Reset Semua Data (Termasuk Siswa)</button>
@@ -1030,8 +1037,10 @@ function buildHomeMenu(){
   }
   if(canSekolah(currentUser)){
     items.push({s:'jadwalpiket',icon:'fa-calendar-days',c:'accent-teal',t:'Jadwal Piket',d:'Atur piket guru'});
-    items.push({s:'pengaturan',icon:'fa-sliders',c:'accent-amber',t:'Pengaturan',d:'Batas waktu & data'});
     items.push({s:'naikkelas',icon:'fa-graduation-cap',c:'accent-purple',t:'Naik Kelas',d:'Migrasi ke kelas baru'});
+  }
+  if(canSekolah(currentUser) || isPiketHariIni()){
+    items.push({s:'pengaturan',icon:'fa-sliders',c:'accent-amber',t:'Pengaturan',d:canSekolah(currentUser)?'Batas waktu & data':'Download data absensi'});
   }
   if(isAdmin(currentUser)){
     items.push({s:'datasiswa',icon:'fa-database',c:'accent-blue',t:'Data Siswa',d:'Database & export'});
@@ -1060,7 +1069,8 @@ window.navigateTo = function(screen){
   if(screen==='walikelas' && !currentUser.waliKelas){ return; }
   if(screen==='akun' && !isAdmin(currentUser)){ return; }
   if(screen==='akunkerohanian' && !canAdminKerohanian(currentUser)){ return; }
-  if((screen==='jadwalpiket'||screen==='pengaturan') && !canSekolah(currentUser)){ return; }
+  if(screen==='jadwalpiket' && !canSekolah(currentUser)){ return; }
+  if(screen==='pengaturan' && !canSekolah(currentUser) && !isPiketHariIni()){ return; }
   if(screen==='naikkelas' && !canSekolah(currentUser)){ return; }
   if((screen==='datasiswa'||screen==='tambahsiswa'||screen==='importexcel') && !isAdmin(currentUser)){ return; }
   if(screen==='kerohanian' && !canKerohanian(currentUser)){ return; }
@@ -1342,6 +1352,8 @@ window.togglePiketHari = async function(username, hari, el){
 
 // ===================== PENGATURAN (admin) =====================
 async function loadPengaturan(){
+  document.getElementById('setBatasWaktuCard').style.display = canSekolah(currentUser) ? '' : 'none';
+  document.getElementById('setZonaResetCard').style.display = isAdmin(currentUser) ? '' : 'none';
   const snap = await db.ref('pengaturan').once('value');
   const p = snap.val()||{};
   document.getElementById('setJamTerlambat').value = p.jamTerlambat || '06:30';
@@ -1355,10 +1367,12 @@ window.simpanPengaturan = async function(){
   showToast('Pengaturan tersimpan','success');
 };
 function initDropdownBulanSet(){
-  const s=document.getElementById('setPilihBulan'); if(!s) return; s.innerHTML='';
-  const now=new Date();
-  for(let i=0;i<12;i++){ const d=new Date(now.getFullYear(),now.getMonth()-i,1);
-    s.innerHTML+=`<option value="${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}">${d.toLocaleDateString('id-ID',{month:'long',year:'numeric'}).toUpperCase()}</option>`; }
+  ['setPilihBulan','setPilihBulanRekap'].forEach(id=>{
+    const s=document.getElementById(id); if(!s) return; s.innerHTML='';
+    const now=new Date();
+    for(let i=0;i<12;i++){ const d=new Date(now.getFullYear(),now.getMonth()-i,1);
+      s.innerHTML+=`<option value="${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}">${d.toLocaleDateString('id-ID',{month:'long',year:'numeric'}).toUpperCase()}</option>`; }
+  });
 }
 window.initTanggalHarianSet = function(ms){
   const sb=document.getElementById('setPilihBulan'), sh=document.getElementById('setTanggalHarian'); if(!sh) return;
@@ -1371,11 +1385,20 @@ window.initTanggalHarianSet = function(ms){
   const today=todayKey();
   if(!ms && [...sh.options].some(o=>o.value===today)) sh.value=today;
 };
+let setSekolahMode = 'harian';
+window.setSekolahExcelMode = function(m){
+  setSekolahMode=m;
+  document.getElementById('setModeHarian').classList.toggle('active', m==='harian');
+  document.getElementById('setModeRekap').classList.toggle('active', m==='rekap');
+  document.getElementById('setHarianPicker').style.display = m==='harian'?'':'none';
+  document.getElementById('setRekapPicker').style.display = m==='rekap'?'':'none';
+};
 function beriWarnaCell(ws,r,c,color){
   const ref=XLSX.utils.encode_cell({r,c});
   if(ws[ref]) ws[ref].s={fill:{patternType:'solid',fgColor:{rgb:color}},font:{bold:true,color:{rgb:'000000'}},alignment:{horizontal:'center',vertical:'center'}};
 }
-window.downloadHarianSekolah = async function(){
+window.downloadDataSekolah = async function(){
+  if(setSekolahMode==='rekap'){ await downloadRekapBulananSekolah(); return; }
   const key = document.getElementById('setTanggalHarian').value;
   if(!key){ showToast('Pilih tanggal','error'); return; }
   document.getElementById('loadingOverlay').classList.add('show');
@@ -1410,8 +1433,56 @@ window.downloadHarianSekolah = async function(){
   }catch(e){ showToast('Gagal','error'); }
   document.getElementById('loadingOverlay').classList.remove('show');
 };
+async function downloadRekapBulananSekolah(){
+  const bv = document.getElementById('setPilihBulanRekap').value;
+  if(!bv){ showToast('Pilih bulan','error'); return; }
+  document.getElementById('loadingOverlay').classList.add('show');
+  try{
+    const [y,m] = bv.split('-'); const tgl=new Date(y,m-1,1);
+    const bln=tgl.getMonth(), thn=tgl.getFullYear();
+    const ft=d=>d.toLocaleDateString('id-ID').replace(/\//g,'-');
+    const fh=d=>`${NAMA_HARI[d.getDay()]} ${d.getDate()}/${d.getMonth()+1}`;
+    const st=[]; for(let i=1;i<=new Date(thn,bln+1,0).getDate();i++){ const d=new Date(thn,bln,i); if(d.getDay()>=1&&d.getDay()<=5) st.push(d); }
+    const pb={}; for(let d of st){ pb[ft(d)]=(await db.ref('presensiSekolah/'+ft(d)).once('value')).val()||{}; }
+    const ss = await db.ref('siswa').once('value'), s = ss.val()||{};
+    const zip = new JSZip(); const nb = tgl.toLocaleDateString('id-ID',{month:'long',year:'numeric'}).replace(/\s/g,'_');
+    for(let k in s){
+      const daftar = Object.keys(s[k]).map(Number).sort((a,b)=>a-b);
+      const hdr=['NO','NAMA',...st.map(fh),'TOTAL']; const rows=[hdr]; const warna=[];
+      daftar.forEach(no=>{
+        const si=s[k][no]||{}; const row=[no, si.nama||'-']; const ri=rows.length; let t=0;
+        st.forEach((d,i)=>{ const h=(pb[ft(d)]||{})[k+'_'+no]; const ci=2+i;
+          if(h){ const stx=(h.status||'').toUpperCase();
+            if(stx==='TERLAMBAT'){ row.push('TERLAMBAT'); warna.push({r:ri,c:ci,color:'FFFF00'}); t++; }
+            else if(stx==='ALPA'){ row.push('ALPA'); warna.push({r:ri,c:ci,color:'FF0000'}); }
+            else { row.push(stx); if(stx==='HADIR') t++; }
+          } else row.push('');
+        });
+        row.push(t); rows.push(row);
+      });
+      const ws = XLSX.utils.aoa_to_sheet(rows);
+      warna.forEach(w=>beriWarnaCell(ws,w.r,w.c,w.color));
+      ws['!cols']=[{wch:8},{wch:28},...st.map(()=>({wch:12})),{wch:10}];
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb,ws,'Rekap');
+      zip.file(`REKAP_${k}_${nb}.xlsx`, XLSX.write(wb,{bookType:'xlsx',type:'array'}));
+    }
+    const blob = await zip.generateAsync({type:'blob'});
+    const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=`REKAP_ABSENSI_${nb}.zip`; a.click();
+    showToast('Download selesai!','success');
+  }catch(e){ showToast('Gagal: '+e.message,'error'); }
+  document.getElementById('loadingOverlay').classList.remove('show');
+}
+function mintaKodeReset(){
+  const kode = prompt('Tindakan ini berbahaya. Ketik kode konfirmasi "TANGSKY" untuk lanjut:');
+  if(kode === null) return false;
+  if(kode.trim() !== 'TANGSKY'){ showToast('Kode konfirmasi salah, reset dibatalkan','error'); return false; }
+  return true;
+}
 window.resetStatistik = async function(){
+  if(!isAdmin(currentUser)){ showToast('Hanya Admin yang bisa reset data','error'); return; }
   if(!confirm('Reset semua statistik kehadiran (counter, riwayat presensi & dispensasi)? Data siswa TIDAK terhapus.')) return;
+  if(!mintaKodeReset()) return;
   document.getElementById('loadingOverlay').classList.add('show');
   try{
     const snap = await db.ref('siswa').once('value'), d = snap.val()||{}, up={};
@@ -1424,8 +1495,9 @@ window.resetStatistik = async function(){
   document.getElementById('loadingOverlay').classList.remove('show');
 };
 window.resetAllData = async function(){
+  if(!isAdmin(currentUser)){ showToast('Hanya Admin yang bisa reset data','error'); return; }
   if(!confirm('PERINGATAN: ini akan menghapus SEMUA data siswa, kode QR, presensi, dan dispensasi. Lanjutkan?')) return;
-  if(!confirm('Konfirmasi sekali lagi: data tidak bisa dikembalikan. Yakin?')) return;
+  if(!mintaKodeReset()) return;
   document.getElementById('loadingOverlay').classList.add('show');
   try{
     await db.ref('siswa').remove();
